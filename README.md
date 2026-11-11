@@ -1,3 +1,27 @@
+## v0.6 — November 11, 2026: user-reported leg and stair fixes + traversal interactions
+
+This release responds to the supplied screenshot showing Boris's lower legs/boots missing and the character blocked on stairs.
+
+- [x] **Local standalone playable HTML** rebuilt with Boris's original head and facial textures, connected reconstructed trousers, articulated knees, boots, jacket and arms.
+- [x] Walk and sprint drive explicit hip, knee, shoulder and elbow movement. Original skeletal animation/rig is still **not recovered**.
+- [x] Improved stair stepping using forward ground probes, vertical riser bypass only when a higher valid tread is found, and fall/landing physics.
+- [x] Local interactive **demonstration** door that opens with E or automatically as the character sprints toward it; N places a demonstration door on the floor ahead (up to 12).
+- [x] Space mantle for detected low obstacles with landing checks; this is experimental, not yet an original game's authored window system.
+- [x] Player HP with fall damage (greater than 3 scene units) and respawn.
+- [x] Updated public-source viewer; it asks the player to supply local GLBs.
+- [ ] Verify step traversability on every Facility staircase from actual Chromebook playtesting.
+- [ ] Proper character skeleton, skinning and original walk/run clips.
+- [ ] Original level doors with exact asset locations, opening/closing sound and physics.
+- [ ] Find and reconstruct the authentic windows and mantle collision profiles.
+- [ ] Verify damage balance and address missing original geometry.
+- [ ] User acceptance testing; current functionality is **not approved** by the user.
+
+### v0.6 controls
+
+WASD walk, Shift sprint, mouse look, E interact with a nearby door, N place a demonstrator door, Space mantle a ledge/window (Space ascends in free-flight), F toggle free flight, V switch first/third person, R respawn/reset, Esc unlock mouse.
+
+**Accuracy note:** The original Boris asset conversion still contains broken rigid vertex layouts. Reconstructed legs and clothing are not the source game's original character rig. Doors are placed interactively/demonstration props, not recovered Facility placements. Missing geometry cannot be assumed complete; movement and collision remain experimental. The local build is self-contained except for Three.js CDN. A scripted Chromium playtest was attempted but the browser environment blocked local URLs, so no graphical-playtest success is claimed.
+
 # 007 Conversion Attempt
 
 A playable GoldenEye 007 XBLA Facility geometry-and-texture conversion experiment built from **user-supplied** XBLA game files.
