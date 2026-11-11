@@ -17,7 +17,7 @@ footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background
 </head><body>
 <canvas id="screen"></canvas>
 <aside>
-<h1>007 • Facility Explorer v0.4</h1>
+<h1>007 • Facility Explorer v0.5</h1>
 <p>Import your locally converted <code>facility_textured.glb</code> and <code>boris_textured.glb</code>. The converter restores authentic XBLA texture images, UVs and material references. Original game files are not hosted in this repository.</p>
 <input type="file" id="assets" accept=".glb" multiple>
 <p id="status">Choose the two locally converted textured GLBs to load Facility and Boris.</p>
@@ -38,10 +38,11 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace
 scene.add(new THREE.HemisphereLight(0xb7d5ee,0x484738,2.2));
 const sun=new THREE.DirectionalLight(0xfff2e0,3);sun.position.set(40,80,20);scene.add(sun);
 const grid=new THREE.GridHelper(220,44,0x506777,0x2b4152);grid.position.y=-9;scene.add(grid);
-const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];
+const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];let arms=[];
 const player={pos:new THREE.Vector3(20,-6.3,20),yaw:0,pitch:0},angles={boris:0,oddjob:2,trevelyan:4};
 function enableWalk(root){
- walkUniforms.length=0;
+ walkUniforms.length=0;arms=[];
+ root.traverse(o=>{if(o.isMesh&&/boris_(00[0-5]|01[0-2])_/.test(o.name))o.visible=false});
  root.traverse(mesh=>{
   if(!mesh.isMesh)return;
   const originals=Array.isArray(mesh.material)?mesh.material:[mesh.material];
@@ -68,6 +69,27 @@ function enableWalk(root){
   });
   mesh.material=Array.isArray(mesh.material)?mats:mats[0];
  });
+ const jacketMesh=root.getObjectByName('boris_007_texture0');
+ const atlas=jacketMesh?.material?.map;
+ let tex=null;
+ if(atlas?.image){
+  const c=document.createElement('canvas');c.width=256;c.height=256;
+  c.getContext('2d').drawImage(atlas.image,40,94,68,138,0,0,256,256);
+  tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
+ }
+ const jacket=new THREE.MeshStandardMaterial({color:0xffffff,map:tex,roughness:1});
+ const skin=new THREE.MeshStandardMaterial({color:0xb98867,roughness:1});
+ const body=new THREE.Group();body.position.x=.30;root.add(body);
+ function piece(parent,g,material,x,y,z){const m=new THREE.Mesh(g,material);m.position.set(x,y,z);parent.add(m);return m}
+ piece(body,new THREE.CylinderGeometry(.245,.195,.63,12),jacket,0,1.37,0);
+ for(const sign of [-1,1]){
+  const shoulder=new THREE.Group();shoulder.position.set(sign*.235,1.63,0);body.add(shoulder);
+  const upper=piece(shoulder,new THREE.CylinderGeometry(.084,.076,.33,10),jacket,sign*.075,-.17,0);upper.rotation.z=sign*.35;
+  const elbow=new THREE.Group();elbow.position.set(sign*.14,-.34,0);shoulder.add(elbow);
+  piece(elbow,new THREE.CylinderGeometry(.068,.055,.27,10),jacket,0,-.13,0);
+  piece(elbow,new THREE.SphereGeometry(.066,10,8),skin,0,-.29,0);
+  arms.push({shoulder,elbow,sign,body});
+ }
  return root;
 }
 function makeActors(){
@@ -178,7 +200,7 @@ function animate(now){
  const hasMotion=move.lengthSq()>0;const sprint=keys.has('ShiftLeft')||keys.has('ShiftRight');
  let moving=false;
  if(hasMotion){moving=tryMove(move.normalize().multiplyScalar(dt*(sprint?6:3.5)))}
- if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);
+ if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);for(const a of arms){const power=moving&&!flight?1:0;a.shoulder.rotation.x=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*.48*power;a.elbow.rotation.x=-.18-Math.max(0,Math.sin(walkPhase+(a.sign<0?0:Math.PI)))*.32*power;a.body.position.y=Math.abs(Math.sin(walkPhase))*.025*power;}
  for(const u of walkUniforms){u.phase.value=walkPhase;u.power.value=moving&&!flight?1:0}
  if(flight){if(keys.has('KeyQ'))player.pos.y-=dt*8;if(keys.has('KeyE'))player.pos.y+=dt*8;}
  player.pos.x=THREE.MathUtils.clamp(player.pos.x,-105,105);
