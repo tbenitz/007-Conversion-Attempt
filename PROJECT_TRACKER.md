@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v1.0. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.1. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -154,3 +154,20 @@ Updated 2026-11-11, v1.0. Goal: polished playable exploration with complete asse
 | GE-096 | Interactive browser playtest of complete v1.0 | BLOCKED — browser launch timed out | [ ] |
 
 All new checkboxes remain unchecked pending direct user approval. Three Facility doors use converted original geometry at grounded **test positions**, not authentic authored door coordinates. Source UVs are unavailable for most models, so provisional planar projection is opt-in. WAV effects are newly synthesized, not original game audio. JavaScript syntax and ZIP CRC verified; graphical Chromium test timed out.
+
+## H — v1.1 authentic-source doors and surrounding world
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-097 | Remove previously fabricated door panels, surrounds and orange dots | IMPLEMENTED — VERIFY | [ ] |
+| GE-098 | Use original XBLA prop geometry for visible door leaves | IMPLEMENTED — VERIFY | [ ] |
+| GE-099 | Bind original door texture images using source UVs | IN PROGRESS — currently projected UVs only | [ ] |
+| GE-100 | Recover authentic Facility door locations/rotations | BLOCKED — stage placement parser needed | [ ] |
+| GE-101 | Enable adjustable source-door showcase positions | IMPLEMENTED — VERIFY — not game placement | [ ] |
+| GE-102 | Convert original Surface outdoor terrain triangles | IMPLEMENTED — VERIFY — 3878 source faces | [ ] |
+| GE-103 | Show repositioned original Surface ground outside Facility | IMPLEMENTED — VERIFY — original adjacency not known | [ ] |
+| GE-104 | No fabricated hills/trees/terrain meshes for exterior | IMPLEMENTED — VERIFY | [ ] |
+| GE-105 | Authentic Facility external boundaries and stage transitions | PLANNED | [ ] |
+| GE-106 | Chrome graphical test of exterior and door visuals | IN PROGRESS — user verification needed | [ ] |
+
+**Source accuracy:** Converted game door meshes now replace generated flat panels, proxy frames and glowing orbs. Textures come from recovered source prop sheets, but UV mapping is provisional. Exact Facility door transforms have **not** been recovered. Exterior is 3,878 original faces from the *Surface* map translated vertically (+62 scene units) and clipped away from the Facility area: **no artificial polygons, trees or hills**. This is not the original geographical adjacency of the two maps. Feature approvals remain unchecked. JS syntax and ZIP integrity checks passed; graphical playtesting still pending.
