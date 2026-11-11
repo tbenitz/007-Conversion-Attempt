@@ -1,0 +1,16 @@
+# User-provided proprietary game files and derived assets
+*.live
+*.xex
+*.bin
+*.glb
+*.z64
+*.n64
+*.v64
+*.zip
+*.7z
+local-assets/
+extracted/
+converted/
+private/
+*_with_assets.html
+__pycache__/
