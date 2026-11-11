@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v1.2. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.3. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -189,3 +189,20 @@ All new checkboxes remain unchecked pending direct user approval. Three Facility
 ### Limitations of v1.2
 
 The ground-safety layer prevents unsupported falls by **retaining confirmed height**; it does not paint a fake floor and will not repair visible source map gaps. It deliberately changes fall behavior where geometry is incomplete. Source texture pairing uses original recovered images, but UV positions are projected and do not reproduce the game atlas binding, so characters are **not yet visually accurate recreations**. Boris's previous custom work is exempt from automatic remapping. No entry above is user-approved until the user tests and confirms it.
+
+## J — v1.3 Source map textures, floor tracking and footstep audio
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-116 | Restore source-material associations on all converted level draw batches | IMPLEMENTED — VERIFY: 22 newly textured maps + existing Facility | [ ] |
+| GE-117 | Decode exact original vertex UV layout/scale on every level | IN PROGRESS — signed-16 UV extraction, several scales unverified | [ ] |
+| GE-118 | Retain unconvertible/invalid source draw batches as vertex-color geometry | IMPLEMENTED — VERIFY | [ ] |
+| GE-119 | Choose spawns from walkable original geometry rather than top-down roof hits | IMPLEMENTED — VERIFY: offline per-map candidate positions | [ ] |
+| GE-120 | Stop roof-snapping from high step-up tolerance | IMPLEMENTED — VERIFY: cap near 0.68 scene units | [ ] |
+| GE-121 | Disable relocated Surface ground on initial load | IMPLEMENTED — VERIFY | [ ] |
+| GE-122 | Keep footstep audio distinct from gunfire samples | IMPLEMENTED — VERIFY: quiet lowpass footstep synthesis | [ ] |
+| GE-123 | Check each source-textured level visually for correct UVs and sky/floor materials | NEEDS USER TEST | [ ] |
+| GE-124 | Verify all level spawns are inside intended traversable areas | NEEDS USER TEST | [ ] |
+| GE-125 | Restore Aztec background to complete 24-map library | BLOCKED — CAFF parser exception | [ ] |
+
+**v1.3 source integrity:** Source texture indices are read from original 0x2d material-slot records and mapped to preserved `batch_NNN` draw labels. Source texture pixels are from the user's asset archive. UV coordinate offset/scale remains partly heuristic and needs validation; these are not guaranteed complete authentic textured maps. The new v1.3 standalone HTML is bundled in one ZIP; extracted copyrighted game assets are not published on GitHub. Ground candidate spawns are computed from original floor triangle centroids rather than a ray from the top of the level, but require playtesting. All approval boxes remain empty.
