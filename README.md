@@ -1,3 +1,19 @@
+# World Explorer v1.0 — HUD, animations, doors and tactical map
+
+**New private single-ZIP build (downloaded from this conversation):** 23 maps, 42 character meshes, 62 gun/item meshes. Adds a first-person ammo/reload HUD, armor and health, collectible test pickups, M fullscreen tactical map drawn from converted mesh triangles, original-derived door meshes with E interaction and user-position controls, procedural movement deformation, and 10 original-created synthetic WAV effects.
+
+**Source accuracy:** Authentic **door locations are not recovered**. The default Facility map places three door meshes at grounded showcase positions near player spawn; the user can move/place them to test. Weapon/character texture images are read from original assets but their UV positions remain unconverted, so the new optional preview uses automatically projected UV coordinates rather than authentic UVs. No original character skeletal animation or game sound pack has been decoded.
+
+**Verification:** JS syntax and ZIP integrity were tested. A headless browser test timed out and the player has not approved this version. Free world traversal remains default because the correct wall/stair collision is still unresolved.
+
+[Full 96-ID master tracker](PROJECT_TRACKER.md) | [Original conversion tools](tools)
+
+**Controls:** WASD movement; Shift sprint; Space jump; V first/third person; R reload; M full map; E operate nearest test door; P place test door; K toggle sound; F free flight. Menu: door asset type / relocate / reset, original vertex colors versus projected texture preview.
+
+**Do not mark any checklist approval boxes until the user validates the feature.**
+
+---
+
 # GoldenEye XBLA World Explorer — v0.9
 
 **Current build:** 23 partial maps, 42 converted character meshes, 62 gun/item meshes. A single downloadable HTML contains the user-supplied-derived assets (not published in this public repository).
