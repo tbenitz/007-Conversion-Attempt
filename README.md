@@ -2,6 +2,20 @@
 
 A playable GoldenEye 007 XBLA Facility geometry-and-texture conversion experiment built from **user-supplied** XBLA game files.
 
+## v0.5 — November 11, 2026: screenshot-reported Boris and stair fixes
+
+- [x] Diagnose exploded/disconnected Boris: converted arm/torso mesh batches 000–005, 010–012 are effectively planar in source GLB, not simply texture rotations.
+- [x] Hide those malformed batches in both the local embedded build and the hosted source viewer.
+- [x] Rebuild provisional articulated torso/arms using a crop of Boris's genuine jacket atlas, retaining original character head, face, lower-body and shoe geometry.
+- [x] Animate reconstructed shoulder/elbow joints and procedurally deform the retained leg geometry in the local build.
+- [x] Raise walkable stair step-up threshold to 0.9 scene units and change collision tests to let low stair risers pass while continuing to block higher walls.
+- [x] Provide self-contained local v0.5 HTML and a ZIP with embedded user-derived assets and source.
+- [ ] Restore character skeleton / actual XBLA animation clips; current gait is procedural.
+- [ ] Complete detailed geometry conversion and proper character-controller collision, including steps, doors and slopes.
+- [ ] Independently validate gameplay with actual browser playtest and user approval.
+
+**Important:** The converted static Boris model has severe vertex-layout/skeleton issues. This interim fix does not constitute proper reconstruction of his source rig. The public GitHub viewer still requires users to import their locally converted GLBs, because copyrighted game models and textures are not pushed to GitHub.
+
 ## v0.4 — November 11, 2026: walkability, Boris gait and gap repair
 
 The downloadable standalone local HTML version `goldeneye_facility_boris_walkable_v04.html` includes assets from the user-provided XBLA package and starts directly as Boris. The **hosted GitHub viewer** runs the updated controls but still asks you to import the two locally converted GLB files; game artwork is not committed.
