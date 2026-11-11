@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v0.9. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.0. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -43,9 +43,9 @@ Updated 2026-11-11, v0.9. Goal: polished playable exploration with complete asse
 | GE-026 | Decode original walk/run/idle/crouch animations | BLOCKED — source decoder needed | [ ] |
 | GE-027 | Retarget locomotion to all character assets | PLANNED | [ ] |
 | GE-028 | Fix 42 character orientations/scales | IN PROGRESS | [ ] |
-| GE-029 | Complete face/clothing materials | IN PROGRESS | [ ] |
+| GE-029 | Complete face/clothing materials | IN PROGRESS — planar texture preview for 4 characters; original UVs missing | [ ] |
 | GE-030 | Hands grip weapon and original reload animations | PLANNED | [ ] |
-| GE-031 | Correct third-person stride/turning | IN PROGRESS | [ ] |
+| GE-031 | Correct third-person stride/turning | IN PROGRESS — procedural leg deformation, not game rig | [ ] |
 | GE-032 | Character preview and 360-degree inspect | PLANNED | [ ] |
 
 ## C — Maps, texture and asset completeness
@@ -59,12 +59,12 @@ Updated 2026-11-11, v0.9. Goal: polished playable exploration with complete asse
 | GE-037 | Apply all 3039 source-decoded textures | IN PROGRESS | [ ] |
 | GE-038 | Glass/transparency/decals/emissive materials | PLANNED | [ ] |
 | GE-039 | Original props and placement transforms | PLANNED | [ ] |
-| GE-040 | All original Facility/stage doors and animations | PLANNED | [ ] |
+| GE-040 | All original Facility/stage doors and animations | IN PROGRESS — source-door showcase, locations unverified | [ ] |
 | GE-041 | Mantling through real window openings | IN PROGRESS | [ ] |
 | GE-042 | Separate real level collision and navigation mesh | PLANNED | [ ] |
 | GE-043 | Reconstructed proper stair/ramps colliders | PLANNED | [ ] |
 | GE-044 | Elevators/ladders/moving platforms | PLANNED | [ ] |
-| GE-045 | Gun/prop textures and UV maps | IN PROGRESS | [ ] |
+| GE-045 | Gun/prop textures and UV maps | IN PROGRESS — provisional projected gun images | [ ] |
 | GE-046 | Fix rotated and disconnected weapon meshes | IN PROGRESS | [ ] |
 | GE-047 | Original level fixture lights | PLANNED | [ ] |
 | GE-048 | Level streaming/LOD/Chromebook optimization | PLANNED | [ ] |
@@ -83,7 +83,7 @@ Updated 2026-11-11, v0.9. Goal: polished playable exploration with complete asse
 | GE-056 | Day/night lighting presets and fog | IMPLEMENTED — VERIFY | [ ] |
 | GE-057 | Map-specific lighting/material polish | IN PROGRESS | [ ] |
 | GE-058 | Polished menus/loading/error state | IN PROGRESS | [ ] |
-| GE-059 | Compass, HP, stamina and exploration HUD | IMPLEMENTED — VERIFY | [ ] |
+| GE-059 | Compass, HP, stamina and exploration HUD | IMPLEMENTED — VERIFY — added ammo and armor HUD | [ ] |
 | GE-060 | Graphics quality presets and FPS counter | PLANNED | [ ] |
 | GE-061 | Accessibility/reduced motion/contrast/subtitles | PLANNED | [ ] |
 
@@ -133,3 +133,24 @@ Updated 2026-11-11, v0.9. Goal: polished playable exploration with complete asse
 5. Expand GE-066–074 linked worlds, random maps, combat, NPCs and missions.
 
 **Test evidence:** v0.9 Node JavaScript syntax passed. ZIP integrity passed. Chromium smoke testing was attempted but the local HTTP URL was blocked by an administrator policy; graphical functionality remains unverified. User approval is pending for every item.
+
+## G — v1.0 HUD, tactical map, materials and interactive door showcase
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-083 | Ammo and reserve UI | IMPLEMENTED — VERIFY | [ ] |
+| GE-084 | Per-weapon magazine reload empty trigger | IMPLEMENTED — VERIFY | [ ] |
+| GE-085 | Armor absorption and meter | IMPLEMENTED — VERIFY | [ ] |
+| GE-086 | Health and armor pickups | IMPLEMENTED — VERIFY | [ ] |
+| GE-087 | Full level map projected from converted geometry | IMPLEMENTED — VERIFY | [ ] |
+| GE-088 | Map player heading door and waypoint markers | IMPLEMENTED — VERIFY | [ ] |
+| GE-089 | Three recovered door meshes shown in Facility | IMPLEMENTED — VERIFY — test placements | [ ] |
+| GE-090 | Decode original accurate Facility door coordinates | BLOCKED — stage setup parser needed | [ ] |
+| GE-091 | Door interactions and relocating via game controls | IMPLEMENTED — VERIFY | [ ] |
+| GE-092 | Authentic char and gun UV texture restoration | IN PROGRESS — projected texture preview only | [ ] |
+| GE-093 | Original character skeletal animations | BLOCKED — rig parser needed | [ ] |
+| GE-094 | Ten original-created synthesized WAV effects | IMPLEMENTED — VERIFY | [ ] |
+| GE-095 | Original game audio decoding | PLANNED | [ ] |
+| GE-096 | Interactive browser playtest of complete v1.0 | BLOCKED — browser launch timed out | [ ] |
+
+All new checkboxes remain unchecked pending direct user approval. Three Facility doors use converted original geometry at grounded **test positions**, not authentic authored door coordinates. Source UVs are unavailable for most models, so provisional planar projection is opt-in. WAV effects are newly synthesized, not original game audio. JavaScript syntax and ZIP CRC verified; graphical Chromium test timed out.
