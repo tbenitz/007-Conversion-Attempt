@@ -17,7 +17,7 @@ footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background
 </head><body>
 <canvas id="screen"></canvas>
 <aside>
-<h1>007 • Facility Explorer v0.5</h1>
+<h1>007 • Facility Explorer v0.6</h1>
 <p>Import your locally converted <code>facility_textured.glb</code> and <code>boris_textured.glb</code>. The converter restores authentic XBLA texture images, UVs and material references. Original game files are not hosted in this repository.</p>
 <input type="file" id="assets" accept=".glb" multiple>
 <p id="status">Choose the two locally converted textured GLBs to load Facility and Boris.</p>
@@ -38,59 +38,45 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace
 scene.add(new THREE.HemisphereLight(0xb7d5ee,0x484738,2.2));
 const sun=new THREE.DirectionalLight(0xfff2e0,3);sun.position.set(40,80,20);scene.add(sun);
 const grid=new THREE.GridHelper(220,44,0x506777,0x2b4152);grid.position.y=-9;scene.add(grid);
-const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];let arms=[];
+const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];let arms=[];let health=100,fallStart=null,vy=0;const doors=[];
 const player={pos:new THREE.Vector3(20,-6.3,20),yaw:0,pitch:0},angles={boris:0,oddjob:2,trevelyan:4};
 function enableWalk(root){
- walkUniforms.length=0;arms=[];
- root.traverse(o=>{if(o.isMesh&&/boris_(00[0-5]|01[0-2])_/.test(o.name))o.visible=false});
- root.traverse(mesh=>{
-  if(!mesh.isMesh)return;
-  const originals=Array.isArray(mesh.material)?mesh.material:[mesh.material];
-  const mats=originals.map(m=>{
-   if(!m)return m;
-   const material=m.clone();
-   const vars={phase:{value:0},power:{value:0}};
-   walkUniforms.push(vars);
-   material.onBeforeCompile=shader=>{
-    shader.uniforms.walkPhase=vars.phase;shader.uniforms.walkPower=vars.power;
-    shader.vertexShader='uniform float walkPhase;\nuniform float walkPower;\n'+shader.vertexShader;
-    shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`#include <begin_vertex>
-     float side=transformed.x<0.30?1.0:-1.0;
-     float stride=sin(walkPhase+(side<0.0?3.14159265:0.0));
-     float leg=1.0-smoothstep(0.22,1.07,transformed.y);
-     transformed.z+=stride*leg*0.20*walkPower;
-     transformed.y+=max(0.0,stride)*(1.0-smoothstep(0.42,0.95,transformed.y))*0.10*walkPower;
-     float arm=smoothstep(0.02,0.16,abs(transformed.x-0.30))*smoothstep(0.95,1.18,transformed.y)*(1.0-smoothstep(1.5,1.82,transformed.y));
-     transformed.z-=stride*arm*0.10*walkPower;
-     `);
-   };
-   material.customProgramCacheKey=()=> 'ge-boris-procedural-v04';
-   return material;
-  });
-  mesh.material=Array.isArray(mesh.material)?mats:mats[0];
+ arms=[];const legs=[];
+ let atlas=null;
+ root.traverse(m=>{
+  if(!m.isMesh)return;
+  if(!/boris_(00[89]|01[345])_/.test(m.name))m.visible=false;
+  if(!atlas&&m.material?.map)atlas=m.material.map
  });
- const jacketMesh=root.getObjectByName('boris_007_texture0');
- const atlas=jacketMesh?.material?.map;
- let tex=null;
- if(atlas?.image){
-  const c=document.createElement('canvas');c.width=256;c.height=256;
-  c.getContext('2d').drawImage(atlas.image,40,94,68,138,0,0,256,256);
-  tex=new THREE.CanvasTexture(c);tex.colorSpace=THREE.SRGBColorSpace;
+ function crop(x,y,w,h){
+  if(!atlas?.image)return null;
+  const c=document.createElement('canvas');c.width=c.height=256;
+  try{c.getContext('2d').drawImage(atlas.image,x,y,w,h,0,0,256,256)}catch(e){return null}
+  const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t
  }
- const jacket=new THREE.MeshStandardMaterial({color:0xffffff,map:tex,roughness:1});
- const skin=new THREE.MeshStandardMaterial({color:0xb98867,roughness:1});
- const body=new THREE.Group();body.position.x=.30;root.add(body);
- function piece(parent,g,material,x,y,z){const m=new THREE.Mesh(g,material);m.position.set(x,y,z);parent.add(m);return m}
- piece(body,new THREE.CylinderGeometry(.245,.195,.63,12),jacket,0,1.37,0);
+ const coat=new THREE.MeshStandardMaterial({color:0x785344,map:crop(40,94,68,138),roughness:1});
+ const pants=new THREE.MeshStandardMaterial({color:0x66605c,map:crop(170,80,65,115),roughness:1});
+ const shoes=new THREE.MeshStandardMaterial({color:0x24201e});
+ const skin=new THREE.MeshStandardMaterial({color:0xba9071});
+ const pivot=new THREE.Group();pivot.position.x=.3;root.add(pivot);
+ const add=(parent,geo,mat,x,y,z)=>{const m=new THREE.Mesh(geo,mat);m.position.set(x,y,z);parent.add(m);return m};
+ add(pivot,new THREE.CylinderGeometry(.25,.20,.69,12),coat,0,1.38,0);
+ add(pivot,new THREE.CylinderGeometry(.105,.105,.1,10),shoes,0,1.06,0);
  for(const sign of [-1,1]){
-  const shoulder=new THREE.Group();shoulder.position.set(sign*.235,1.63,0);body.add(shoulder);
-  const upper=piece(shoulder,new THREE.CylinderGeometry(.084,.076,.33,10),jacket,sign*.075,-.17,0);upper.rotation.z=sign*.35;
-  const elbow=new THREE.Group();elbow.position.set(sign*.14,-.34,0);shoulder.add(elbow);
-  piece(elbow,new THREE.CylinderGeometry(.068,.055,.27,10),jacket,0,-.13,0);
-  piece(elbow,new THREE.SphereGeometry(.066,10,8),skin,0,-.29,0);
-  arms.push({shoulder,elbow,sign,body});
+  const shoulder=new THREE.Group();shoulder.position.set(sign*.23,1.64,0);pivot.add(shoulder);
+  add(shoulder,new THREE.CylinderGeometry(.082,.075,.34,10),coat,sign*.04,-.17,0);
+  const elbow=new THREE.Group();elbow.position.set(sign*.07,-.34,0);shoulder.add(elbow);
+  add(elbow,new THREE.CylinderGeometry(.07,.055,.29,10),coat,0,-.14,0);
+  add(elbow,new THREE.SphereGeometry(.065,9,8),skin,0,-.29,0);
+  arms.push({shoulder,elbow,sign,pivot});
+  const hip=new THREE.Group();hip.position.set(sign*.115,1.04,0);pivot.add(hip);
+  add(hip,new THREE.CylinderGeometry(.12,.096,.49,12),pants,0,-.245,0);
+  const knee=new THREE.Group();knee.position.set(0,-.48,0);hip.add(knee);
+  add(knee,new THREE.CylinderGeometry(.09,.07,.47,12),pants,0,-.23,0);
+  add(knee,new THREE.BoxGeometry(.15,.14,.3),shoes,0,-.49,-.06);
+  legs.push({hip,knee,sign})
  }
- return root;
+ root.userData.legs=legs;return root
 }
 function makeActors(){
  for(const k in actors){scene.remove(actors[k]);delete actors[k]}
@@ -128,49 +114,70 @@ document.querySelector('#wire').onclick=()=>{
  document.querySelector('#wire').textContent='Wireframe '+(wire?'ON':'OFF');
 };
 document.querySelector('#panelToggle').onclick=()=>document.body.classList.toggle('minimal');
-const floorRay=new THREE.Raycaster(),normal=new THREE.Vector3(),down=new THREE.Vector3(0,-1,0);
-function faceY(hit){return hit.face?normal.copy(hit.face.normal).transformDirection(hit.object.matrixWorld).y:0}
+const floorRay=new THREE.Raycaster();const normal=new THREE.Vector3(),down=new THREE.Vector3(0,-1,0),stepHeight=1.35;
+function faceY(h){return h.face?normal.copy(h.face.normal).transformDirection(h.object.matrixWorld).y:0}
 function groundHeight(x,z,feet){
  if(!facility)return null;
- floorRay.set(new THREE.Vector3(x,feet+2.4,z),down);floorRay.near=0;floorRay.far=6.5;
- let best=null,bestScore=Infinity;
- for(const hit of floorRay.intersectObject(facility,true)){
-  if(Math.abs(faceY(hit))<0.67)continue;
-  const diff=hit.point.y-feet;
-  if(diff>0.85||diff< -4.1)continue;
-  const score=Math.abs(diff);
-  if(score<bestScore){bestScore=score;best=hit.point.y+1.7}
- }
- return best;
+ floorRay.set(new THREE.Vector3(x,feet+1.9,z),down);floorRay.far=5.9;
+ let best=null,score=Infinity;
+ for(const h of floorRay.intersectObject(facility,true)){
+  if(Math.abs(faceY(h))<.65)continue;
+  const d=h.point.y-feet;if(d>stepHeight+.05||d< -3.2)continue;
+  if(Math.abs(d)<score){score=Math.abs(d);best=h.point.y+1.7}
+ }return best
 }
-function blocked(from,to){
+function wallBlocks(old,next,rise){
  if(!facility)return false;
- const delta=to.clone().sub(from);delta.y=0;
- const distance=delta.length();if(distance<0.00001)return false;
- delta.normalize();
- for(const h of [-1.43,-0.91,-0.30]){
-  floorRay.set(from.clone().add(new THREE.Vector3(0,h,0)),delta);
-  floorRay.near=0.02;floorRay.far=distance+0.34;
-  for(const hit of floorRay.intersectObject(facility,true))if(Math.abs(faceY(hit))<0.52)return true;
- }
- return false;
-}
-function tryMove(delta){
- if(flight){player.pos.add(delta);return true}
- let moved=false;const n=Math.max(1,Math.ceil(delta.length()/0.22));delta.divideScalar(n);
- for(let step=0;step<n;step++){
-  for(const axis of ['x','z']){
-   const d=new THREE.Vector3(axis==='x'?delta.x:0,0,axis==='z'?delta.z:0);
-   if(d.lengthSq()<1e-9)continue;
-   const next=player.pos.clone().add(d);
-   if(blocked(player.pos,next))continue;
-   const h=groundHeight(next.x,next.z,player.pos.y-1.7);
-   player.pos.copy(next);
-   if(h!==null)player.pos.y=h;
-   moved=true;
+ const dir=next.clone().sub(old),len=dir.length();if(len<.0001)return false;dir.normalize();
+ for(const height of [.2,.75,1.25]){
+  floorRay.set(old.clone().add(new THREE.Vector3(0,-1.7+Math.max(0,rise)+height,0)),dir);
+  floorRay.far=len+.19;
+  for(const hit of floorRay.intersectObject(facility,true)){
+   if(Math.abs(faceY(hit))<.47)return hit
   }
- }
- return moved;
+ }return false
+}
+function makeDoor(pos,angle){
+ if(doors.length>=12)return;
+ const g=new THREE.Group();g.position.copy(pos);g.rotation.y=angle;scene.add(g);
+ const steel=new THREE.MeshStandardMaterial({color:0x68717b,metalness:.42,roughness:.52});
+ const panel=new THREE.MeshStandardMaterial({color:0x4a535c,metalness:.32,roughness:.56});
+ const add=(w,h,d,x,y,z,m,p=g)=>{const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);p.add(o)};
+ add(1.36,.1,.15,0,2.05,0,steel);add(.1,2,.15,-.65,1,0,steel);add(.1,2,.15,.65,1,0,steel);
+ const hinge=new THREE.Group();hinge.position.x=-.60;g.add(hinge);add(1.16,1.9,.1,.58,1,0,panel,hinge);
+ doors.push({g,hinge,target:0,open:0});status.textContent="Door placed · E interact, sprint opens"
+}
+function nearestDoor(){
+ return doors.find(d=>d.g.position.distanceTo(player.pos.clone().add(new THREE.Vector3(0,-1.7,0)))<2.4)
+}
+function tryMove(d){
+ if(flight){player.pos.add(d);return true}
+ let did=false;const n=Math.max(1,Math.ceil(d.length()/.12));d.divideScalar(n);
+ for(let i=0;i<n;i++){
+  const old=player.pos.clone();
+  for(const delta of [d,new THREE.Vector3(d.x,0,0),new THREE.Vector3(0,0,d.z)]){
+   if(delta.lengthSq()<1e-9)continue;
+   const next=old.clone().add(delta);
+   let h=groundHeight(next.x,next.z,old.y-1.7);
+   if(h===null){const ahead=delta.clone().normalize().multiplyScalar(.36);h=groundHeight(next.x+ahead.x,next.z+ahead.z,old.y-1.7)}
+   const rise=h===null?0:h-old.y;
+   if(rise>stepHeight)continue;
+   if(doors.some(q=>q.open<.7&&q.g.position.distanceTo(next.clone().add(new THREE.Vector3(0,-1.7,0)))<.58))continue;
+   const blocked=wallBlocks(old,next,rise);
+   if(blocked&&(!h||rise<.08||blocked.point.y>old.y-1.7+rise+.16))continue;
+   player.pos.copy(next);if(h!==null&&rise>=-.3)player.pos.y=h;
+   did=true;break
+  }
+ }return did
+}
+function mantle(){
+ if(flight||!facility)return;
+ const dir=new THREE.Vector3(-Math.sin(player.yaw),0,-Math.cos(player.yaw));
+ const to=player.pos.clone().addScaledVector(dir,1.25),h=groundHeight(to.x,to.z,player.pos.y-.5);
+ if(h===null||Math.abs(h-player.pos.y)>1.7){status.textContent="No safe mantle landing";return}
+ const wall=wallBlocks(player.pos,to,0);
+ if(!wall){status.textContent="Face a low window or ledge";return}
+ player.pos.set(to.x,h,to.z);status.textContent="Mantled ledge"
 }
 const keys=new Set();
 onkeydown=e=>{
@@ -180,6 +187,9 @@ onkeydown=e=>{
   chosen=['boris','oddjob','trevelyan'][Number(e.code.slice(-1))-1];
   document.querySelector('#character').value=chosen
  }
+ if(e.code==='KeyE'){const d=nearestDoor();if(d)d.target=d.target>.5?0:1}
+ if(e.code==='KeyN'){const dir=new THREE.Vector3(-Math.sin(player.yaw),0,-Math.cos(player.yaw)).multiplyScalar(2.7);const p=player.pos.clone().add(dir);const h=groundHeight(p.x,p.z,player.pos.y-1.7);if(h!==null)makeDoor(new THREE.Vector3(p.x,h-1.7,p.z),player.yaw)}
+ if(e.code==='Space')mantle();
  if(e.code==='KeyV')third=!third;if(e.code==='KeyF')flight=!flight;if(e.code==='KeyR'){player.pos.set(20,-6.3,20);player.yaw=0;player.pitch=0;flight=false;}
 };
 onkeyup=e=>keys.delete(e.code);
@@ -201,8 +211,11 @@ function animate(now){
  let moving=false;
  if(hasMotion){moving=tryMove(move.normalize().multiplyScalar(dt*(sprint?6:3.5)))}
  if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);for(const a of arms){const power=moving&&!flight?1:0;a.shoulder.rotation.x=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*.48*power;a.elbow.rotation.x=-.18-Math.max(0,Math.sin(walkPhase+(a.sign<0?0:Math.PI)))*.32*power;a.body.position.y=Math.abs(Math.sin(walkPhase))*.025*power;}
- for(const u of walkUniforms){u.phase.value=walkPhase;u.power.value=moving&&!flight?1:0}
- if(flight){if(keys.has('KeyQ'))player.pos.y-=dt*8;if(keys.has('KeyE'))player.pos.y+=dt*8;}
+ for(const a of (actors.boris?.userData.legs||[])){const power=moving&&!flight?1:0;const v=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*power;a.hip.rotation.x=v*.51;a.knee.rotation.x=-Math.max(0,v)*.72}
+ for(const d of doors){if(sprint&&d.g.position.distanceTo(player.pos.clone().add(new THREE.Vector3(0,-1.7,0)))<1.8)d.target=1;d.open=THREE.MathUtils.damp(d.open,d.target,7,dt);d.hinge.rotation.y=-d.open*1.5}
+ if(!flight){const h=groundHeight(player.pos.x,player.pos.z,player.pos.y-1.7);if(h===null){if(fallStart===null)fallStart=player.pos.y-1.7;vy=Math.max(-24,vy-14*dt);player.pos.y+=vy*dt;}else{if(fallStart!==null){health-=Math.max(0,Math.round((fallStart-(h-1.7)-3)*11));health=Math.max(0,health)}fallStart=null;vy=0;player.pos.y=h;}if(player.pos.y< -30||health===0){health=100;player.pos.set(20,-6.3,20);vy=0;fallStart=null}}
+ if(Math.floor(now/180)!==Math.floor((now-dt*1000)/180))status.textContent="Health "+health+"/100 · E door · N place demo door · Space mantle";
+ if(flight){if(keys.has('KeyQ'))player.pos.y-=dt*8;if(keys.has('Space'))player.pos.y+=dt*8;}
  player.pos.x=THREE.MathUtils.clamp(player.pos.x,-105,105);
  player.pos.y=THREE.MathUtils.clamp(player.pos.y,-16,38);
  player.pos.z=THREE.MathUtils.clamp(player.pos.z,-90,90);
