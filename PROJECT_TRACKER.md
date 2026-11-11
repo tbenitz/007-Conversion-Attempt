@@ -224,3 +224,18 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 | GE-136 | Validate map visuals and prop scale/placement interactively on Chromebook | NEEDS USER TEST — browser local file blocked in test environment | [ ] |
 
 **Accuracy and source policy:** v1.4 programmatically creates **new terrain/road/path geometry**, as explicitly requested, but it uses recovered game textures only. Plants, vehicles and environmental objects are **converted game-source meshes**, not substituted cone-tree or placeholder models. Terrain shape, prop placement, biome choices and roads are generated rather than actual GoldenEye level-authored layouts. Some object textures are planar-projected because authentic source UV decoding is unfinished. Exteriors are a reconstructed annex, not the original outdoor level. No feature approvals have been checked.
+
+## L — v1.5 visible texture recovery and complete asset coverage audit
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-137 | Audit all 23 embedded level GLBs and source image references | IMPLEMENTED — VERIFY: 23/23 GLBs parsed; 518836 triangles | [ ] |
+| GE-138 | Exclude pure white/black decals and masks from fallback environment textures | IMPLEMENTED — VERIFY: 4–6 per-map original-source textures | [ ] |
+| GE-139 | Apply per-face planar UV fallback to invalid converted map texture charts | IMPLEMENTED — VERIFY: live renderer, Chromebook test pending | [ ] |
+| GE-140 | Retain valid Facility UVs and preserve glass/transparent materials | IMPLEMENTED — VERIFY: conditional repair | [ ] |
+| GE-141 | Reduce overexposed lighting washing out source materials | IMPLEMENTED — VERIFY | [ ] |
+| GE-142 | Clean up temporary material buffers when switching levels | IMPLEMENTED — VERIFY | [ ] |
+| GE-143 | Verify source atlas and material appearances visually on ChromeOS for each level | NEEDS USER TEST — headless test blocked | [ ] |
+| GE-144 | Reconstruct exact source UVs, full original geometry and missing Aztec | IN PROGRESS / BLOCKED — source decoder research | [ ] |
+
+All 23 available converted GLB files can be reopened and have source texture images, and all are present in the standalone build. This **does not mean every map is historically complete or that all UVs are accurate**. New default reprojection uses only recovered game images. 3D browser testing is blocked; no visual user approval is recorded. Aztec remains missing and several maps have very incomplete geometry.
