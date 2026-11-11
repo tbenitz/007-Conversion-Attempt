@@ -1,3 +1,28 @@
+# GoldenEye XBLA World Explorer — v0.9
+
+**Current build:** 23 partial maps, 42 converted character meshes, 62 gun/item meshes. A single downloadable HTML contains the user-supplied-derived assets (not published in this public repository).
+
+### Project status and feature tracking
+
+**[Open the 82-item master feature tracker](PROJECT_TRACKER.md)** — development status and user-approval checkboxes kept separate. Features are **never** approved based solely on code changes or tests.
+
+### New in v0.9
+
+- Smooth walking acceleration, sprinting with stamina, crouch and jump with gravity
+- First-person head bob, camera tilt, sprint FOV, third-person obstruction checks
+- Generated Web Audio footsteps, gunfire effects, jumping/landing, wind ambience; audio volume and toggle
+- Day/night lighting, adjustable fog and brighter weapon lighting
+- Compass, exploration markers and discovered-location progress saved locally where allowed
+- One-click Next World, preserved map/character/weapon selection
+
+**Not yet complete:** original Boris/other character rigs and animations, authentic weapon sounds, many gun/character textures, Aztec, true solid-world collision, walkable steps with walls enabled, original level doors and prop placements. The current build intentionally preserves freely passing through incomplete walls to avoid the user-reported staircase deadlock.
+
+**Testing:** source JavaScript syntax and ZIP integrity verified; interactive Chromium testing was blocked by local URL policy. All user-approval boxes remain unchecked.
+
+**Delivery:** The proprietary model/textures from the supplied XBLA package are provided in a private downloadable **one-ZIP** build. This public repo contains extraction/conversion/viewer code and tracking, not the proprietary assets.
+
+---
+
 ## v0.8 — 2026-11-11: multi-map exploration and first-person weapons
 
 The user-download `GoldenEye_World_Explorer_v08_COMPLETE.zip` contains a **single standalone HTML** with these assets embedded:
