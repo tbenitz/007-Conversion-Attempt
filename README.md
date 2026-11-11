@@ -1,3 +1,25 @@
+# World Explorer v1.5 — white-wall material repair and 23-map audit
+
+**This release targets the reported failure:** 23 of the selectable XBLA background meshes existed but still displayed many mostly-white surfaces. Their source material indices were available; their converted UV charts were incomplete and the previous fallback sometimes chose game decals/masks instead of usable environment textures.
+
+### Changes in the single-file private download
+
+- Rebuilt *per-map* texture fallbacks from the user's original recovered GoldenEye source sheets. Excluded mostly-white, mostly-black, low-variation and mask-like images; every map has 4–6 alternative game-source images.
+- Render mode **Restore visibility with original game-source wall/floor textures** is enabled by default. It keeps an existing usable original source texture when possible and replaces bad source images with game-owned material fallbacks.
+- Triangle-local UV projection on converted meshes with missing/incorrect UV data, rather than stretching an atlas or sampling one point repeatedly. Existing well-textured Facility UVs are retained wherever usable.
+- Preserved transparent game materials (glass/decals), reduced overbright exposure, and disposed of temporary projected geometry/materials when changing levels.
+- All 23 packaged map GLBs verified readable programmatically (**518,836 triangles total**), with source image references. **Aztec remains missing** due to original CAFF parser failure.
+- Recompressed opaque source textures inside GLBs to high-quality JPEG; preserved textures with alpha as PNG. One archive is approximately **28.5 MB**.
+- `MAP_TEXTURE_QA.json` within the download lists material/image counts, original atlas sources, and expected fallback count for all 23 maps.
+
+**Important limitation:** This repairs *visible game-owned texturing* through projection. It is **not yet a complete, visually verified reconstruction of the game's original per-triangle UV charts, all geometry, authentic object positions, or Aztec**. The 23 map models remain partial source geometry, and map appearance still needs a real Chromebook playtest. The browser test environment blocks local-file navigation; static JS syntax, map GLB readability/image validation, and ZIP CRC passed. User-approval checkboxes remain unchecked.
+
+[Master requirements tracker](PROJECT_TRACKER.md)
+
+**One-file policy:** copyrighted source-model data stays in the user's private downloadable HTML/ZIP, not committed to the public repository. This repository only hosts source converters, renderer helper code, reports and the tracker.
+
+---
+
 # GoldenEye World Explorer v1.4 — Game-asset-only generated environments
 
 **Downloadable standalone build:** `GoldenEye_World_Explorer_v14_ONE_ZIP.zip` is delivered in the ChatGPT conversation. It contains one self-contained HTML with converted map/prop meshes and game-derived textures embedded (external Three.js module CDN still required).
