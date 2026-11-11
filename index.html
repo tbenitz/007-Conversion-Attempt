@@ -54,8 +54,8 @@ function enableWalk(root){
   try{c.getContext('2d').drawImage(atlas.image,x,y,w,h,0,0,256,256)}catch(e){return null}
   const t=new THREE.CanvasTexture(c);t.colorSpace=THREE.SRGBColorSpace;return t
  }
- const coat=new THREE.MeshStandardMaterial({color:0x785344,map:crop(40,94,68,138),roughness:1});
- const pants=new THREE.MeshStandardMaterial({color:0x66605c,map:crop(170,80,65,115),roughness:1});
+ const coat=new THREE.MeshStandardMaterial({color:0x785344,map:crop(20,16,155,245),roughness:1});
+ const pants=new THREE.MeshStandardMaterial({color:0x66605c,map:crop(157,270,255,125),roughness:1});
  const shoes=new THREE.MeshStandardMaterial({color:0x24201e});
  const skin=new THREE.MeshStandardMaterial({color:0xba9071});
  const pivot=new THREE.Group();pivot.position.x=.3;root.add(pivot);
