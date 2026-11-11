@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v1.1. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.2. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -23,7 +23,7 @@ Updated 2026-11-11, v1.1. Goal: polished playable exploration with complete asse
 | GE-011 | Accurate fall damage | IN PROGRESS | [ ] |
 | GE-012 | Climb every Facility staircase without getting stuck | BROKEN — free-walk workaround | [ ] |
 | GE-013 | Solid wall collision | BROKEN — disabled by default | [ ] |
-| GE-014 | Accurate floor, slope and platform handling | IN PROGRESS | [ ] |
+| GE-014 | Accurate floor, slope and platform handling | IN PROGRESS — v1.2 last-known-safe-floor fallback | [ ] |
 | GE-015 | Third-person camera occlusion handling | IMPLEMENTED — VERIFY | [ ] |
 | GE-016 | First-person bob/lean/sprint FOV | IMPLEMENTED — VERIFY | [ ] |
 | GE-017 | Safe spawn point for every map | IN PROGRESS | [ ] |
@@ -43,7 +43,7 @@ Updated 2026-11-11, v1.1. Goal: polished playable exploration with complete asse
 | GE-026 | Decode original walk/run/idle/crouch animations | BLOCKED — source decoder needed | [ ] |
 | GE-027 | Retarget locomotion to all character assets | PLANNED | [ ] |
 | GE-028 | Fix 42 character orientations/scales | IN PROGRESS | [ ] |
-| GE-029 | Complete face/clothing materials | IN PROGRESS — planar texture preview for 4 characters; original UVs missing | [ ] |
+| GE-029 | Complete face/clothing materials | IN PROGRESS — source face/clothing atlas preview, UVs unrecovered — planar texture preview for 4 characters; original UVs missing | [ ] |
 | GE-030 | Hands grip weapon and original reload animations | PLANNED | [ ] |
 | GE-031 | Correct third-person stride/turning | IN PROGRESS — procedural leg deformation, not game rig | [ ] |
 | GE-032 | Character preview and 360-degree inspect | PLANNED | [ ] |
@@ -171,3 +171,21 @@ All new checkboxes remain unchecked pending direct user approval. Three Facility
 | GE-106 | Chrome graphical test of exterior and door visuals | IN PROGRESS — user verification needed | [ ] |
 
 **Source accuracy:** Converted game door meshes now replace generated flat panels, proxy frames and glowing orbs. Textures come from recovered source prop sheets, but UV mapping is provisional. Exact Facility door transforms have **not** been recovered. Exterior is 3,878 original faces from the *Surface* map translated vertically (+62 scene units) and clipped away from the Facility area: **no artificial polygons, trees or hills**. This is not the original geographical adjacency of the two maps. Feature approvals remain unchecked. JS syntax and ZIP integrity checks passed; graphical playtesting still pending.
+
+## I — v1.2 falling-through-ground recovery and character texture audit
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-107 | Keep player above last confirmed ground height when imported floor has a hole | IMPLEMENTED — VERIFY (safety toggle ON by default) | [ ] |
+| GE-108 | Prevent lower, misplaced mesh from pulling grounded player through a floor | IMPLEMENTED — VERIFY (threshold-based) | [ ] |
+| GE-109 | Add user toggle to disable safety for testing real drops | IMPLEMENTED — VERIFY | [ ] |
+| GE-110 | Reconstruct all actual missing visible ground polygons using original asset sources | IN PROGRESS — not solved; safety is invisible | [ ] |
+| GE-111 | Catalog recovered face/clothing images for every available character | IMPLEMENTED — VERIFY (41 auto pairs; Boris manual) | [ ] |
+| GE-112 | Preview face atlas separately from clothing atlas on each character | IMPLEMENTED — VERIFY (approximate projection, not original UVs) | [ ] |
+| GE-113 | Suppress flattened incorrectly converted character mesh ribbons in atlas preview | IMPLEMENTED — VERIFY; conservative bounds checks | [ ] |
+| GE-114 | Recover exact source vertex texture coordinates and skeletal rig for all characters | BLOCKED — CAFF mesh format decoding unfinished | [ ] |
+| GE-115 | Verify textured character previews on ChromeOS visually | NEEDS USER TEST — no browser runtime validation | [ ] |
+
+### Limitations of v1.2
+
+The ground-safety layer prevents unsupported falls by **retaining confirmed height**; it does not paint a fake floor and will not repair visible source map gaps. It deliberately changes fall behavior where geometry is incomplete. Source texture pairing uses original recovered images, but UV positions are projected and do not reproduce the game atlas binding, so characters are **not yet visually accurate recreations**. Boris's previous custom work is exempt from automatic remapping. No entry above is user-approved until the user tests and confirms it.
