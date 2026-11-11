@@ -2,7 +2,36 @@
 
 A playable GoldenEye 007 XBLA Facility geometry-and-texture conversion experiment built from **user-supplied** XBLA game files.
 
-## November 11, 2026 — Textured Facility + playable Boris
+## v0.4 — November 11, 2026: walkability, Boris gait and gap repair
+
+The downloadable standalone local HTML version `goldeneye_facility_boris_walkable_v04.html` includes assets from the user-provided XBLA package and starts directly as Boris. The **hosted GitHub viewer** runs the updated controls but still asks you to import the two locally converted GLB files; game artwork is not committed.
+
+- [x] Replaced fail-closed floor ray with nearest walkable ground sampling; a missing source-floor polygon no longer completely freezes horizontal movement
+- [x] Added horizontal wall collision against the rendered source Facility mesh with sliding along surfaces
+- [x] Added third-person camera occlusion ray so it comes closer when near walls
+- [x] Added a **procedural** Boris leg/arm gait that activates during movement (shader-driven deformation of original model, not original skeletal animation clips)
+- [x] Compared the supplied remastered Facility geometry to its **original-generation** background; recovered 165 unmatched source triangles as a separate repair mesh (total 13,919 triangles in the local patched asset)
+- [x] Added `tools/patch_missing_facility.py` for repeating the original-geometry gap repair with user-provided locally extracted files
+- [ ] Decode original Boris skeleton and authentic walk/run animation clips
+- [ ] Place all doors, props and interactive objects using original stage setup data
+- [ ] Reconstruct full original collision/nav areas (the `background_hits` data is projectile impact data, not a drop-in character navigation map)
+- [ ] Verify every patch face and source UV/material, including in browser on Chromebook
+- [ ] Full Facility gameplay and user playtest
+
+**Important limitation:** this is a materially improved **explorer**, not a completely reconstructed game level. The missing 165 source polygons are colored because their original-generation material atlas is not yet merged into the remastered atlas. Doors and props may still be absent. Geometry-based wall collision cannot block an opening where the source conversion has no wall polygon.
+
+Controls: WASD walking, Shift running, mouse look, V first/third person, F free-flight, Q/E altitude in flight, R reset, Esc unlock pointer.
+
+To patch the locally converted Facility GLB:
+
+```bash
+python -m pip install numpy scipy trimesh
+python tools/patch_missing_facility.py converted/facility_textured.glb local-assets/files/original/background/facility/default.bin converted/facility_textured_repaired.glb
+```
+
+When running the hosted viewer, import `facility_textured_repaired.glb` and `boris_textured.glb`. The standalone HTML already embeds both.
+
+## Earlier v0.3 — Textured Facility + playable Boris
 
 **Implemented in source:**
 - [x] Corrected user-supplied XBLA/STFS extraction to CAFF asset bundles
