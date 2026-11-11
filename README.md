@@ -1,3 +1,19 @@
+# v1.1 — GoldenEye source doors and outdoor Surface terrain
+
+The private downloadable game **GoldenEye_World_Explorer_v11_ONE_ZIP.zip** contains one playable HTML file with the existing 23 maps, 42 partial characters and 62 gun/item meshes.
+
+**Response to user screenshots:** Removed the synthetic doorframe, solid placeholder door panel and orange glowing sphere. The Facility demo doors now use converted original XBLA prop geometry and source door texture sheets. UV texture projection remains provisional; door positions are test placements, not recovered original Facility coordinates.
+
+**Exterior:** Retains **3,878 original source triangles** from the XBLA Surface map after removing triangles overlapping Facility's footprint, with a vertical world offset. No generated terrain polygons, invented trees or fabricated hills. The actual physical connection between Surface and Facility is not claimed: it is a relocated original-game-ground demonstration. Toggle it using **Show original Surface outdoor ground** in the game menu.
+
+**Remains open:** actual stage prop transform decoding, correct game material UVs, Facility exit-door alignment, uninterrupted walkable exterior, authentic stage transition, stair/wall collision and animated character skeletons.
+
+Source-only conversion scripts can be run locally against files extracted from the user's legally supplied game copy. **Copyrighted meshes, source textures, and derived private builds are not committed to the public GitHub repo.**
+
+[Track all 106 requirements](PROJECT_TRACKER.md). No user-approval checkboxes have been checked by the assistant.
+
+---
+
 # World Explorer v1.0 — HUD, animations, doors and tactical map
 
 **New private single-ZIP build (downloaded from this conversation):** 23 maps, 42 character meshes, 62 gun/item meshes. Adds a first-person ammo/reload HUD, armor and health, collectible test pickups, M fullscreen tactical map drawn from converted mesh triangles, original-derived door meshes with E interaction and user-position controls, procedural movement deformation, and 10 original-created synthetic WAV effects.
