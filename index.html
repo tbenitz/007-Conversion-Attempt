@@ -52,7 +52,7 @@ function enableWalk(root){
    walkUniforms.push(vars);
    material.onBeforeCompile=shader=>{
     shader.uniforms.walkPhase=vars.phase;shader.uniforms.walkPower=vars.power;
-    shader.vertexShader='uniform float walkPhase;\\nuniform float walkPower;\\n'+shader.vertexShader;
+    shader.vertexShader='uniform float walkPhase;\nuniform float walkPower;\n'+shader.vertexShader;
     shader.vertexShader=shader.vertexShader.replace('#include <begin_vertex>',`#include <begin_vertex>
      float side=transformed.x<0.30?1.0:-1.0;
      float stride=sin(walkPhase+(side<0.0?3.14159265:0.0));
