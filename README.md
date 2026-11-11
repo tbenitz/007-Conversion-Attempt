@@ -1,3 +1,15 @@
+# v1.2 — Ground fall-through safety + character texture atlas audit
+
+**User test build:** One downloadable HTML/ZIP made from the user's supplied source game files. Ground-fall protection is now **enabled by default**, holding the last known supported floor height if the imported level is missing a polygon underneath the player or has an incorrect lower surface. This does not invent visible geometry or replace the source map: **visual holes remain**.
+
+**Character materials:** The source assets carry separate face and clothing texture atlases. The new preview uses a different recovered sheet for each region for 41 character options, plus skips flattening artifacts in the source mesh preview. Boris remains exempt from automatic remapping to preserve previous manual work. All these bindings use approximate projected UVs — **they do not yet faithfully reproduce every original game character**. The original per-vertex UVs, proper mesh weights, authentic rigging and animations still require a source decoder.
+
+**Verification:** JavaScript syntax and ZIP integrity tested. No interactive ChromeOS browser playtest yet. The complete feature tracker now has 115 stable requirements, and all user-approval boxes remain unchecked until the user verifies the features.
+
+[Master tracker](PROJECT_TRACKER.md)
+
+---
+
 # v1.1 — GoldenEye source doors and outdoor Surface terrain
 
 The private downloadable game **GoldenEye_World_Explorer_v11_ONE_ZIP.zip** contains one playable HTML file with the existing 23 maps, 42 partial characters and 62 gun/item meshes.
