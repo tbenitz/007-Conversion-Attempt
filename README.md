@@ -1,3 +1,29 @@
+## v0.8 — 2026-11-11: multi-map exploration and first-person weapons
+
+The user-download `GoldenEye_World_Explorer_v08_COMPLETE.zip` contains a **single standalone HTML** with these assets embedded:
+
+- [x] 23 selectable background geometry maps (Facility prefers the textured, patched GLB; the other maps are partial vertex-colour geometry)
+- [x] 42 selectable original character **geometry** models
+- [x] 62 selectable XBLA gun/item geometry models, including 20 recognizable firearm models
+- [x] First-person default, with selected original 3D weapon geometry in view and rotation sliders per gun
+- [x] Third-person character preview, camera mouse controls, sprint and cosmetic gun recoil/flash
+- [x] Free movement by default to prevent the previously reported staircase deadlock
+- [x] File-integrity and JavaScript syntax checks
+- [ ] Chrome graphical playtest: blocked by browser testing sandbox; user verification needed
+- [ ] Correct all remaining 3D model placement and weapon axis transforms
+- [ ] Convert all corresponding textures and UV/material assignments for non-Facility maps, character bodies and guns
+- [ ] Original game character skeletons, walk/run animations, doors, props and true collision
+- [ ] Repair Aztec and other nonconvertible resource files
+- [ ] User feature approval (do not mark as approved until user confirms)
+
+The build intentionally embeds user-provided copyrighted source-derived assets **only in the private downloadable artifact**, not in GitHub. The hosted GitHub source remains an experimental GLB-import viewer; it does not include these assets. The downloadable HTML does *not* require separate GLB uploads to run, but it needs a connection to load the Three.js CDN modules.
+
+### Resource counts
+
+Original 23 exported level meshes plus 42 successful character mesh conversions and 62 successful gun/item mesh conversions. Six character/gun items failed and are recorded in the downloadable `conversion_report.json`.
+
+**Known limitations:** Most models are partial geometry, not complete textured levels or rigged animated game characters. A chosen weapon uses its real converted mesh, but pose/orientation may require the angle sliders; a cosmetic click/recoil is not a combat simulation. Wall collision is deliberately disabled for traversal until the staircase bug and source geometry can be properly fixed. Aztec remains unavailable.
+
 ## v0.7 — 2026-11-11: stair rollback + bulk content conversion
 
 **Playable game:** `goldeneye_facility_explorer_v07_free_stairs.html` (user download) uses the original v0.1 principle: move horizontally without requiring a collision-mesh hit. The later collision algorithm repeatedly trapped the player against stairs. This build therefore **disables source wall collision by default** rather than claiming to have a completed character controller.
