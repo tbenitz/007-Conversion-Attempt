@@ -1,44 +1,52 @@
 # 007 Conversion Attempt
 
-A browser-based **GoldenEye 007 XBLA Facility exploration prototype** and experimental converter for user-supplied game assets.
+A playable GoldenEye 007 XBLA Facility geometry-and-texture conversion experiment built from **user-supplied** XBLA game files.
 
-## Status — 2026-11-11
+## November 11, 2026 — Textured Facility + playable Boris
 
-- [x] Identified STFS package structure in the supplied Xbox 360 LIVE package.
-- [x] Corrected the extraction offset (CAFF headers must occur at byte 0 in an extracted model file; the earlier extraction began two blocks too early).
-- [x] Parsed CAFF resource tables for Facility, Boris, Oddjob and Trevelyan.
-- [x] Converted real indexed triangle geometry to GLB.
-- [x] Built a downloadable single-file HTML preview containing converted models.
-- [x] Prototype keyboard movement, mouse look, character switching, stationary/patrolling NPC placeholders and free-flight.
-- [ ] Fully decoded original textures, materials and UVs.
-- [ ] Character animations and original skeletons.
-- [ ] Complete conversion validation for every vertex layout and level surface.
-- [ ] Accurate geometry-based collision, spawn positions and navigation.
-- [ ] Full level gameplay and AI.
+**Implemented in source:**
+- [x] Corrected user-supplied XBLA/STFS extraction to CAFF asset bundles
+- [x] CAFF resource-table parser
+- [x] Decode all 69 source Facility images (tiled Xbox GPU images / DXT)
+- [x] Decode all four Boris source images
+- [x] Read shader/material image slots from CAFF draw commands
+- [x] Export textured Facility GLB (120 meshes; 118 linked with source textures)
+- [x] Export textured Boris GLB (16 meshes; all linked with source textures)
+- [x] HTML viewer imports the textured GLBs and defaults to Boris in third person
+- [x] Ground-height following, WASD, mouse look, Shift sprint, V camera, F free-flight
+- [ ] Verified geometry/collision of every original Facility surface
+- [ ] Decode all remaining unusual UV layouts and material variants
+- [ ] Character skeleton and walk animation
+- [ ] Solid wall/door collision and traversal
+- [ ] Mission AI, doors, authentic spawn points and objectives
+- [ ] User playtest and approval
 
-**Current conversion counts (first pass, not exhaustive fidelity):**
+**Known limitations:** The 13,754-triangle Facility export is an experimental partial decode, not guaranteed to include every original surface. The textured Boris is a static unrigged source model that can be moved as the player, **not an animated walking character**. The floor-following algorithm is an approximation, not authentic physics. The original source textures are recovered but some UV transforms/special materials may be incorrect; don't consider them validated until playtested.
 
-| Asset | Triangle faces |
-|---|---:|
-| Facility | 13,754 |
-| Boris | 3,536 |
-| Oddjob | 6,474 |
-| Trevelyan | 3,316 |
+## Downloadable single-file prototype
 
-The prototype loads actual geometry but **is not yet the complete original Facility map**, and the source textures, rigging and original character animations are not reconstructed.
+The ChatGPT-provided `goldeneye_facility_boris_textured.html` bundles the two user's converted GLBs inside the HTML, loads Three.js over CDN, and starts as Boris. This artifact is **not committed to the public repository** because it contains derived copyrighted GoldenEye artwork and models.
 
-## Using the playable build
+## To prepare the same files locally
 
-Download `goldeneye_xbla_facility_real_assets.html` from the ChatGPT deliverable and open in Chrome. It embeds the user-provided converted assets and needs an Internet connection for Three.js modules.
+Install Python 3 with `numpy pillow trimesh`, then use the user's own ZIP:
 
-Controls: WASD movement, mouse look (click Explore), Shift sprint, Q/E vertical movement, 1/2/3 character switching, V third person, Esc mouse release.
+```bash
+python -m pip install numpy pillow trimesh
+python tools/extract_xbla.py GoldenEye_007_XBLA_Retail.zip local-assets
+python tools/decode_textures.py local-assets/files/new/background/facility/default.bin textures/facility
+python tools/decode_textures.py local-assets/files/new/char/boris/default.bin textures/boris
+python tools/export_textured_glbs.py local-assets textures converted
+```
 
-## Repository model
+Then open `index.html` in Chrome and select `converted/facility_textured.glb` and `converted/boris_textured.glb`. The GitHub-hosted viewer requires those two local files to be supplied by the user; it does not host the game's artwork.
 
-This public repository tracks **source code and workflows**, not redistributed copyrighted GoldenEye/XBLA assets. Keep `*.live`, `*.xex`, extracted `default.bin`, converted `*.glb`, and asset-bearing standalone builds locally or in a private untracked folder. The supplied game package is user-provided and not uploaded here.
+### Controls
 
-The converter source (including CAFF parsing and geometry export) is provided in the download bundle from this ChatGPT session. Upstream format research was informed by [Sightline](https://github.com/mscrnt/Sightline), especially `tools/worldasset/xblaworld.py` and `tools/texpack/caff.py`.
+WASD move • mouse look (click Explore) • Shift sprint • V toggle third person • F toggle free-flight • Q/E descend/ascend during flight • Esc release mouse • Reset button.
 
-## Next engineering step
+### Original game materials
 
-Finish texture decoding and vertex-layout coverage, verify orientation and spawn coordinates against the original game, and implement collision from the original level collision meshes. Do not label these complete without validation.
+The texture format is Xbox 360 Xenos tiled GPU surfaces; the numbered images are linked using material op `0x2d` image indices in each draw command. A small number of unusual meshes remain untextured while their vertex/UV layout is being researched.
+
+Conversion code was informed by [Sightline's published format research](https://github.com/mscrnt/Sightline). Source asset bytes and user-provided game files are deliberately excluded from this public repository.
