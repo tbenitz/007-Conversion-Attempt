@@ -1,3 +1,26 @@
+# GoldenEye World Explorer v1.4 — Game-asset-only generated environments
+
+**Downloadable standalone build:** `GoldenEye_World_Explorer_v14_ONE_ZIP.zip` is delivered in the ChatGPT conversation. It contains one self-contained HTML with converted map/prop meshes and game-derived textures embedded (external Three.js module CDN still required).
+
+### Changed after v1.3 reports of white walls, missing ground and empty maps
+
+- On 23 converted maps, reprojection of source textures onto incomplete/blank map materials using local geometry normals and position instead of the inaccurate fixed-point UV scaling. This is an **approximation**: original material UV chart coordinates are not faithfully recovered.
+- 92 **actual GoldenEye Xbox texture images** selected from corresponding map CAFF atlases. No external stock imagery or invented diffuse textures.
+- Procedural exterior terrain **geometry** around all 23 converted map bounding boxes, with rolling hills and 3 textured approach paths; all rendered texture images sourced from original game assets. The new topography, path layout and alignment to the map **are generated**, not authentic original GoldenEye stage layout.
+- 17 converted source prop model types (including actual game-source trees, trucks, barrels, crates, barricades) placed in user-test arrangements around the map and near spawn. They are not fake cone trees or generic proxy crates. Texture UVs for some props are provisional.
+- Menu toggles to compare map texture repair, generated exteriors and game props independently, all on by default.
+- Reuses original map geometry and per-map spawn candidate while leaving authentic collision/navmesh, terrain transitions and original map-object positions as open requirements.
+
+### Validation
+
+`node --check` passed and the single ZIP CRC test passed. Full in-browser interactive rendering could not be tested because local-file access was blocked in the Chromium test environment. **No user approval is inferred.**
+
+[Full tracker — GE-001 through GE-136](PROJECT_TRACKER.md)
+
+**Game-derived meshes and textures are intentionally not checked into this public repository.** The user-supplied retail archive remains local to the user; the downloadable HTML contains their converted files.
+
+---
+
 # World Explorer v1.3 — source-map textures, spawn safety, distinct footsteps
 
 User-download artifact: `GoldenEye_World_Explorer_v13_ONE_ZIP.zip` (one ZIP with the standalone asset-embedded HTML, reports, and README).
