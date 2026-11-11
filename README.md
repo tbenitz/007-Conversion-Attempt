@@ -1,3 +1,34 @@
+## v0.7 — 2026-11-11: stair rollback + bulk content conversion
+
+**Playable game:** `goldeneye_facility_explorer_v07_free_stairs.html` (user download) uses the original v0.1 principle: move horizontally without requiring a collision-mesh hit. The later collision algorithm repeatedly trapped the player against stairs. This build therefore **disables source wall collision by default** rather than claiming to have a completed character controller.
+
+- [x] Free horizontal movement by default, including through incomplete imported mesh collisions
+- [x] Best-effort ground/stair-following with forward higher-tread probe
+- [x] Experimental solid collision toggle (C), OFF by default
+- [x] PageUp / PageDown manual altitude correction at geometry gaps
+- [ ] Verified correct automatic staircase traversal on Chromebook (user approval required)
+- [ ] Fully reconstructed wall collision and authentic navigable stair surface
+
+**Bulk conversion completed from user-supplied XBLA retail package:**
+
+| Item | Result |
+|---|---:|
+| Remastered source asset bundles examined | 499 |
+| Successfully decoded bundles | 489 |
+| PNG texture images decoded | 3,039 |
+| Remastered map backgrounds with partial GLB geometry | 23 of 24 |
+| Unresolved source bundles | 10 |
+
+The 10 exceptions are documented in `conversion_report.json` inside the downloadable user-owned asset pack. Aztec is among them. Individual texture records in successfully decoded bundles had no reported decode failures.
+
+**User deliverables:** `GoldenEye_XBLA_ALL_Converted_Assets.zip`, plus smaller `GoldenEye_XBLA_Levels_Assets.zip`, `GoldenEye_XBLA_Characters_Weapons_Assets.zip` and `GoldenEye_XBLA_Props_Assets.zip`. The bundles contain numbered source PNGs, source CAFF resource files, an inventory and 23 partially decoded geometry GLBs.
+
+**What these packages are NOT:** complete fully textured playable stages, original skeletal animations, accurate map collision, placed interactive doors, or a random map generator. The GLBs are partial vertex-colored meshes with separate numbered texture images. Mapping source image indexes and UVs for *all* draw batches remains further work.
+
+**How to repeat:** `python tools/bulk_extract_and_decode.py user-provided.live output_dir` after installing the NumPy/Pillow dependencies. The source package has to be supplied locally by its owner.
+
+**Public repository policy:** Script and viewer code are committed here; copyrighted extracted models, textures and derived game builds are not committed to this public repo.
+
 ## v0.6 — November 11, 2026: user-reported leg and stair fixes + traversal interactions
 
 This release responds to the supplied screenshot showing Boris's lower legs/boots missing and the character blocked on stairs.
