@@ -17,7 +17,7 @@ footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background
 </head><body>
 <canvas id="screen"></canvas>
 <aside>
-<h1>007 • Facility Explorer v0.6</h1>
+<h1>007 • Facility Explorer v0.7</h1>
 <p>Import your locally converted <code>facility_textured.glb</code> and <code>boris_textured.glb</code>. The converter restores authentic XBLA texture images, UVs and material references. Original game files are not hosted in this repository.</p>
 <input type="file" id="assets" accept=".glb" multiple>
 <p id="status">Choose the two locally converted textured GLBs to load Facility and Boris.</p>
@@ -38,7 +38,7 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace
 scene.add(new THREE.HemisphereLight(0xb7d5ee,0x484738,2.2));
 const sun=new THREE.DirectionalLight(0xfff2e0,3);sun.position.set(40,80,20);scene.add(sun);
 const grid=new THREE.GridHelper(220,44,0x506777,0x2b4152);grid.position.y=-9;scene.add(grid);
-const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];let arms=[];let health=100,fallStart=null,vy=0;const doors=[];
+const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];let arms=[];let health=100,fallStart=null,vy=0;const doors=[];let solidWalls=false;
 const player={pos:new THREE.Vector3(20,-6.3,20),yaw:0,pitch:0},angles={boris:0,oddjob:2,trevelyan:4};
 function enableWalk(root){
  arms=[];const legs=[];
@@ -150,25 +150,24 @@ function makeDoor(pos,angle){
 function nearestDoor(){
  return doors.find(d=>d.g.position.distanceTo(player.pos.clone().add(new THREE.Vector3(0,-1.7,0)))<2.4)
 }
-function tryMove(d){
- if(flight){player.pos.add(d);return true}
- let did=false;const n=Math.max(1,Math.ceil(d.length()/.12));d.divideScalar(n);
- for(let i=0;i<n;i++){
-  const old=player.pos.clone();
-  for(const delta of [d,new THREE.Vector3(d.x,0,0),new THREE.Vector3(0,0,d.z)]){
-   if(delta.lengthSq()<1e-9)continue;
-   const next=old.clone().add(delta);
-   let h=groundHeight(next.x,next.z,old.y-1.7);
-   if(h===null){const ahead=delta.clone().normalize().multiplyScalar(.36);h=groundHeight(next.x+ahead.x,next.z+ahead.z,old.y-1.7)}
-   const rise=h===null?0:h-old.y;
-   if(rise>stepHeight)continue;
-   if(doors.some(q=>q.open<.7&&q.g.position.distanceTo(next.clone().add(new THREE.Vector3(0,-1.7,0)))<.58))continue;
-   const blocked=wallBlocks(old,next,rise);
-   if(blocked&&(!h||rise<.08||blocked.point.y>old.y-1.7+rise+.16))continue;
-   player.pos.copy(next);if(h!==null&&rise>=-.3)player.pos.y=h;
-   did=true;break
-  }
- }return did
+function tryMove(delta){
+ if(flight){player.pos.add(delta);return true}
+ const old=player.pos.clone(),next=old.clone().add(delta);
+ if(solidWalls){
+  const dist=delta.length();
+  if(dist>0.0001&&wallBlocks(old,next,0))return false;
+ }
+ // First working prototype: free horizontal exploration by default.
+ // A missing converted wall or floor triangle cannot block movement.
+ player.pos.x=next.x;player.pos.z=next.z;
+ let floor=groundHeight(next.x,next.z,old.y-1.7);
+ if(delta.lengthSq()>0.0001){
+  const ahead=delta.clone().normalize().multiplyScalar(.9);
+  const upper=groundHeight(next.x+ahead.x,next.z+ahead.z,old.y-1.35);
+  if(upper!==null&&(floor===null||upper>floor+.24)&&upper-old.y<2.25)floor=upper;
+ }
+ if(floor!==null&&floor-old.y>=-.3&&floor-old.y<=2.25)player.pos.y=floor;
+ return true;
 }
 function mantle(){
  if(flight||!facility)return;
@@ -190,7 +189,7 @@ onkeydown=e=>{
  if(e.code==='KeyE'){const d=nearestDoor();if(d)d.target=d.target>.5?0:1}
  if(e.code==='KeyN'){const dir=new THREE.Vector3(-Math.sin(player.yaw),0,-Math.cos(player.yaw)).multiplyScalar(2.7);const p=player.pos.clone().add(dir);const h=groundHeight(p.x,p.z,player.pos.y-1.7);if(h!==null)makeDoor(new THREE.Vector3(p.x,h-1.7,p.z),player.yaw)}
  if(e.code==='Space')mantle();
- if(e.code==='KeyV')third=!third;if(e.code==='KeyF')flight=!flight;if(e.code==='KeyR'){player.pos.set(20,-6.3,20);player.yaw=0;player.pitch=0;flight=false;}
+ if(e.code==='KeyC'){solidWalls=!solidWalls;status.textContent=solidWalls?'Experimental collision ON':'Free explore: wall collision OFF'}if(e.code==='PageUp')player.pos.y+=.8;if(e.code==='PageDown')player.pos.y-=.8;if(e.code==='KeyV')third=!third;if(e.code==='KeyF')flight=!flight;if(e.code==='KeyR'){player.pos.set(20,-6.3,20);player.yaw=0;player.pitch=0;flight=false;}
 };
 onkeyup=e=>keys.delete(e.code);
 document.addEventListener('mousemove',e=>{
