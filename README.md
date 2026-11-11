@@ -1,3 +1,19 @@
+# World Explorer v1.3 — source-map textures, spawn safety, distinct footsteps
+
+User-download artifact: `GoldenEye_World_Explorer_v13_ONE_ZIP.zip` (one ZIP with the standalone asset-embedded HTML, reports, and README).
+
+**Source-level material conversion:** Original Xbox CAFF opcode 0x2d records identify the texture bound to each original draw batch. The local pipeline uses preserved `batch_NNN` GLB names to associate textures with 22 converted map GLBs and retains the previously textured Facility. 23 total playable selectable maps are embedded. Aztec remains unsupported. Recovered source UVs are signed 16-bit values with **provisional** scale/offset choices; not every texture placement has been verified. Invalid or unresolved batches remain vertex-colored.
+
+**Spawn/floor fixes:** Map-specific starting points are drawn from original horizontal polygons rather than a ray cast down from each map's roof. Stair stepping is limited to a nearby support elevation rather than jumping onto overhead surfaces. The relocated Surface outdoor overlay is **OFF by default**, so it cannot unintentionally present a barren exterior on load. Missing genuine collision surfaces and map geometry remain unfinished.
+
+**Audio:** The walk/run triggers now call a quiet filtered shoe-contact synthesizer rather than the WAV samples that resembled gunshots. Shot audio is only called by the weapon-fire action.
+
+**Verification:** Node JavaScript syntax and single ZIP CRC tested. Interactive visual playback has not been validated. All feature checklist approvals remain unchecked.
+
+[Master tracker: 125 stable requirements](PROJECT_TRACKER.md)
+
+---
+
 # v1.2 — Ground fall-through safety + character texture atlas audit
 
 **User test build:** One downloadable HTML/ZIP made from the user's supplied source game files. Ground-fall protection is now **enabled by default**, holding the last known supported floor height if the imported level is missing a polygon underneath the player or has an incorrect lower surface. This does not invent visible geometry or replace the source map: **visual holes remain**.
