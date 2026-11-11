@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v1.3. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.4. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -206,3 +206,21 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 | GE-125 | Restore Aztec background to complete 24-map library | BLOCKED — CAFF parser exception | [ ] |
 
 **v1.3 source integrity:** Source texture indices are read from original 0x2d material-slot records and mapped to preserved `batch_NNN` draw labels. Source texture pixels are from the user's asset archive. UV coordinate offset/scale remains partly heuristic and needs validation; these are not guaranteed complete authentic textured maps. The new v1.3 standalone HTML is bundled in one ZIP; extracted copyrighted game assets are not published on GitHub. Ground candidate spawns are computed from original floor triangle centroids rather than a ray from the top of the level, but require playtesting. All approval boxes remain empty.
+
+## K — v1.4 recovered-texture environment generation
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-126 | Repair white/blank converted map surfaces from source textures | IMPLEMENTED — VERIFY: planar fallback, not exact original UVs | [ ] |
+| GE-127 | Select only original map-owned Xbox textures for procedurally assembled environments | IMPLEMENTED — VERIFY: 92 game-derived texture images across 23 maps | [ ] |
+| GE-128 | Generate continuous exterior ring with rolling terrain outside source map footprints | IMPLEMENTED — VERIFY: newly generated geometry with source texture images | [ ] |
+| GE-129 | Generate textured connecting paths using source game textures | IMPLEMENTED — VERIFY: placement is procedural, not authentic | [ ] |
+| GE-130 | Convert recognizable game-source crates, barrels, barricades, vehicles and trees | IMPLEMENTED — VERIFY: 17 unique source prop model types | [ ] |
+| GE-131 | Place original prop meshes near player and in outdoor surroundings | IMPLEMENTED — VERIFY: generated arrangements, not authored placements | [ ] |
+| GE-132 | Automatically switch biome style for each selectable map | IMPLEMENTED — VERIFY: heuristic snow/forest/urban/rock/industrial categories | [ ] |
+| GE-133 | Toggle map texture repair, outdoor generation and prop population separately | IMPLEMENTED — VERIFY | [ ] |
+| GE-134 | Guarantee collision-safe seamless navigation across every outdoor/indoor transition | IN PROGRESS — incomplete source navigation, last-floor safety workaround | [ ] |
+| GE-135 | Restore all original map texture UV bindings without reprojecting | IN PROGRESS — CAFF vertex format decoding required | [ ] |
+| GE-136 | Validate map visuals and prop scale/placement interactively on Chromebook | NEEDS USER TEST — browser local file blocked in test environment | [ ] |
+
+**Accuracy and source policy:** v1.4 programmatically creates **new terrain/road/path geometry**, as explicitly requested, but it uses recovered game textures only. Plants, vehicles and environmental objects are **converted game-source meshes**, not substituted cone-tree or placeholder models. Terrain shape, prop placement, biome choices and roads are generated rather than actual GoldenEye level-authored layouts. Some object textures are planar-projected because authentic source UV decoding is unfinished. Exteriors are a reconstructed annex, not the original outdoor level. No feature approvals have been checked.
