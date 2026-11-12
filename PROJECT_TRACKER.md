@@ -194,7 +194,7 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 
 | ID | Requirement | Development status | User approved |
 |---|---|---|---|
-| GE-116 | Restore source-material associations on all converted level draw batches | IMPLEMENTED — VERIFY: 22 newly textured maps + existing Facility | [ ] |
+| GE-116 | Restore source-material associations on all converted level draw batches | BROKEN — materials rendered black in user testing: 22 newly textured maps + existing Facility | [ ] |
 | GE-117 | Decode exact original vertex UV layout/scale on every level | IN PROGRESS — signed-16 UV extraction, several scales unverified | [ ] |
 | GE-118 | Retain unconvertible/invalid source draw batches as vertex-color geometry | IMPLEMENTED — VERIFY | [ ] |
 | GE-119 | Choose spawns from walkable original geometry rather than top-down roof hits | IMPLEMENTED — VERIFY: offline per-map candidate positions | [ ] |
@@ -231,7 +231,7 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 |---|---|---|---|
 | GE-137 | Audit all 23 embedded level GLBs and source image references | IMPLEMENTED — VERIFY: 23/23 GLBs parsed; 518836 triangles | [ ] |
 | GE-138 | Exclude pure white/black decals and masks from fallback environment textures | IMPLEMENTED — VERIFY: 4–6 per-map original-source textures | [ ] |
-| GE-139 | Apply per-face planar UV fallback to invalid converted map texture charts | IMPLEMENTED — VERIFY: live renderer, Chromebook test pending | [ ] |
+| GE-139 | Apply per-face planar UV fallback to invalid converted map texture charts | BROKEN — v1.5/v1.6 black maps: live renderer, Chromebook test pending | [ ] |
 | GE-140 | Retain valid Facility UVs and preserve glass/transparent materials | IMPLEMENTED — VERIFY: conditional repair | [ ] |
 | GE-141 | Reduce overexposed lighting washing out source materials | IMPLEMENTED — VERIFY | [ ] |
 | GE-142 | Clean up temporary material buffers when switching levels | IMPLEMENTED — VERIFY | [ ] |
@@ -244,15 +244,27 @@ All 23 available converted GLB files can be reopened and have source texture ima
 
 | ID | Requirement | Development status | User approved |
 |---|---|---|---|
-| GE-145 | Dam converted scene too dark / source-mesh occluders | IMPLEMENTED — VERIFY (lighting and 34 huge-face removals) | [ ] |
-| GE-146 | Bunker and Bunker 2 mostly black views | IMPLEMENTED — VERIFY (lighting and oversized-face filtering) | [ ] |
-| GE-147 | Cavern black / unlit underground surfaces | IMPLEMENTED — VERIFY (near-camera fill and emissive map) | [ ] |
+| GE-145 | Dam converted scene too dark / source-mesh occluders | BROKEN — user reports maps still black (lighting and 34 huge-face removals) | [ ] |
+| GE-146 | Bunker and Bunker 2 mostly black views | BROKEN — user reports black in v1.6 (lighting and oversized-face filtering) | [ ] |
+| GE-147 | Cavern black / unlit underground surfaces | BROKEN — user reports black in v1.6 (near-camera fill and emissive map) | [ ] |
 | GE-148 | Statue Park malformed giant triangles | IMPLEMENTED — VERIFY (experimental face filtering) | [ ] |
 | GE-149 | Preserve genuine snow/concrete/shadow texture images instead of blanket rejecting white and dark images | IMPLEMENTED — VERIFY (conservative source image checks) | [ ] |
-| GE-150 | Snowguard source head and original face map retained | IMPLEMENTED — VERIFY (projected UV preview) | [ ] |
+| GE-150 | Snowguard source head and original face map retained | BROKEN — head still invisible in v1.6 user playtest (projected UV preview) | [ ] |
 | GE-151 | Replace Snowguard's disconnected flat body with coherent original-atlas uniform and articulated limbs | IMPLEMENTED — VERIFY (provisional reconstruction only) | [ ] |
 | GE-152 | Ground third-person characters correctly and preserve animation vertical offset | IMPLEMENTED — VERIFY | [ ] |
 | GE-153 | Restore authentic Snowguard body mesh and original skeletal animation | NOT DONE — original decoder needed | [ ] |
 | GE-154 | Graphical Chromebook test of Dam, Bunker, Cavern and Snowguard | NEEDS USER REVIEW — browser GPU unavailable here | [ ] |
 
 The new v1.6 single-file explorer includes camera fill lighting and emissive texture illumination, conservative original map-image filtering, and per-map huge triangle removal: Bunker 3,388, Bunker 2 3,401, Statue Park 17,255, Dam 34, Cavern 8. These are experimentally classified triangles and may include legitimate source faces; original assets remain unchanged in the user's master archive. Snowguard retains the real source head and texture atlases but the body geometry is reconstructed, not recovered. Existing character vertical placement is repaired. These are unverified JS/static checks; browser WebGL test blocked. No user approval is recorded.
+
+## N — v1.7 rollback for black maps and missing Snowguard head
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-155 | Never overwrite Facility’s known-working original GLB materials/UVs | IMPLEMENTED — VERIFY in v1.7; no visual playtest | [ ] |
+| GE-156 | Source-textured unlit fallback on non-Facility maps to avoid black shader output | IMPLEMENTED — VERIFY in v1.7; visual verification needed | [ ] |
+| GE-157 | Per-batch image readability test, with original-game fallback textures only | IMPLEMENTED — VERIFY; all 23 map image sets decode | [ ] |
+| GE-158 | Explicit visible Snowguard head volume and original face atlas | IMPLEMENTED — VERIFY; provisional rig and face placement | [ ] |
+| GE-159 | Confirm Facility, Bunker, Cavern and Snowguard visually on Chromebook | NEEDS USER TEST; previous v1.6 failed | [ ] |
+
+**Regression rule:** The user reported black textures, including Facility, and Snowguard's missing head in v1.6. Previously marked code-ready items GE-116, GE-139 and GE-145–147 and GE-150 are now marked BROKEN pending new verification. v1.7 bypasses global material overrides on Facility and switches the other maps to source-textured MeshBasicMaterial with recomputed UVs. A clearly visible hood/head is provisionally constructed using Snowguard's own original face pixels. This is not genuine original skeletal animation or complete accurate UV mapping. All user approvals remain unchecked. Node syntax test, source-image audit and ZIP CRC passed; WebGL visual testing unavailable.
