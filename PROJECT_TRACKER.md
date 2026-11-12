@@ -1,3 +1,15 @@
+## 2026-11-12 — v3.2 private playable map object-placement research (NOT user-approved)
+
+- [x] Inspected the current v3.1 private playable ZIP and 4,565-file decoded asset archive; no decoded original stage setup/pad object tables were present. Game-derived model identity **does not** prove authored placement.
+- [x] Added source-floor-raycast object-placement panel to the actual 79 MB asset-embedded world explorer. Users can choose any recovered `ENV.propModels` model and place it on an original decoded walkable floor under the crosshair.
+- [x] Per-map manual placements persist locally; portable JSON export/import with coordinate-system and provenance labels, validation, per-map undo and clear. Imported placements are explicitly **unverified**, not presented as original level setup locations.
+- [x] Added `V32_PLACEMENT_SOURCE_AUDIT.json` and `V32_PROGRESS_AND_OPEN_ISSUES.md` inside the private ZIP. All 12 original non-game auxiliary files were verified byte-for-byte unchanged; game HTML and source module kept synchronized; Node JS syntax and ZIP integrity passed.
+- [ ] Decode original stage setup files and pad/preset positions from user-owned source data for every map, including doors, object IDs, flags, guards, path networks and scene coordinate transforms.
+- [ ] Validate original authored object transform mapping against each CAFF level with a scene overlay. Only then replace biome-based / randomly reconstructed scatter with authenticated instances.
+- [ ] Continue missing original geometry draw recovery and source UV/shader repair for heavily incomplete maps; Aztec still unresolved.
+- [ ] Add collision validation, performance measurements, on-device screenshot QA and user-approved test results before marking features accepted.
+- [ ] The historical master checklist below and all previous unresolved bugs remain applicable and untouched.
+
 ## 2026-11-12 — Private v3.1 map geometry / texture audit (implementation; not user-approved)
 
 - [x] Audited all 23 map GLBs actually embedded in the v3.0 playable HTML, compared against recovered original CAFF draw records and texture descriptors. Report stored as `V31_MAP_COVERAGE_AUDIT.json` in new private ZIP.
