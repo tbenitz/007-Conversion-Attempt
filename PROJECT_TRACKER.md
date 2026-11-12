@@ -1,3 +1,16 @@
+## 2026-11-12 — Private playable v3.3 mission SIMULATION (code implemented; NOT user-approved)
+
+- [x] Added initial Dam campaign selection instead of Facility and 20 original N64 **00 Agent** briefing/objective catalogues (80 objective entries); source citation included in private documentation. 18 campaign stages plus Aztec and Egyptian; Aztec remains unplayable due missing converted map.
+- [x] Added mission selector, loaded stage transition, per-stage progress reset/save, and objective HUD within the actual embedded-asset world explorer (not the obsolete public demo).
+- [x] Added reconstructed gameplay objective markers anchored when possible to raycast floor triangles from source converted maps: E interact/collect/reach/extract, firearm shoot for red destroy markers, extract gated by other objectives; persistent completion.
+- [x] Surface 1 / Surface 2 reference missions select the same available Surface asset, not fabricated second source map.
+- [x] Moved old game files forward intact to `GoldenEye_World_Explorer_v33_MISSIONS_AND_OBJECTIVES.zip` and added `V33_MISSION_REFERENCE.json`, `V33_PROGRESS_AND_OPEN_ISSUES.md`. All previous auxiliary research/tracking files retained byte-for-byte; Node JavaScript syntax, ZIP CRC, and source/HTML sync tested.
+- [ ] **Critical:** This is explicitly a mission training SIMULATION, not original complete single-player campaign. Original pad/setup coordinates, object identity placement, AI scripts, hostage/survival logic, cutscenes, original mission triggers, timing, fail conditions and difficulty-specific rules are still not decoded.
+- [ ] Decode source stage setup and all mission/guard/AI logic, then populate original object/pad transforms. Replace stand-ins only when evidence supports authenticity.
+- [ ] Validate mission markers are accessible and all objective flows work on each map using Chromebook WebGL playtesting. Some maps have incomplete floors or missing geometry.
+- [ ] Restore Aztec source map, multiple original objective-object instances, civilians/scientists, rescue escorts, real explosives and scripted enemies.
+- [ ] Explicit user approval required; previous unresolved requirements and user approvals below unchanged.
+
 ## 2026-11-12 — v3.2 private playable map object-placement research (NOT user-approved)
 
 - [x] Inspected the current v3.1 private playable ZIP and 4,565-file decoded asset archive; no decoded original stage setup/pad object tables were present. Game-derived model identity **does not** prove authored placement.
