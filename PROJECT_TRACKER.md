@@ -1,3 +1,17 @@
+## 2026-11-12 — v3.5 original stage setup records (source-authenticated, NOT user approved)
+
+- [x] Decoded **5,200 normal source pad records** across original XBLA stage setup arrays, including native XYZ, up/look orientation, pad-to-room pointers and record offsets; Cuba needs a separate pointer-layout pass. These coordinates are ORIGINAL game units, not calibrated to converted browser map geometry.
+- [x] Decoded **235 supported original objective record entries** (watch labels, objective starts/ends, destroy-objects, complete/fail condition flags). These are real native metadata, **not executable objective triggers**.
+- [x] Strictly decoded **37 guard records**, including **36 Dam guards**, with native body ID, AI-list ID and pad-linked source positions/facing. Found 564 additional *candidate* guard records in contiguous native type-9 clusters, but these require full prop-type grammar proof before being considered complete.
+- [x] Added `Original setup data` panel to the actual asset-embedded source-only v3.5 private explorer. Shows real stage pad/guard/objective records without inventing physical objects or marking objectives done.
+- [x] Included decoder, original stage JSON and `V35_DECODER_PROGRESS_AND_OPEN_ISSUES.md` in new private ZIP. JS syntax and ZIP CRC verified; original embedded game assets retained.
+- [ ] **Original objective execution: 0% verified.** Need actual AI opcode/branch/flag semantics and source-event bindings, not only objective condition descriptors.
+- [ ] **Original prop/door/guard physical placement: 0% verified in explorer.** Native pad-linked guard records found, but original-to-GLB coordinate conversion must be calibrated and verified before spawning.
+- [ ] Decode all source prop record sizes, including door/standard/surveillance camera, to traverse every stage object list safely.
+- [ ] Calibrate source-to-converted-map coordinate units and axes with real source landmarks or shared geometry; do not invent transforms.
+- [ ] Reconstruct complete original per-stage mission triggers, guards, doors, props, audio bindings, paths; correct missing Dam floor geometry and other maps.
+- [ ] Real Chromebook visual/gameplay QA and explicit user approval. All earlier tracker items remain intact below.
+
 ## 2026-11-12 — Full authentic XBLA executable decompression and stage pointer discovery (NOT USER APPROVED)
 
 - [x] Fixed STFS first hash-table boundary in native XEX extraction; original full retail game is intact. Correct extracted XEX SHA-256 `00b9197180cb044142dd78f2591ff721b1884f1b87aca5b566a325770054b8fa`.
