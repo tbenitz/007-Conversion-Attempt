@@ -1,3 +1,23 @@
+# World Explorer v1.9 — Source-textured world shell, curved character faces and roaming Snowguards
+
+**Downloadable single HTML + ZIP:** The user-owned offline-style release `GoldenEye_World_Explorer_v19_SINGLE_GAME.zip` is delivered through this conversation. It embeds game-derived content from the user's copy; Three.js still loads via CDN. Copyright-derived game meshes and images are *not* committed here.
+
+### v1.9 response to player screenshots
+
+- **No backward square heads:** Replaced the portrait billboard on reconstructed character heads with a curved spherical face surface, facing the player's forward movement direction. The true original rig/head UVs are still not restored.
+- **Not white vehicles:** The original converted BMW and truck meshes remain; wheel/tire, silver side/body, glass, grille and green truck panel surfaces now select distinct **real GoldenEye game images**, with temporary projected UVs where original UVs are missing. 17 recovered prop model types are placed in the environment.
+- **No paintings for ground:** Inspected level texture sheets and curated ground/wall/path/roof material image selections for every one of the 23 map options. Archives ground now uses the source stone floor texture, not its paintings/portraits. 92 decoded game images are embedded in the curated environment set.
+- **Larger connected world:** Keeps each actual converted level as the central geometry, adds a continuous *visible and walkable* ground mesh under it (including conversion holes), rolling outskirts and textured paths. Indoor stages get an outer building shell and converted original game-door meshes at generated accessible entrances plus some interior demonstration doors. Terrain and new wall geometry are generated; material images are original.
+- **Roaming guards:** Three procedural Snowguard NPCs appear around the map spawn. They patrol, detect/chase the player, fire at intervals, take weapon/Slappers/mine damage, fall down and respawn. Toggle them off in the menu. They use recovered Snowguard face/uniform images but reconstructed animated bodies and newly coded AI, not original GoldenEye enemy animations or game logic.
+
+### Quality gates and limitations
+
+All 23 map choices, 42 character selections and 64 selectable weapons/items are retained. Source imagery and proxy geometry *do not guarantee original asset fidelity*. Accurate head/prop UV maps, original collision/navigation, authored door placements, original skeletal animations and Aztec conversion remain unresolved. Browser visual testing on ChromeOS is still required: Chromium in the test container blocks both local-file and localhost URLs. Static Node JS syntax, 92+40 embedded source-image decode checks, converted prop GLB openings, and ZIP integrity have passed. All user acceptance checkboxes stay unchecked.
+
+[Master progress tracker (GE-001 through GE-191)](PROJECT_TRACKER.md)
+
+---
+
 # GoldenEye XBLA World Explorer v1.8 — Source-textured characters, Slappers and mines
 
 **Latest user's screenshot:** Facility/Bunker map textures show again, but props render solid black, Suit Bond and many other characters lack proper body textures, and Snowguard looks unnaturally short. v1.8 targets those regressions using original game source face/clothing/prop/gun texture atlases.
