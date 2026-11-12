@@ -21,7 +21,7 @@ Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete asse
 | GE-009 | Crouch and camera height | IMPLEMENTED — VERIFY | [ ] |
 | GE-010 | Jump and gravity | IMPLEMENTED — VERIFY | [ ] |
 | GE-011 | Accurate fall damage | IN PROGRESS | [ ] |
-| GE-012 | Climb every Facility staircase without getting stuck | BROKEN — user still cannot climb some original Facility stairs; v2.3 tread sampler trial (unverified) | [ ] |
+| GE-012 | Climb every Facility staircase without getting stuck | BROKEN / IN PROGRESS — some stairs still blocked; v2.6 fall controller does not recover missing original stairs | [ ] |
 | GE-013 | Solid wall collision | BROKEN — disabled by default | [ ] |
 | GE-014 | Accurate floor, slope and platform handling | IN PROGRESS — v1.2 last-known-safe-floor fallback | [ ] |
 | GE-015 | Third-person camera occlusion handling | IMPLEMENTED — VERIFY | [ ] |
@@ -219,7 +219,7 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 | GE-131 | Place original prop meshes near player and in outdoor surroundings | IN PROGRESS — props placed but several white / incorrect material assignments in v1.8 | [ ] |
 | GE-132 | Automatically switch biome style for each selectable map | IMPLEMENTED — VERIFY: heuristic snow/forest/urban/rock/industrial categories | [ ] |
 | GE-133 | Toggle map texture repair, outdoor generation and prop population separately | IMPLEMENTED — VERIFY | [ ] |
-| GE-134 | Guarantee collision-safe seamless navigation across every outdoor/indoor transition | IN PROGRESS — geometry collision and outdoor/indoor traversal still fail player reports; v2.0 trial source-ray controller not yet verified | [ ] |
+| GE-134 | Guarantee collision-safe seamless navigation across every outdoor/indoor transition | IN PROGRESS — v2.6 physical fall-through and real terrain fallback, user test pending | [ ] |
 | GE-135 | Restore all original map texture UV bindings without reprojecting | IN PROGRESS — CAFF vertex format decoding required | [ ] |
 | GE-136 | Validate map visuals and prop scale/placement interactively on Chromebook | NEEDS USER TEST — browser local file blocked in test environment | [ ] |
 
@@ -301,7 +301,7 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-178 | Differentiate military truck and APC body, wheel, panel material groups | IMPLEMENTED — VERIFY (per-batch source sheets) | [ ] |
 | GE-179 | Stop using posters and paintings as generated ground textures | IMPLEMENTED — VERIFY (23 curated source-image palettes) | [ ] |
 | GE-180 | Use 23 explicit game-owned ground/wall/path/roof material sets | IMPLEMENTED — VERIFY (92 recovered images) | [ ] |
-| GE-181 | Create continuous walkable terrain below/around original level geometry | IN PROGRESS — user still encountered source geometry holes/exterior placement issues | [ ] |
+| GE-181 | Create continuous walkable terrain below/around original level geometry | IN PROGRESS — v2.5 elevated rooms floated; v2.6 ground lowered and generated retaining walls (unverified) | [ ] |
 | GE-182 | Make interior building shells around complete source maps without covering authored interiors | IMPLEMENTED — VERIFY (source wall/roof textures, generated geometry) | [ ] |
 | GE-183 | Install authentic converted door models at exterior entrance and interior test locations | IN PROGRESS — generated paired source-door exterior access added, locations remain unverified | [ ] |
 | GE-184 | Place source GoldenEye crates, barrels, foliage and vehicles in world surroundings | IMPLEMENTED — VERIFY (17 converted model types) | [ ] |
@@ -365,9 +365,9 @@ The user reported a startup-blocking syntax error in v2.0. The generator closed 
 | GE-220 | 3D inspect nonweapon source models without ammo or firing | IMPLEMENTED — VERIFY | [ ] |
 | GE-221 | Use original watch geometry and apply source watch image to the dial rather than the entire model | IN PROGRESS — watch original UV maps still unverified | [ ] |
 | GE-222 | Combine original watch body and laser source attachment for watchlaser | IMPLEMENTED — VERIFY | [ ] |
-| GE-223 | Enter/exit converted original BMW, military truck and APC meshes | IMPLEMENTED — VERIFY (new movement controller) | [ ] |
+| GE-223 | Enter/exit converted original BMW, military truck and APC meshes | IN PROGRESS — reverse-facing source car issue reported by user; 180-degree visual rotation in v2.6 pending test | [ ] |
 | GE-224 | WASD driving/reverse/steering, Space braking and Shift acceleration | IMPLEMENTED — VERIFY | [ ] |
-| GE-225 | First-person and third-person driving camera modes using V | IMPLEMENTED — VERIFY | [ ] |
+| GE-225 | First-person and third-person driving camera modes using V | IN PROGRESS — first-person driver view obstructed by glass; v2.6 camera moved outside windshield (unverified) | [ ] |
 | GE-226 | Accessible source BMW near generated shell entrance and J spawn action | IMPLEMENTED — VERIFY | [ ] |
 | GE-227 | Three original-source door meshes at front, left and right generated shell entrances | BROKEN — user reported freestanding/random black doors; retired boundary gates in v2.2 | [ ] |
 | GE-228 | Game-textured access ramp geometry through entrance wall gaps | IN PROGRESS — old boundary walkway gate placements retired; original entry geometry still missing | [ ] |
@@ -388,7 +388,7 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-236 | Detect per-source head forward face direction so faces are not painted on backs | IMPLEMENTED — VERIFY; user visual test needed | [ ] |
 | GE-237 | Allow manual original head selection and flip/persistence per character | IMPLEMENTED — VERIFY; head-body pairings unverified | [ ] |
 | GE-238 | Recover actual original game head-to-character attachment and authentic UV layout | IN PROGRESS / BLOCKED — stage attachment data not recovered | [ ] |
-| GE-239 | Use original GoldenEye metal-door textures instead of nearly-black masks | IMPLEMENTED — VERIFY; tested source image decoding, not full WebGL | [ ] |
+| GE-239 | Use original GoldenEye metal-door textures instead of nearly-black masks | IN PROGRESS — original source-door mesh flattened and aligned against found walls in v2.6, original cutouts absent | [ ] |
 | GE-240 | Remove random freestanding/boundary gates and find nearby actual map wall faces | IMPLEMENTED — VERIFY; source-wall raycast selection | [ ] |
 | GE-241 | Require walkable floor on both sides before placing a wall-mounted door | IMPLEMENTED — VERIFY; 4 candidates confirmed from Facility source geometry | [ ] |
 | GE-242 | Keep E-triggered door transitions within 1.75 meters across the selected wall | IMPLEMENTED — VERIFY; no distant arbitrary teleport | [ ] |
@@ -482,3 +482,23 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-300 | Verify repaired heads and correct source audio on user's ChromeOS | NEEDS USER TEST; no successful WebGL playtest | [ ] |
 
 The user provided screenshots of head textures stretched into body-like structures and reported that a door-labeled audio clip was actually a gun sound. v2.5 corrects the XSB sound-to-wave mapping at the binary structural level (209 verified source references) and selects one coherent original mesh for each of the 35 cleaned heads, rejecting disconnected/flattened draw fragments. No invented head triangles or generated source WAVs. Weapon class→named cue assignment, authentic vertex UV mapping and skeletal animations still require original game logic decoding. All user approvals remain unchecked.
+
+
+## Y — v2.6 ground physics, raised-room support, source-door depth and car alignment
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-301 | Allow actual falling off original map edges rather than freezing on last-known support | IMPLEMENTED — VERIFY: safe ledge assist OFF by default; user test needed | [ ] |
+| GE-302 | Find lower physical surfaces using down ray against original level, generated ground and ramps | IMPLEMENTED — VERIFY: original/source materials unchanged | [ ] |
+| GE-303 | Swept vertical fall-to-ground collision to prevent tunneling through a thin floor at high speed | IMPLEMENTED — VERIFY: static checks only | [ ] |
+| GE-304 | Retain fall damage on real landing after dropping from an elevated platform | IMPLEMENTED — VERIFY | [ ] |
+| GE-305 | Lower generated source-textured exterior terrain below indoor starting floor for visible height separation | IMPLEMENTED — VERIFY: 4.2 scene units lower | [ ] |
+| GE-306 | Construct game-textured retaining-wall supports beneath sampled exposed raised room floors | IMPLEMENTED — VERIFY: generated geometry, not authentic game walls | [ ] |
+| GE-307 | Correct source door local depth/origin against existing vertical wall face | IMPLEMENTED — VERIFY: <=0.085 source-derived door display depth | [ ] |
+| GE-308 | Cut genuine doorway openings into original wall polygons and reconstruct authored door positions | NOT DONE — model/stage setup decoder incomplete | [ ] |
+| GE-309 | Align converted BMW/truck/APC visual forwards with W-forward movement | IMPLEMENTED — VERIFY: Y-axis model rotation, visual playtest pending | [ ] |
+| GE-310 | Position first-person driving view in front of the original windshield obstruction | IMPLEMENTED — VERIFY: windshield-just-outside offset, visual test pending | [ ] |
+| GE-311 | Full ChromeOS graphical test: fall edge, raised room, door flushness, car heading and windshield POV | NEEDS USER TEST | [ ] |
+| GE-312 | Restore original per-stage supported outside terrain/ground and collision instead of reconstructed supports | NOT DONE — original stage setup/collision decoding incomplete | [ ] |
+
+v2.6 changes are independently written prototype logic. No original game stage setup/collision or car camera code is recovered. Visual assets and textures remain the original recovered Xbox media. Full GUI gameplay testing unavailable; all approval boxes unchecked.
