@@ -1,3 +1,16 @@
+# v2.8 — Original Xbox skeleton metadata research and outdoor room compounds
+
+**Original source findings, not invented clip data:** Direct analysis of the user's original GoldenEye XBLA STFS package found 42 original and 42 remastered `char/*_hits/default.rbh` resources. Their CAFF payloads include actual `SKEL_*` bone/skinning names (`SKEL_RT_HIP`, `SKEL_RT_KNEE`, `SKEL_RT_ANKLE`, `SKEL_NECK`, wrists, etc.) and `|POSITION|BASE|...` skinning chains. The per-character audit lists **765 joint/skinning label entries in original and 1,060 in remastered** files, with original byte offsets and SHA-256. Label counts are not unique bones, and several files expose no names. **No original pose frames or authentic clips have been decoded yet.**
+
+The original animation catalog documents walk `0x28`, run `0x29`, jogging `0x2A`, fire while walking `0x30`, hit shoulder `0x0E`, hit arm `0x10`, hit leg `0x14`, death forward `0x1A`, backward fall `0x1C`. Source: https://goldeneyedepot.com/anims . The user-download contains a 62-ID reference manifest; it is a research mapping, not raw animation bytes. Current guard logic records desired source clip IDs for walk/fire/hit/death but **does not play original clips**. The legacy procedural fallback is still clearly separate. Genuine XBLA animation bank or source XEX2 tables are not yet unpacked.
+
+**More substantial exteriors:** Up to nine existing original-prop cover yards are now surrounded by **new game-textured multiroom enclosures**, with up to 72 wall segments, 18 partly roofed rear rooms, and nine terrain-following open walkways. Each open front entry and inner room passage is 3.7 scene units wide. Walls are included in source-textured generated collision and use distance prechecks to avoid expensive offscreen rays. The props remain game-derived crate/ammunition/barricade meshes; wall arrangement and wall geometry are generated, **not restored original GoldenEye buildings**.
+
+**Private deliverables:** `GoldenEye_World_Explorer_v28_OUTPOSTS_AND_RIG_RESEARCH.zip` (playable asset-embedded HTML, 42/42 rig report and code) and `GoldenEye_v28_ANIMATION_RESEARCH_SOURCE_ONLY.zip` (full code, rig audit and reference catalogs without embedded game media). No copyrighted assets added to this public repository.
+
+**QA:** Node `--check` and independent TypeScript AST parser pass, rig audit checks and generated wall-gap/collision-broadphase assertions pass, archives pass CRC. Chromium refused local HTML with `ERR_BLOCKED_BY_ADMINISTRATOR`; no visual test or user approval. Existing stairs, source collision, original skeletal skinning, original motion clips and head UVs remain open.
+
+---
 # GoldenEye World Explorer v2.7 — Physical ramps, solid retaining walls, source-prop outdoor cover
 
 **User report:** v2.6 ramps were visually present but not traversable; raised-room retaining walls were pass-through; some ramps did not meet their source-game door, and the outdoor level had unguarded boundaries. The recovered military truck looked wooden from incorrect source texture assignments. Original walk/run/hit/death animations remain outstanding.
