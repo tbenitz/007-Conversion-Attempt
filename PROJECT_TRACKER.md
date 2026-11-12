@@ -338,7 +338,17 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-208 | Reduce oversized vehicles and avoid spawning them immediately inside authored rooms | IMPLEMENTED — VERIFY (appearance requires test) | [ ] |
 | GE-209 | Original vehicle material UV mapping / placement and correct scale across all maps | IN PROGRESS — previous screenshots show failures | [ ] |
 | GE-210 | Restore full authored exteriors, cave/bunker entrances and object placements | IN PROGRESS — synthetic stage linkage is a test, not authentic source reconstruction | [ ] |
-| GE-211 | Full acceptance test of v2.0 with stairs, collisions, mines, shops, audio on Chromebook | NEEDS USER TEST — browser blocked in model environment | [ ] |
+| GE-211 | Full acceptance test of v2.0 with stairs, collisions, mines, shops, audio on Chromebook | BROKEN in v2.0 — a syntax error prevented any gameplay from starting | [ ] |
 | GE-212 | Optimize wall-ray performance and test on 8GB Chromebook | PLANNED — may be expensive on high-triangle maps | [ ] |
 
 **User approvals:** All GE-192..GE-212 items are unchecked; no code or static test constitutes user approval. v1.9 complaints about floaty/white vehicles, wall/stair pass-through, fake Slappers and mine explosions are recorded as open regressions. The new soundbank source is actual original signed PCM and the firebomb artwork is sourced from the retail copy, but XACT cue binding needs independent parsing and the original character animations remain blocked. Generated crates, credits, gear station menus and exterior portal locations are explicitly not original GoldenEye-authored map elements.
+
+## R — v2.0.1 mine-update parsing hotfix
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-213 | Repair v2.0 JavaScript parse crash at updateMines (Unexpected token at line 1069) | IMPLEMENTED — VERIFY in v2.0.1; user runtime test pending | [ ] |
+| GE-214 | Add independent strict JavaScript AST parsing as QA gate beyond Node --check | IMPLEMENTED — VERIFY locally; zero parser diagnostics and checked mine-loop nesting | [ ] |
+| GE-215 | Confirm local ChromeOS loading and gameplay after parse hotfix | NEEDS USER TEST; file:// warning may be independent | [ ] |
+
+The user reported a startup-blocking syntax error in v2.0. The generator closed its `for (const m of gameMines)` loop before timed/proximity mine checks, leaving one extra closing brace. v2.0.1 fixes the nesting without altering source assets. All embedded JSON data parsed, the extracted module passed Node plus TypeScript AST parsing, and the new ZIP CRC matches. The separate file:// security warning is not claimed fixed. Previous regression approvals remain unchecked.
