@@ -1,3 +1,16 @@
+# 2026-11-12 — Public viewer: 10× generated outdoors + real glTF rig audit (work in progress)
+
+**Scope:** The repository contains the older public `index.html` viewer, not the private v2.8 asset-embedded build described below. This update edits the committed public viewer only. It does not alter the unavailable private v2.8 ZIP, and does not claim any newly recovered Xbox animation bytes.
+
+- `src/outdoor.js` adds four **generated/reconstructed** outdoor outpost compounds, tree models and cover. A deterministic seed requests **540 combined tree/cover placements** (10× the previously documented 54 source-prop placements) and returns the actual placed totals on screen; generated compound walls are additional geometry. Instanced meshes keep tree draw calls low. Ground, boundary walls and approximate horizontal obstacle collision are included. These are not extracted original GoldenEye objects. Per-object collision and ground integration still need in-browser playtesting.
+- `index.html` loads the exterior at start and displays counts. It imports authored glTF animation clips **only when provided in the locally uploaded GLB**, clones actual skinned meshes with Three.js SkeletonUtils and selects recognized idle/walk/run tracks by names. J/H/K can preview authored firing/hit/death tracks if present. Naming conventions are guesses, and the old fallback articulated animation remains procedural. The broken `a.body.position` access in the fallback gait is fixed.
+- `tools/audit_rigs_and_animations.py` (standard-library only) inventories glTF nodes, child/parent links, joint indices, inverse bind matrix accessor metadata, skin roots, animation target channels and sampler metadata. It **does not** decode source CAFF animations; use it on user-converted local GLB files to collect evidence before mapping native skeleton and animation bank formats.
+- **Outstanding:** native CAFF/XEX authored animation parsing; confirmed bone hierarchy/coordinate frames; animation-to-character/source ID mapping; retargeting if exported GLBs are unskinned; reliable local Chromebook WebGL QA; test of generated obstacle placement and collision. No user approval is implied.
+
+Example: `python tools/audit_rigs_and_animations.py boris_textured.glb --out rig_report.json`
+
+---
+
 # v2.8 — Original Xbox skeleton metadata research and outdoor room compounds
 
 **Original source findings, not invented clip data:** Direct analysis of the user's original GoldenEye XBLA STFS package found 42 original and 42 remastered `char/*_hits/default.rbh` resources. Their CAFF payloads include actual `SKEL_*` bone/skinning names (`SKEL_RT_HIP`, `SKEL_RT_KNEE`, `SKEL_RT_ANKLE`, `SKEL_NECK`, wrists, etc.) and `|POSITION|BASE|...` skinning chains. The per-character audit lists **765 joint/skinning label entries in original and 1,060 in remastered** files, with original byte offsets and SHA-256. Label counts are not unique bones, and several files expose no names. **No original pose frames or authentic clips have been decoded yet.**
