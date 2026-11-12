@@ -1,3 +1,14 @@
+## 2026-11-12 — Private playable v2.9 Library ZIP (additive; NOT user-approved)
+
+- [x] Created `GoldenEye_World_Explorer_v29_DENSE_EXTERIORS_AND_RIG_RESEARCH.zip` from the actual asset-embedded v2.8 private archive in ChatGPT Library. This is implementation, not acceptance.
+- [x] Added `populateDenseSourceExterior` to target 486 additional existing-source tree and cover prop placements outside nine preserved outpost sites, on top of the original ~54 source cover props. Count varies with map/assets; reports actual numbers.
+- [x] Left original embedded game-derived assets, existing rig audit, original animation ID catalog, reverse-engineering notes, release notes and tests unchanged.
+- [x] Added `V29_PROGRESS_AND_OPEN_ISSUES.md` inside private ZIP for additional implementation and open issues.
+- [ ] User-confirmed Chromebook in-game test: source trees, terrain placement, performance, outpost doors and movement collision.
+- [ ] Native Xbox/XBLA original keyframe/skeleton decoder (CAFF/XEX) with validated bones, animations and source model relationships.
+- [ ] User approval of any v2.9 features.
+- [ ] Additional full master tracker items still apply unchanged below.
+
 ## 2026-11-12 — Public viewer animation / exterior work
 
 - [x] Code added: deterministic generated exterior with four outposts and ~10× (540 target) scattered tree/cover instances. **Not user-approved or playtested.**
