@@ -21,7 +21,7 @@ Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete asse
 | GE-009 | Crouch and camera height | IMPLEMENTED — VERIFY | [ ] |
 | GE-010 | Jump and gravity | IMPLEMENTED — VERIFY | [ ] |
 | GE-011 | Accurate fall damage | IN PROGRESS | [ ] |
-| GE-012 | Climb every Facility staircase without getting stuck | BROKEN — free-walk workaround | [ ] |
+| GE-012 | Climb every Facility staircase without getting stuck | BROKEN — user still cannot climb some original Facility stairs; v2.3 tread sampler trial (unverified) | [ ] |
 | GE-013 | Solid wall collision | BROKEN — disabled by default | [ ] |
 | GE-014 | Accurate floor, slope and platform handling | IN PROGRESS — v1.2 last-known-safe-floor fallback | [ ] |
 | GE-015 | Third-person camera occlusion handling | IMPLEMENTED — VERIFY | [ ] |
@@ -142,7 +142,7 @@ Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete asse
 | GE-084 | Per-weapon magazine reload empty trigger | IMPLEMENTED — VERIFY | [ ] |
 | GE-085 | Armor absorption and meter | IMPLEMENTED — VERIFY | [ ] |
 | GE-086 | Health and armor pickups | IMPLEMENTED — VERIFY | [ ] |
-| GE-087 | Full level map projected from converted geometry | IMPLEMENTED — VERIFY | [ ] |
+| GE-087 | Full level map projected from converted geometry | IMPLEMENTED — VERIFY: original M-key full map still in v2.2; v2.3 adds always-visible minimap | [ ] |
 | GE-088 | Map player heading door and waypoint markers | IMPLEMENTED — VERIFY | [ ] |
 | GE-089 | Three recovered door meshes shown in Facility | IMPLEMENTED — VERIFY — test placements | [ ] |
 | GE-090 | Decode original accurate Facility door coordinates | BLOCKED — stage setup parser needed | [ ] |
@@ -397,3 +397,23 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-245 | Runtime WebGL QA of head faces, wall doors and sprint on user's Chromebook | NEEDS USER TEST — Chromium graphics initialization failed | [ ] |
 
 **Regression handling:** The user reported black rectangular doors, arbitrary boundary teleports, and identical fabricated character faces in v2.1. GE-175/176 and GE-227/229 remain marked BROKEN, not approved, until a real playtest. v2.2 replaces generic sphere heads with 35 genuine 3D head asset bundles; original head-to-body assignments are explicitly provisional and editable. The default exterior-boundary shell gates are disabled, source-wall door positions are derived from vertical original map polygons and two supported floor samples. E crosses just 1.75m through a mounted door; original wall polygons are not cut into doorway openings. All user acceptance checkboxes remain unchecked. The standalone JS, independent AST parser, asset JSON and ZIP CRC pass; GUI WebGL smoke test fails in container's EGL initialization, so these are unverified visually.
+
+
+## U — v2.3 reproducible assets/code separation, original XEX and map/stair audit
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-246 | Deliver complete browser game source as separate asset-free JS/HTML/CSS package | IMPLEMENTED — VERIFIED STATIC: source-only ZIP 74KB | [ ] |
+| GE-247 | Deliver all currently decoded model, image and original-bank WAV assets in one archive | IMPLEMENTED — VERIFIED STATIC: asset ZIP 176MB, 4562 entries | [ ] |
+| GE-248 | Generate manifest of every binary asset and its source/checksum | IMPLEMENTED — VERIFIED STATIC: ASSET_MANIFEST.json | [ ] |
+| GE-249 | Rebuild the standalone game from source-only ZIP plus decoded-assets ZIP | IMPLEMENTED — VERIFIED STATIC: all six embedded data objects match | [ ] |
+| GE-250 | Reinstate a clearly visible HUD minimap with click-to-open full map | IMPLEMENTED — VERIFY in v2.3; game graphical test pending | [ ] |
+| GE-251 | Preserve full M-key tactical map overlay and drawing | IMPLEMENTED — VERIFIED CODE: full map remains in v2.2 and v2.3 | [ ] |
+| GE-252 | Improve source-only stair tread stepping to supported risers up to 1.08 units | IN PROGRESS — v2.3 code change; user reported blocked stairs; not verified | [ ] |
+| GE-253 | Decode original Xbox native executable into original C/C++ game logic | NOT DONE — compiled default.xex extracted, native source not decompiled | [ ] |
+| GE-254 | Extract and verify original default.xex native Xbox executable | IMPLEMENTED — VERIFIED DATA: 7,266,304 byte XEX2 binary | [ ] |
+| GE-255 | Resolve original level floor, staircase and collision/navigation data | BROKEN / IN PROGRESS — current raycast proxy insufficient | [ ] |
+| GE-256 | Restore authentic original game animation/event scripts | BLOCKED / NOT DONE — source animation and native executable logic undecoded | [ ] |
+| GE-257 | Run full WebGL game and staircase playtest on Chromebook | NEEDS USER TEST — cannot validate in container | [ ] |
+
+**Important:** The user asked for all actual decoded assets, original game logic and source in separate packages. This release ships 3037 compressed source texture atlases, 23 early GLB backgrounds, 195 embedded GLB resources, 209 original decoded wave-bank WAV entries, 30 source effect frames, and additional embedded source textures/samples, with a complete manifest. The resource list is complete for the CURRENTLY ASSEMBLED decoded build, but the original game's assets are **not 100% decoded**. Original Xbox compiled default.xex is provided separately inside the asset archive, as compiled machine code, NOT game source. The browser game engine/source is assistant-developed. Code-only v2.3 game source is 125218 bytes JS plus 17,451 byte HTML source shell and 6,355 byte CSS. No user approvals are claimed. The new floor stepping probe is experimental; old stair regression remains open.
