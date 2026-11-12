@@ -219,7 +219,7 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 | GE-131 | Place original prop meshes near player and in outdoor surroundings | IN PROGRESS — props placed but several white / incorrect material assignments in v1.8 | [ ] |
 | GE-132 | Automatically switch biome style for each selectable map | IMPLEMENTED — VERIFY: heuristic snow/forest/urban/rock/industrial categories | [ ] |
 | GE-133 | Toggle map texture repair, outdoor generation and prop population separately | IMPLEMENTED — VERIFY | [ ] |
-| GE-134 | Guarantee collision-safe seamless navigation across every outdoor/indoor transition | IN PROGRESS — incomplete source navigation, last-floor safety workaround | [ ] |
+| GE-134 | Guarantee collision-safe seamless navigation across every outdoor/indoor transition | IN PROGRESS — geometry collision and outdoor/indoor traversal still fail player reports; v2.0 trial source-ray controller not yet verified | [ ] |
 | GE-135 | Restore all original map texture UV bindings without reprojecting | IN PROGRESS — CAFF vertex format decoding required | [ ] |
 | GE-136 | Validate map visuals and prop scale/placement interactively on Chromebook | NEEDS USER TEST — browser local file blocked in test environment | [ ] |
 
@@ -279,13 +279,13 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — wrapped source portraits on curved heads in v1.9; original UVs still incomplete | [ ] |
 | GE-164 | Preserve existing Boris character model during generalized preview changes | IMPLEMENTED — VERIFY | [ ] |
 | GE-165 | Restore standard adult height across character previews; Oddjob shorter, Jaws taller | IMPLEMENTED — VERIFY: ~1.78m adults, 1.52m Oddjob, 2.02m Jaws | [ ] |
-| GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | IMPLEMENTED — VERIFY: procedural motion, not source skeletal animation | [ ] |
-| GE-167 | Add Slappers as a selectable first-person unarmed melee weapon | IMPLEMENTED — VERIFY | [ ] |
-| GE-168 | Animate alternating left/right melee swing, impact checks and sound | IMPLEMENTED — VERIFY: procedural hand movement, synthesized slap impact | [ ] |
+| GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | BROKEN / UNAPPROVED — v1.9 procedural animation rejected by user; original source clips unavailable | [ ] |
+| GE-167 | Add Slappers as a selectable first-person unarmed melee weapon | IN PROGRESS — Slappers input/hit logic works in code; authentic original model/animation unavailable | [ ] |
+| GE-168 | Animate alternating left/right melee swing, impact checks and sound | BROKEN / UNAPPROVED — synthetic swing/audio rejected; v2.0 hides fabricated motion, original PCM cue candidate now available | [ ] |
 | GE-169 | Restore original Remote Mine source mesh/texture and in-game placing | IMPLEMENTED — VERIFY: 80 source triangles | [ ] |
 | GE-170 | Restore original Timed Mine source mesh/texture and 5.5-second detonation | IMPLEMENTED — VERIFY: 96 source triangles | [ ] |
-| GE-171 | Proximity Mine green original texture and trigger radius | IMPLEMENTED — VERIFY: remote mine body proxy; original proximity vertex decoder blocked | [ ] |
-| GE-172 | Remote trigger key, mine counters, throwing arc and explosion visuals | IMPLEMENTED — VERIFY: synthetic flash/burst/damage | [ ] |
+| GE-171 | Proximity Mine green original texture and trigger radius | IN PROGRESS — source mine textures improved; Proximity chassis not converted | [ ] |
+| GE-172 | Remote trigger key, mine counters, throwing arc and explosion visuals | BROKEN / UNAPPROVED — prior mines passed through walls; v2.0 swept collision attempt pending user test | [ ] |
 | GE-173 | Original GoldenEye mine/slappers sound recordings and motion clips | NOT DONE — only newly synthesized effect clips | [ ] |
 | GE-174 | Full ChromeOS visual interaction regression test of props, character scaling, melee and mines | NEEDS USER TEST — local test browser denied file access | [ ] |
 
@@ -297,20 +297,48 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 |---|---|---|---|
 | GE-175 | Replace square portrait plane with a curved forward-facing source-textured head surface | IMPLEMENTED — VERIFY (generated spherical face patch, user visual test needed) | [ ] |
 | GE-176 | Correct face orientation while running forward; keep avatar local +Z as forward | IMPLEMENTED — VERIFY (third-person yaw consistent with movement) | [ ] |
-| GE-177 | Use different recovered game-source texture sheets for car wheel, body paint, glass and grille | IMPLEMENTED — VERIFY (BMW per-batch mapping, user test needed) | [ ] |
+| GE-177 | Use different recovered game-source texture sheets for car wheel, body paint, glass and grille | BROKEN / UNAPPROVED — user screenshot still shows vehicles white/bad materials | [ ] |
 | GE-178 | Differentiate military truck and APC body, wheel, panel material groups | IMPLEMENTED — VERIFY (per-batch source sheets) | [ ] |
 | GE-179 | Stop using posters and paintings as generated ground textures | IMPLEMENTED — VERIFY (23 curated source-image palettes) | [ ] |
 | GE-180 | Use 23 explicit game-owned ground/wall/path/roof material sets | IMPLEMENTED — VERIFY (92 recovered images) | [ ] |
-| GE-181 | Create continuous walkable terrain below/around original level geometry | IMPLEMENTED — VERIFY (84x84 continuous generated ground, fallback support ray) | [ ] |
+| GE-181 | Create continuous walkable terrain below/around original level geometry | IN PROGRESS — user still encountered source geometry holes/exterior placement issues | [ ] |
 | GE-182 | Make interior building shells around complete source maps without covering authored interiors | IMPLEMENTED — VERIFY (source wall/roof textures, generated geometry) | [ ] |
-| GE-183 | Install authentic converted door models at exterior entrance and interior test locations | IMPLEMENTED — VERIFY (placements reconstructed, not original) | [ ] |
+| GE-183 | Install authentic converted door models at exterior entrance and interior test locations | IN PROGRESS — generated paired source-door exterior access added, locations remain unverified | [ ] |
 | GE-184 | Place source GoldenEye crates, barrels, foliage and vehicles in world surroundings | IMPLEMENTED — VERIFY (17 converted model types) | [ ] |
 | GE-185 | Spawn 3 roaming Snowguard enemies with source face/uniform images | IMPLEMENTED — VERIFY (provisional articulated avatars) | [ ] |
 | GE-186 | Enemy patrol, vision checks, pursuit and movement | IMPLEMENTED — VERIFY (new AI state machine, not original) | [ ] |
 | GE-187 | Enemy firing, damage, death, respawn and player armor interaction | IMPLEMENTED — VERIFY (prototype combat) | [ ] |
-| GE-188 | Player weapons, Slappers and mine explosions affect nearby guards | IMPLEMENTED — VERIFY (raycast/melee/radius prototype) | [ ] |
+| GE-188 | Player weapons, Slappers and mine explosions affect nearby guards | IN PROGRESS — damage logic present, weapon and mine hit interactions not yet user verified | [ ] |
 | GE-189 | Remove generated exterior, doors and NPCs on map switching | IMPLEMENTED — VERIFY (stale-load guards, no live playtest) | [ ] |
 | GE-190 | Restore authentic original character faces, original stage door positions, UVs and navigation | IN PROGRESS / BLOCKED — source converters still incomplete | [ ] |
 | GE-191 | Check v1.9 character faces, vehicle materials, ground surfaces and NPCs in ChromeOS | NEEDS USER TEST — headless WebGL blocked in environment | [ ] |
 
 **Scope:** Original game maps stay the level centerpiece. The outer walls, terrain shape, paths and object placements are reconstructed code-generated geometry and layout, but use only genuine decoded XBLA texture images and converted original prop models. Character heads are curved rather than square pictures and face local +Z (the walking direction). The source-derived silver BMW, military truck and other props now have separate source-texture assignments for wheels/body/windows; UV mapping remains provisional. Three new Snowguard agents patrol, chase, can attack/take damage/respawn; AI is not the original game code. **No user approval recorded.** JS syntax, source-image decoding (92 environmental + 40 prop sheets), and one-ZIP CRC verified. Chromium local/localhost navigation returned ERR_BLOCKED_BY_ADMINISTRATOR, so graphical playtest remains pending.
+
+## Q — v2.0 source effects, collision, loot and exploratory map access
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-192 | Decode original 30-frame Xbox firebomb CAFF image sequence | IMPLEMENTED — VERIFY: 24 coherent source frames used | [ ] |
+| GE-193 | Extract original sfx.xwb/sfx.xsb PCM data without generated replacement recordings | IMPLEMENTED — VERIFY: 209 source 44.1kHz mono PCM WAV entries | [ ] |
+| GE-194 | Resolve correct XSB event-to-XWB entry bindings | IN PROGRESS — cue-name string table order tentatively matched; not verified | [ ] |
+| GE-195 | Replace fabricated glowing mine explosion with original firebomb sprite sequence | IMPLEMENTED — VERIFY; graphical test pending | [ ] |
+| GE-196 | Original Slappers hand/fist animation/mesh | BLOCKED — source fist CAFF pool/animation decoder not ready; synthetic swing disabled | [ ] |
+| GE-197 | Play provisional original-bank punch/explosion/mine/door WAV samples | IMPLEMENTED — VERIFY audio decoding, cue assignments not confirmed | [ ] |
+| GE-198 | Mines use swept collision against floor, walls and doors rather than passing through | IMPLEMENTED — VERIFY (source polygons only), user test pending | [ ] |
+| GE-199 | Orient stuck mines along source surface normal and display game-owned atlas | IMPLEMENTED — VERIFY | [ ] |
+| GE-200 | Wall collision from actual converted source mesh with horizontal slide | IMPLEMENTED — VERIFY (not fully reconstructed collision/nav data) | [ ] |
+| GE-201 | Stair lookahead for low risers with no roof teleportation | IMPLEMENTED — VERIFY, user test pending | [ ] |
+| GE-202 | Recover true game collision maps and stair volumes for all original levels | BLOCKED / NOT DONE | [ ] |
+| GE-203 | Source door-mesh paired portals between generated indoor shell and exterior | IMPLEMENTED — VERIFY (not original placement) | [ ] |
+| GE-204 | Room-aware test crate placement near authored walls on source floor polygons | IMPLEMENTED — VERIFY (generated placement logic) | [ ] |
+| GE-205 | Source box/cartridge/armor meshes exported and included | IMPLEMENTED — VERIFY, 7 newly extracted models | [ ] |
+| GE-206 | Credits, plate, health, ammo loot in interactable crates | IMPLEMENTED — VERIFY (new gameplay economy) | [ ] |
+| GE-207 | Buy stations using recovered source ammo crates for ammo/plates/health/weapons | IMPLEMENTED — VERIFY (reconstructed economy and UI) | [ ] |
+| GE-208 | Reduce oversized vehicles and avoid spawning them immediately inside authored rooms | IMPLEMENTED — VERIFY (appearance requires test) | [ ] |
+| GE-209 | Original vehicle material UV mapping / placement and correct scale across all maps | IN PROGRESS — previous screenshots show failures | [ ] |
+| GE-210 | Restore full authored exteriors, cave/bunker entrances and object placements | IN PROGRESS — synthetic stage linkage is a test, not authentic source reconstruction | [ ] |
+| GE-211 | Full acceptance test of v2.0 with stairs, collisions, mines, shops, audio on Chromebook | NEEDS USER TEST — browser blocked in model environment | [ ] |
+| GE-212 | Optimize wall-ray performance and test on 8GB Chromebook | PLANNED — may be expensive on high-triangle maps | [ ] |
+
+**User approvals:** All GE-192..GE-212 items are unchecked; no code or static test constitutes user approval. v1.9 complaints about floaty/white vehicles, wall/stair pass-through, fake Slappers and mine explosions are recorded as open regressions. The new soundbank source is actual original signed PCM and the firebomb artwork is sourced from the retail copy, but XACT cue binding needs independent parsing and the original character animations remain blocked. Generated crates, credits, gear station menus and exterior portal locations are explicitly not original GoldenEye-authored map elements.
