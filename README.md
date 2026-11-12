@@ -1,3 +1,25 @@
+# GoldenEye World Explorer v2.6 — falling, raised-room supports, flush doors, drive direction and windshield POV
+
+## User-reported problems
+v2.5 screenshot shows a raised Facility room with no geometry below it; player cannot naturally fall off an edge to lower terrain. Source doors protrude from wall surfaces, and converted source cars drive facing the opposite direction to their camera/heading. First-person car view can be obstructed by nontransparent source windshield models.
+
+## v2.6 playable code changes (UNVERIFIED VISUALLY)
+- The previously enabled invisible last-known-floor safety is now OFF by default. Normal gravity applies when original mesh floor drops away. A downward ray checks both original polygons and generated game-textured ground/entrance ramps; a swept falling path catches landings when falling fast. Fall damage remains.
+- Exterior terrain is about 4.2 game units below indoor starting-floor elevation instead of exactly aligned to it. Under some exposed original elevated room edges the viewer generates retaining-wall skirts down to the terrain using **recovered original GoldenEye wall textures**. The supports are NOT original level geometry; they are reconstructed and incomplete.
+- The rendered original-source door model is compressed to a thin leaf plane (max ~0.085 scene-unit depth and width capped ~1.65) and positioned ~0.014 scene units outside the detected original wall plane, to avoid jutting slab artifacts. This does NOT remove the original wall polygons, create an actual authored doorway, or confirm historical door placement.
+- For original source BMW/truck/APC geometries, the visual model is rotated 180 degrees around Y to align the visible car front with newly coded W-forward motion. First-person driver camera moves forward from the middle of the car to just outside the windshield, offset toward the driver's side and looking in the direction of travel. Third-person view follows the same forward direction.
+- All original embedded meshes, audio and textures are otherwise retained from v2.5.
+
+### Known issues and QA
+Actual original level placement data, collision/navigation and staircase volumes are NOT recovered. Source maps have incomplete floor/wall geometry. Generated retaining walls are a prototype and may not cover every detached platform. Car orientation, first-person camera and wall-mounted door position require real ChromeOS testing. No new features are user approved.
+
+`node --check` and independent TypeScript JS AST parsing pass; all eight embedded JSON data sections parse; standalone browser JS exactly matches the HTML module; ZIP integrity check passes. No graphical WebGL test performed.
+
+**User delivery:** Private `GoldenEye_World_Explorer_v26_ONE_GAME.zip` and separate `GoldenEye_World_Explorer_v26_CODE_ONLY.zip`. Game-derived data is in the private playable HTML, not added to the public repository.
+
+[Master development tracker](PROJECT_TRACKER.md)
+
+---
 # v2.5 — Verified Xbox sound cue bindings and corrected source-head fragments
 
 **User-reported regressions:** v2.4 painted the same original portrait repeatedly on badly displaced source head draw groups, producing body-shaped heads and faces on clothing. The sound audition incorrectly assumed a cue's list index equaled its WAV's index; the user heard a gun sound labeled as a door. Both were real implementation errors.
