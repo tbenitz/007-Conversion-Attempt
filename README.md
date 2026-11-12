@@ -1,3 +1,17 @@
+# GoldenEye XBLA World Explorer v1.8 — Source-textured characters, Slappers and mines
+
+**Latest user's screenshot:** Facility/Bunker map textures show again, but props render solid black, Suit Bond and many other characters lack proper body textures, and Snowguard looks unnaturally short. v1.8 targets those regressions using original game source face/clothing/prop/gun texture atlases.
+
+**New in private downloadable game:** 41 proportional reconstructed character previews using recovered source face and clothing textures (plus previous Boris asset), procedural walk/run limb articulation, 17 source-prop diffuse texture replacements displayed with unlit materials, source texture previews for all 62 original gun/item models, Slappers melee mode, and Remote/Timed/Proximity mine selection with throws, detonations, ammo counters and newly synthesized sounds.
+
+**Mine asset provenance:** Remote Mine (80 converted original faces) and Timed Mine (96 faces) use the recovered original chassis and red/blue original texture atlases. Proximity Mine uses the genuine green source atlas *on the converted Remote chassis* because the separate proximity mesh decoder remains broken. All three can be placed; Remote detonates with G, Timed triggers after roughly 5.5s, and Proximity triggers near the player for standalone testing. Explosions and sounds are procedural, **not extracted from the game**.
+
+**Visual limitations:** The original character rig and UV charts are still unavailable. The character bodies in v1.8 are rebuilt previews, not restorations of the game's original bodies; source atlas mapping is approximate. This is not a finished game. The original Boris model is left unchanged. The archived source assets are not in this public repository.
+
+**Verification:** New JavaScript passes Node's module syntax check; converted mine GLBs reopen; original texture sheets decode. The local Chromium environment returned `ERR_BLOCKED_BY_ADMINISTRATOR` when attempting to open the HTML, so graphics and interaction require user testing. All feature approval checkboxes in [PROJECT_TRACKER.md](PROJECT_TRACKER.md) remain unchecked.
+
+---
+
 # v1.7 — Black material regression rollback and visible Snowguard head
 
 After user testing reported that **even previously working Facility textures became black**, the new downloadable game does not modify Facility's source GLB material instances/UVs at all. For the other 22 available maps, material repair now rebuilds invalid material batches using recovered source map images and **MeshBasicMaterial** so inverted normals and absent indoor lighting cannot produce a black shader result. UVs are reprojected as a temporary visualization method; authentic source UVs remain incomplete.
