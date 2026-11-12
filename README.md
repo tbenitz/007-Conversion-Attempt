@@ -1,3 +1,26 @@
+# GoldenEye v2.4 — original sound-bank relationships, correct pistol diffuse and grounded exterior entries
+
+**Private user download:** `GoldenEye_World_Explorer_v24_ONE_GAME.zip` containing one 73 MB standalone asset-embedded HTML with a 42-clip original-bank sound preview interface, cue tables, and audio/asset QA. Separate `GoldenEye_World_Explorer_v24_SOURCE_ONLY.zip` is the 136 KB full browser-game script + HTML source shell, original-cue catalog and corrective code without game assets. Proprietary game-derived media are never committed here.
+
+## Source asset audit findings
+
+- The source `music.xsb` includes **56 named stage/music cues** including Facility, Dam, Bunker 1/2, Archives, Train, Jungle, Control, Caverns and alternate music variants. The numeric link between those source cues and the **61 decoded music wave tracks remains unverified**. The viewer shows candidate stage music names but does not automatically assign arbitrary music files.
+- The SFX bank has **209 original PCM WAV entries** and **209 candidate XSB cue strings**. Candidate cue categories include specific silenced PPK, rifles, metal/wood doors, explosions, punches, mines and train/alarms. The cue-to-wave numeric mapping is still **unverified**, so users can audition 42 embedded files and manually assign sounds per event; assignments are stored locally and explicitly labelled provisional. No original source-named footstep recording was verified.
+- The original PPK diffuse atlas is `textures/gun/ppk/005.webp` (dark gun and grip). The old build incorrectly used image `003`, a rainbow/palette lookup. This release selects the true game-owned 005 images for PPK/PPK Silenced/Gold PPK/Ruger where present; exact UVs are still unfinished.
+- The 35 recovered source-head GLBs have unusual geometry depths (many roughly 0.08 scene units and `headjoe` around 1.37). The viewer now conservatively normalizes the original mesh proportions instead of inventing a generic head; original face UVs, skeleton and character associations are still unresolved.
+
+## Exterior entries and elevated maps
+
+Indoor game stages get a **new scan for likely outside-facing source wall polygons**: visible vertical wall, original source floor on near side, no comparable source floor immediately outside, and no second blocking wall within a short distance. Up to five original converted GoldenEye door meshes can be placed flush to these verified candidates. Generated ramps use decoded original ground/path texture images and extend from supported threshold elevations to generated outdoor terrain. Generated game-textured foundation supports appear below some exposed elevated floor edges. The ramp surfaces are included in floor raycasting for walking. The authored entrance/door coordinates and physical opening-cutouts remain unavailable, so these are *reconstructed test links*, not restored original level design.
+
+## QA and known limits
+
+`node --check`, TypeScript JavaScript AST parsing, all eight JSON sections, and one-game ZIP/source ZIP CRC checks passed. No runtime/WebGL test on Chromebook is claimed. Some geometry, movement, texture UVs, audio event mappings and original character animations remain incomplete, and all checklist user-approval boxes remain unchecked.
+
+[Tracker through GE-288](PROJECT_TRACKER.md)
+
+---
+
 # Recovery pass: Aztec geometry/textures + original music bank (Nov 11, 2026)
 
 **New downloadable private artifact:** `GoldenEye_NEWLY_DECODED_AZTEC_MUSIC_ASSETS.zip` (78.7 MB). It is a **delta** to the previously supplied asset archive, not the full collection and not a completed original-game conversion.
