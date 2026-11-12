@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v1.8. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -213,10 +213,10 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 |---|---|---|---|
 | GE-126 | Repair white/blank converted map surfaces from source textures | IMPLEMENTED — VERIFY: planar fallback, not exact original UVs | [ ] |
 | GE-127 | Select only original map-owned Xbox textures for procedurally assembled environments | IMPLEMENTED — VERIFY: 92 game-derived texture images across 23 maps | [ ] |
-| GE-128 | Generate continuous exterior ring with rolling terrain outside source map footprints | IMPLEMENTED — VERIFY: newly generated geometry with source texture images | [ ] |
+| GE-128 | Generate continuous exterior ring with rolling terrain outside source map footprints | BROKEN in v1.8 — Archives exterior ground used a painting; v1.9 curated source ground pending playtest | [ ] |
 | GE-129 | Generate textured connecting paths using source game textures | IMPLEMENTED — VERIFY: placement is procedural, not authentic | [ ] |
-| GE-130 | Convert recognizable game-source crates, barrels, barricades, vehicles and trees | IMPLEMENTED — VERIFY: 17 unique source prop model types | [ ] |
-| GE-131 | Place original prop meshes near player and in outdoor surroundings | IMPLEMENTED — VERIFY: generated arrangements, not authored placements | [ ] |
+| GE-130 | Convert recognizable game-source crates, barrels, barricades, vehicles and trees | IN PROGRESS — original props exist but vehicle surfaces white in v1.8; v1.9 batch materials pending playtest | [ ] |
+| GE-131 | Place original prop meshes near player and in outdoor surroundings | IN PROGRESS — props placed but several white / incorrect material assignments in v1.8 | [ ] |
 | GE-132 | Automatically switch biome style for each selectable map | IMPLEMENTED — VERIFY: heuristic snow/forest/urban/rock/industrial categories | [ ] |
 | GE-133 | Toggle map texture repair, outdoor generation and prop population separately | IMPLEMENTED — VERIFY | [ ] |
 | GE-134 | Guarantee collision-safe seamless navigation across every outdoor/indoor transition | IN PROGRESS — incomplete source navigation, last-floor safety workaround | [ ] |
@@ -275,8 +275,8 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 |---|---|---|---|
 | GE-160 | Correct black world-object textures using their original prop texture sheets | IMPLEMENTED — VERIFY: 17 source prop texture choices, unlit materials | [ ] |
 | GE-161 | Select original recovered source texture images for every weapon/item | IMPLEMENTED — VERIFY: 63 weapon/item images, provisional projected UVs | [ ] |
-| GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | IMPLEMENTED — VERIFY: 41 character variants reconstructed | [ ] |
-| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IMPLEMENTED — VERIFY: 41 source atlas pairs, approximate crop | [ ] |
+| GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | IN PROGRESS — v1.8 source head textures were square/back-facing; v1.9 curved-face repair pending playtest | [ ] |
+| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — wrapped source portraits on curved heads in v1.9; original UVs still incomplete | [ ] |
 | GE-164 | Preserve existing Boris character model during generalized preview changes | IMPLEMENTED — VERIFY | [ ] |
 | GE-165 | Restore standard adult height across character previews; Oddjob shorter, Jaws taller | IMPLEMENTED — VERIFY: ~1.78m adults, 1.52m Oddjob, 2.02m Jaws | [ ] |
 | GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | IMPLEMENTED — VERIFY: procedural motion, not source skeletal animation | [ ] |
@@ -290,3 +290,27 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-174 | Full ChromeOS visual interaction regression test of props, character scaling, melee and mines | NEEDS USER TEST — local test browser denied file access | [ ] |
 
 **Accuracy:** 41 non-Boris characters have a reconstructed, articulated body using original source face/clothing sheets, not restored original skinning or game-authentic face UV layouts. Boris's previous source geometry is left alone. The original Proximity Mine texture exists, but its standalone geometry still fails decoding; the source Remote Mine chassis is a temporary visual substitute. Slappers hands, all gait motion, effects and sound clips are procedural recreations. World objects now use their own original game-source texture imagery, but UV projection remains approximate. Prior Snowguard height regression was not approved. The v1.8 local asset archive passed JavaScript syntax and embedded mesh/image checks; graphical Chromium access remained blocked. All user approvals remain unchecked.
+
+## P — v1.9 curved faces, source materials, continuous world and roaming guards
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-175 | Replace square portrait plane with a curved forward-facing source-textured head surface | IMPLEMENTED — VERIFY (generated spherical face patch, user visual test needed) | [ ] |
+| GE-176 | Correct face orientation while running forward; keep avatar local +Z as forward | IMPLEMENTED — VERIFY (third-person yaw consistent with movement) | [ ] |
+| GE-177 | Use different recovered game-source texture sheets for car wheel, body paint, glass and grille | IMPLEMENTED — VERIFY (BMW per-batch mapping, user test needed) | [ ] |
+| GE-178 | Differentiate military truck and APC body, wheel, panel material groups | IMPLEMENTED — VERIFY (per-batch source sheets) | [ ] |
+| GE-179 | Stop using posters and paintings as generated ground textures | IMPLEMENTED — VERIFY (23 curated source-image palettes) | [ ] |
+| GE-180 | Use 23 explicit game-owned ground/wall/path/roof material sets | IMPLEMENTED — VERIFY (92 recovered images) | [ ] |
+| GE-181 | Create continuous walkable terrain below/around original level geometry | IMPLEMENTED — VERIFY (84x84 continuous generated ground, fallback support ray) | [ ] |
+| GE-182 | Make interior building shells around complete source maps without covering authored interiors | IMPLEMENTED — VERIFY (source wall/roof textures, generated geometry) | [ ] |
+| GE-183 | Install authentic converted door models at exterior entrance and interior test locations | IMPLEMENTED — VERIFY (placements reconstructed, not original) | [ ] |
+| GE-184 | Place source GoldenEye crates, barrels, foliage and vehicles in world surroundings | IMPLEMENTED — VERIFY (17 converted model types) | [ ] |
+| GE-185 | Spawn 3 roaming Snowguard enemies with source face/uniform images | IMPLEMENTED — VERIFY (provisional articulated avatars) | [ ] |
+| GE-186 | Enemy patrol, vision checks, pursuit and movement | IMPLEMENTED — VERIFY (new AI state machine, not original) | [ ] |
+| GE-187 | Enemy firing, damage, death, respawn and player armor interaction | IMPLEMENTED — VERIFY (prototype combat) | [ ] |
+| GE-188 | Player weapons, Slappers and mine explosions affect nearby guards | IMPLEMENTED — VERIFY (raycast/melee/radius prototype) | [ ] |
+| GE-189 | Remove generated exterior, doors and NPCs on map switching | IMPLEMENTED — VERIFY (stale-load guards, no live playtest) | [ ] |
+| GE-190 | Restore authentic original character faces, original stage door positions, UVs and navigation | IN PROGRESS / BLOCKED — source converters still incomplete | [ ] |
+| GE-191 | Check v1.9 character faces, vehicle materials, ground surfaces and NPCs in ChromeOS | NEEDS USER TEST — headless WebGL blocked in environment | [ ] |
+
+**Scope:** Original game maps stay the level centerpiece. The outer walls, terrain shape, paths and object placements are reconstructed code-generated geometry and layout, but use only genuine decoded XBLA texture images and converted original prop models. Character heads are curved rather than square pictures and face local +Z (the walking direction). The source-derived silver BMW, military truck and other props now have separate source-texture assignments for wheels/body/windows; UV mapping remains provisional. Three new Snowguard agents patrol, chase, can attack/take damage/respawn; AI is not the original game code. **No user approval recorded.** JS syntax, source-image decoding (92 environmental + 40 prop sheets), and one-ZIP CRC verified. Chromium local/localhost navigation returned ERR_BLOCKED_BY_ADMINISTRATOR, so graphical playtest remains pending.
