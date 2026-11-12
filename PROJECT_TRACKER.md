@@ -1,3 +1,16 @@
+## 2026-11-12 — Original XBLA mission/placement decoding evidence (NOT user-approved)
+
+- [x] Inspected original user-supplied `original_default.xex`, not a simulated mission catalogue. XEX2 header parsed; AES encryption type 1, Normal LZX compression type 2, 32 KiB window.
+- [x] Recovered the working XEX devkit-key decryption path and authenticated the first **seven consecutive XEX compressed blocks** against the on-disk SHA-1 linked-block chain.
+- [ ] The eighth block, index 7 at decrypted offset `0x63000`, fails the SHA-1 chain. Cannot claim full XEX payload extraction or original mission records. Investigate source integrity and block format before using any unauthenticated payload.
+- [x] Audited the 4,565-entry decoded asset archive; no separately named original source setup/pad/AI script files recovered. The already-completed model conversion is not equivalent to mission-setup decoding.
+- [ ] **Original objective scripts/triggers: 0% VERIFIED** (zero native mission records extracted, linked and tested).
+- [ ] **Original door/prop/guard placements: 0% VERIFIED** (zero source-authenticated setup-to-pad transforms linked and tested).
+- [ ] Decode complete XEX PE and/or original game stage setup resources; map source record types, original pads/presets/door transforms, guard spawns and AI lists to actual source geometry.
+- [ ] Implement native objective triggers, difficulty conditions, failure states and audio alignment ONLY when source evidence exists.
+- [ ] Full Chromebook gameplay validation and explicit user acceptance. Retain v3.4 source-only behavior; do not re-enable fabricated missions or objects.
+- [x] Added documentation at `research/XBLA_XEX_ORIGINAL_SETUP_PROGRESS.md` and an evidence-only XEX audit script/report deliverable. Historical tracker below retained unmodified.
+
 ## 2026-11-12 — v3.4 SOURCE-ONLY Dam collision regression & original mission audit (not user approved)
 
 **User-reported regressions:** Falling through Dam walkway, random floating colored mission cubes, non-authentic pseudo-mission objectives, incomplete map meshes/textures, and invented object placement/audio alignments. All are kept as outstanding until tested and explicitly accepted.
