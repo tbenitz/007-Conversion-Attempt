@@ -55,14 +55,14 @@ Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete asse
 | GE-033 | Decode all XBLA CAFF source bundles (489/499 passed) | IN PROGRESS | [ ] |
 | GE-034 | Finish Aztec background extraction | BLOCKED | [ ] |
 | GE-035 | All 24 level geometry exports complete | IN PROGRESS — 23 partial maps | [ ] |
-| GE-036 | UV/material references restored on every map | IN PROGRESS — source draw/texture metadata audited, original UV charts still incomplete | [ ] |
+| GE-036 | UV/material references restored on every map | IN PROGRESS — original UVs incomplete; PPK rainbow from lookup image 003 corrected to source diffuse 005 in v2.4 (unverified visually) | [ ] |
 | GE-037 | Apply all 3039 source-decoded textures | IN PROGRESS | [ ] |
 | GE-038 | Glass/transparency/decals/emissive materials | PLANNED | [ ] |
 | GE-039 | Original props and placement transforms | PLANNED | [ ] |
-| GE-040 | All original Facility/stage doors and animations | IN PROGRESS — three generated source-door shell entrances, original placement not recovered | [ ] |
+| GE-040 | All original Facility/stage doors and animations | IN PROGRESS — v2.4 source-wall exit scan plus game-textured ramps; original authored door coordinates and doorway cutouts missing | [ ] |
 | GE-041 | Mantling through real window openings | IN PROGRESS | [ ] |
 | GE-042 | Separate real level collision and navigation mesh | PLANNED | [ ] |
-| GE-043 | Reconstructed proper stair/ramps colliders | PLANNED | [ ] |
+| GE-043 | Reconstructed proper stair/ramps colliders | BROKEN — some original stair volumes remain unwalkable; original collision mesh not recovered | [ ] |
 | GE-044 | Elevators/ladders/moving platforms | PLANNED | [ ] |
 | GE-045 | Gun/prop textures and UV maps | IN PROGRESS — provisional projected gun images | [ ] |
 | GE-046 | Fix rotated and disconnected weapon meshes | IN PROGRESS — wristwatch source geometry/face material improved; original wristwatch UVs unverified | [ ] |
@@ -276,7 +276,7 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-160 | Correct black world-object textures using their original prop texture sheets | IMPLEMENTED — VERIFY: 17 source prop texture choices, unlit materials | [ ] |
 | GE-161 | Select original recovered source texture images for every weapon/item | IMPLEMENTED — VERIFY: 63 weapon/item images, provisional projected UVs | [ ] |
 | GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | BROKEN / UNDER REVIEW — user reports generic heads; v2.2 loads real source head meshes, not verified in Chrome | [ ] |
-| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — individual original head geometry now available; original character pairing and atlas UVs remain unverified | [ ] |
+| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — v2.4 source head proportions corrected for shallow geometry and outlier, still visually unverified | [ ] |
 | GE-164 | Preserve existing Boris character model during generalized preview changes | IMPLEMENTED — VERIFY | [ ] |
 | GE-165 | Restore standard adult height across character previews; Oddjob shorter, Jaws taller | IMPLEMENTED — VERIFY: ~1.78m adults, 1.52m Oddjob, 2.02m Jaws | [ ] |
 | GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | BROKEN / UNAPPROVED — v1.9 procedural animation rejected by user; original source clips unavailable | [ ] |
@@ -363,7 +363,7 @@ The user reported a startup-blocking syntax error in v2.0. The generator closed 
 | GE-218 | Recover authentic authored doors, room/setup coordinates and full vertex UV descriptors | IN PROGRESS — data not independently recovered | [ ] |
 | GE-219 | Separate firearms/mines from VHS tapes, wristwatches and mission gadgets | IMPLEMENTED — VERIFY | [ ] |
 | GE-220 | 3D inspect nonweapon source models without ammo or firing | IMPLEMENTED — VERIFY | [ ] |
-| GE-221 | Use original watch geometry and apply source watch image to the dial rather than the entire model | IMPLEMENTED — VERIFY (UV approximation) | [ ] |
+| GE-221 | Use original watch geometry and apply source watch image to the dial rather than the entire model | IN PROGRESS — watch original UV maps still unverified | [ ] |
 | GE-222 | Combine original watch body and laser source attachment for watchlaser | IMPLEMENTED — VERIFY | [ ] |
 | GE-223 | Enter/exit converted original BMW, military truck and APC meshes | IMPLEMENTED — VERIFY (new movement controller) | [ ] |
 | GE-224 | WASD driving/reverse/steering, Space braking and Shift acceleration | IMPLEMENTED — VERIFY | [ ] |
@@ -432,10 +432,33 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-265 | Recover Frigate skydome source texture images | IMPLEMENTED — VERIFIED DATA: 2 images, geometry still unsupported | [ ] |
 | GE-266 | Extract original Xbox music.xwb and parse its 61 entries | IMPLEMENTED — VERIFIED DATA: 60 XMA and 1 WMA | [ ] |
 | GE-267 | Provide all 61 music bank entries as playable Opus test exports | IMPLEMENTED — STATIC VERIFIED; decoder warnings on every track | [ ] |
-| GE-268 | Verify original music decode fidelity and cue mappings | IN PROGRESS / NOT DONE — XMA warnings, severe WMA warning, cues unverified | [ ] |
+| GE-268 | Verify original music decode fidelity and cue mappings | IN PROGRESS — music XSB stage cue NAMES present, decoded XWB wave-index links/fidelity remain unresolved | [ ] |
 | GE-269 | Decode all remaining CAFF model bundles | NOT DONE — six unresolved source bundles and unsupported vertex formats | [ ] |
 | GE-270 | Decode all original character animations and attach original heads/rigs | NOT DONE — animation data/source rig parser missing | [ ] |
 | GE-271 | Ensure all original 3D level meshes and exact shader UV maps are recovered | NOT DONE — missing batches remain in many maps | [ ] |
 | GE-272 | Deliver one audited incremental recovery archive | IMPLEMENTED — ZIP CRC, GLB reopen, PNG verification, audio probes, checksum manifest | [ ] |
 
 **Source count audit:** Earlier archive has 3037 texture sheets. The new verified delta has 64 original images, so current collection contains 3101 texture images, with 24 source background bundles at least partially parsed. Music has 61 best-effort converted Opus exports but every one has FFmpeg warnings and cue associations remain unverified. The six failed resource bundles, original skeleton animations and complete map geometry remain open. No user acceptance boxes are checked.
+
+## W — v2.4 source audio mapping and exterior/foundation/material corrections
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-273 | Extract and categorize all 209 original Xbox sfx XSB candidate names against PCM WAV files | IMPLEMENTED — VERIFIED DATA: source candidate catalog, cue-to-wave numeric binding not parsed | [ ] |
+| GE-274 | Extract stage-named original music cues for each map, including alternate X tracks | IMPLEMENTED — VERIFIED DATA: 56 original XSB named cues; XWB wave link unresolved | [ ] |
+| GE-275 | Audit proper original gunshots, metallic doors, mine SFX, melee and watch candidate cues | IMPLEMENTED — CANDIDATES VERIFIED, actual event assignments need audition | [ ] |
+| GE-276 | Find original source footstep WAV recordings and per-material footsteps | NOT DONE — no FOOT/STEP candidate cue names in 209 current sfx entries | [ ] |
+| GE-277 | Provide in-browser sound-cue audition for 42 original PCM files with local event overrides | IMPLEMENTED — VERIFY, no WebGL playtest | [ ] |
+| GE-278 | Fix PPK rainbow lookup texture 003 used instead of real diffuse slide/grip sheet 005 | IMPLEMENTED — VERIFIED IMAGE SOURCE, visual runtime test pending | [ ] |
+| GE-279 | Apply source image 005 to PPK, PPK Silenced, Gold PPK and Ruger where available | IMPLEMENTED — VERIFY; exact source UV maps remain open | [ ] |
+| GE-280 | Normalize 35 original source head model proportions when Z is flattened or extreme | IMPLEMENTED — VERIFY; original source geometry adjusted, not original rig | [ ] |
+| GE-281 | Correct source headjoe extreme depth 1.372 vs most other head depths near 0.08–0.13 | IMPLEMENTED — STATIC VERIFIED bounds; graphical test pending | [ ] |
+| GE-282 | Scan for exterior-facing walls using original geometry rather than source-wall boundary coordinates | IMPLEMENTED — VERIFY: floor on inside / apparent gap outside, no authored entrance data | [ ] |
+| GE-283 | Add additional game-mesh doors mounted flush with validated exit walls | IMPLEMENTED — VERIFY: up to five candidate source-wall entries, may find fewer | [ ] |
+| GE-284 | Connect elevated exit thresholds down to terrain via original game-textured walkable ramps | IMPLEMENTED — VERIFY; generated geometry, original stage ramp locations not recovered | [ ] |
+| GE-285 | Generate original-game-textured foundation supports under some exposed elevated floor edges | IMPLEMENTED — VERIFY: conservative source height tests, generated supports | [ ] |
+| GE-286 | Add generated ramp meshes to ground-following collision instead of leaving them visual only | IMPLEMENTED — VERIFY, Chromebook test needed | [ ] |
+| GE-287 | Parse XACT cue-to-wave indices and verify original music and every sound effect event | NOT DONE — parser/aural QA still required | [ ] |
+| GE-288 | Check exterior entrances, ramps, head shapes, source pistol diffuse and sound in Chromebook | NEEDS USER TEST; available container lacks working graphical WebGL | [ ] |
+
+**User-owned asset evidence:** music.xsb contains 56 named stage cues; original sound bank reports 209 PCM entries and 209 candidate XSB name strings. The relationship of XACT events to wavebank numeric indices is not parsed, so the cue audition is deliberately candidate-level. Original footstep cues not found by name. The source PPK 003 image is an unsuitable rainbow palette lookup; PPK 005 shows the real dark gun/grip diffuse texture. Original head source files are abnormally thin on the Z axis, with headjoe a large outlier. New exterior exits are detected using real original wall polygons, near-side source floors, and a lack of authoring-floor support immediately outside, with generated ramps/foundations using only recovered game textures. The shell and new geometry are reconstructed; original doors and collision data are not decoded. All user-approval boxes remain unchecked. JS + AST + embedded JSON and ZIP CRC checks passed; no visual/runtime game test.
