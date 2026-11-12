@@ -525,3 +525,24 @@ v2.6 changes are independently written prototype logic. No original game stage s
 | GE-327 | Decode original collision/hit CAFF resource into stair, wall and door physics volumes | IN PROGRESS / BLOCKED — actual hit resource found, internal structure not decoded | [ ] |
 
 **Regression discipline:** Previously delivered ramps and supports were reported visually present but non-collidable, so the old GE-284–286 and GE-306 entries remain broken until user re-approval. The v2.7 changes are new unverified implementation attempts. The source-only audit finds real Xbox collision/hit data, but no decoded original character animation clips. No source-model approval or graphical runtime success is asserted.
+
+## AA — v2.8 source skeleton research and dense outdoor compounds
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-328 | Audit all original GoldenEye Xbox character hit CAFF resources for real skeletal/skin metadata | IMPLEMENTED — VERIFIED DATA: 42 original and 42 remastered resources | [ ] |
+| GE-329 | Export original SKEL_* joint references, skin-chains and byte offsets | IMPLEMENTED — VERIFIED DATA: 765 original / 1060 remastered label entries | [ ] |
+| GE-330 | Find and verify original walking/jogging/running animation source IDs | RESEARCH MAPPED — historical 0x28,0x29,0x2A IDs; XBLA frame offsets not extracted | [ ] |
+| GE-331 | Identify original fire-while-walking/hit/death/fall animation IDs | RESEARCH MAPPED — historical IDs from GoldenEye animation reference catalog | [ ] |
+| GE-332 | Decode real XBLA original keyframes and clip headers from native executable/animation data | BLOCKED / NOT DONE — zero original clip frames recovered | [ ] |
+| GE-333 | Decode actual skin weights, bind transforms and attach source animation tracks to recovered character models | NOT DONE — only named joint and skinning-chain labels recovered | [ ] |
+| GE-334 | Record real original animation ID targets during AI patrol, hit, fire and death states | IMPLEMENTED — VERIFIED CODE; NO source clip playback | [ ] |
+| GE-335 | Preserve original/user-supplied asset provenance without fabricating animation clips | IMPLEMENTED — VERIFIED: no motion data labeled original | [ ] |
+| GE-336 | Build actual multiroom outdoor walled compounds instead of open prop-only fields | IMPLEMENTED — VERIFY: up to 9 compounds based on original-prop yards | [ ] |
+| GE-337 | Add walkable front and internal openings into generated outdoor rooms | IMPLEMENTED — STATIC VERIFIED: 3.7-unit open spans | [ ] |
+| GE-338 | Add original-source-textured roof shelter and terrain-following access paths to outposts | IMPLEMENTED — VERIFY: 18 roofs and 9 paths maximum | [ ] |
+| GE-339 | Collide against generated compound wall faces and skip distant wall raycasts | IMPLEMENTED — STATIC VERIFIED: generated walls shared with collision list, radius precheck | [ ] |
+| GE-340 | Verify all exterior outposts, doorways, motion debug references and performance on Chromebook | NEEDS USER TEST — graphical Chromium blocked | [ ] |
+| GE-341 | Locate decrypted original remaster XEX animation table/segment and recover exact binary keyframe stream | NOT DONE — compiled source XEX remains packed and animation mapping unresolved | [ ] |
+
+**Evidence:** Original XBLA CAFF `hits` resources expose joint and skinning-chain metadata for 42 original plus 42 remastered character variants. This is not the original animation track data; `clip_frames_decoded=0`. A reference list of 62 historical N64 animation IDs is included but not claimed as decoded original Xbox bytes. Exterior compounds use newly generated walls/roofs/path GEOMETRY with original XBLA diffuse textures and original-source movable props, and feature genuinely open door widths without arbitrary teleports. No user approval boxes checked; visual gameplay remains untested.
