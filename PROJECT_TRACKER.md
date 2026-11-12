@@ -1,3 +1,16 @@
+## 2026-11-12 — Playable PRIVATE v3.7 original guard records + source-only playtest (NOT user approved)
+
+- [x] Extended original XEX guard-record scanner to find 578 additional high-confidence **contiguous native 0x09 guard-record candidates** from 21 stage setups, in addition to 59 previously strictly parsed guards; **637 total**, with original offsets, IDs, native spawn pads and facing coordinates preserved. Candidate status intentionally explicit pending full setup grammar.
+- [x] Decoded 32 original native intro spawn-pad records and grouped known source objective conditions by source objective index.
+- [x] Expanded original opcode names for 662 existing AI scripts with documented GoldenEye AI command definitions; labels are forensic descriptions, NOT proof of runtime execution.
+- [x] Added opt-in source-guard playtest to real source-only asset-embedded HTML (v3.7) using **original character GLBs**, native guard pad records, and strict support from decoded map triangles. No random patrol targets, fake objective markers, or enemy respawns. Model shots/hits are testable.
+- [x] Preserved original binary assets and prior auxiliary research files, Node JS syntax and ZIP CRC passed. The 79–82 MB source asset-embedded HTML is contained in `GoldenEye_World_Explorer_v37_ORIGINAL_GUARD_PLAYTEST.zip` in ChatGPT Library; public demo index not substituted.
+- [ ] **CRITICAL: Original source-to-browser map conversion unverified.** v3.7 source guard playtest uses an **experimental 0.01x offset from source intro pad to current explorer spawn**. Guards with unsupported floors are excluded. Placement is *NOT authenticated* to converted 3D geometry, even if their native pad IDs are authentic.
+- [ ] **CRITICAL: Native AI patrol, combat, and mission objective execution NOT implemented.** Native original bytecode remains research/inspection-only; source GLB guard avatars are static until verified game AI and motion keyframes are restored.
+- [ ] Recover accurate pad XYZ-to-GLB transform; finish original prop/door full grammar, AI opcodes, path patrol arrays, event trigger/audio links, original objective conditions.
+- [ ] Fix missing Dam walkway and 23-stage geometry/UV meshes and collision; visually playtest on Chromebook, establish performance and source guard model fidelity.
+- [ ] All previous checklist entries and explicit approvals below remain unchanged. These new code items are NOT user-approved or declared fully tested.
+
 ## 2026-11-12 — v3.6 authentic original prop + AI opcode stream decoding (NOT user approved)
 
 - [x] Extended original XEX stage property parser with **strict type 0x03 standard object (0x80 bytes)** and **type 0x08 original weapon/item record (0x8C bytes)**, validated against original binary record boundaries; unknown records stop decoding rather than corrupting later offsets.
