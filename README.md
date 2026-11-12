@@ -1,3 +1,24 @@
+# GoldenEye World Explorer v2.1 — Source layout audit, original wristwatch and vehicle driving
+
+**User download:** GoldenEye_World_Explorer_v21_ONE_ZIP.zip. Contains one asset-embedded HTML, SOURCE_LAYOUT_AUDIT.json, source code and README.
+
+## Confirmed source discovery
+Audited all 24 original Xbox CAFF background model bundles. 23 parse successfully; Aztec remains unsupported. Their rendergraph streams contain original draw commands, material image-slot records and texture descriptors. The audit reports original draws versus recovered model batches. For example, Facility is 120/120, Dam 230/391, and Library 14/66. Source UV declarations and the original game placement/setup coordinates for doors, vehicles and props remain incomplete or unavailable as separately extracted files.
+
+The original Xbox source folder named 'gun' contains VHS videotapes, data tapes, watches, keys, gadgets and firearms: it is a held-object asset category, not a firearm list. The v2.1 UI separates combat weapons and mines from inspectable mission items and gadgets. A tape no longer has ammunition or a fire action.
+
+## New v2.1 game features (awaiting user test)
+- Watch communicator uses actual 3D source casing/strap/dial geometry (2,431 source triangles). The recovered watch image is projected onto dial mesh groups rather than onto the whole watch body; casing retains vertex colors. Watchlaser combines original laser attachment with the watch body. Original watch UV semantics remain unresolved.
+- Source BMW, military truck and APC models can be entered/exited using E, driven with WASD, accelerated using Shift, braked with Space, and viewed in first- or third-person using V. Press J to place a source BMW near the player. Car physics are newly coded, not original GoldenEye driving mechanics.
+- Three generated building-shell door openings (front/left/right) with original converted door mesh assets and game-textured approach ramps. The entry and interior portal locations are reconstructed, not authentic stage placement data.
+- The in-game map selector shows per-map original draw counts, recovered draw counts and texture descriptors.
+
+## Known limitations and QA
+True authored level layouts, original per-vertex UVs, fully reconstructed map geometry, original driving physics, animations and collision/navmesh remain unfinished. Gameplay is not claimed to be an authentic remaster. No user approval checkboxes have been marked. Source assets are in the private download only, not this public repo. Node JS syntax, TypeScript AST, embedded source refs and ZIP CRC passed; interactive Chromebook WebGL testing is pending.
+
+[Master requirement tracker](PROJECT_TRACKER.md)
+
+---
 # GoldenEye World Explorer v2.0.1 — Critical JavaScript parsing hotfix
 
 User's ChromeOS console reported `Uncaught SyntaxError: Unexpected token '}'` on line 1069 of the v2.0 standalone HTML. Root cause: `updateMines()` prematurely closed its source-mine loop, moving the timed/proximity checks outside their intended scope and leaving an extra brace.
