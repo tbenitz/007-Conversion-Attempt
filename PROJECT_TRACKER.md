@@ -417,3 +417,25 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-257 | Run full WebGL game and staircase playtest on Chromebook | NEEDS USER TEST — cannot validate in container | [ ] |
 
 **Important:** The user asked for all actual decoded assets, original game logic and source in separate packages. This release ships 3037 compressed source texture atlases, 23 early GLB backgrounds, 195 embedded GLB resources, 209 original decoded wave-bank WAV entries, 30 source effect frames, and additional embedded source textures/samples, with a complete manifest. The resource list is complete for the CURRENTLY ASSEMBLED decoded build, but the original game's assets are **not 100% decoded**. Original Xbox compiled default.xex is provided separately inside the asset archive, as compiled machine code, NOT game source. The browser game engine/source is assistant-developed. Code-only v2.3 game source is 125218 bytes JS plus 17,451 byte HTML source shell and 6,355 byte CSS. No user approvals are claimed. The new floor stepping probe is experimental; old stair regression remains open.
+
+## V — Original-source recovery: Aztec, failed CAFF images and new music bank
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-258 | Find and correct Aztec CAFF section alignment to parse material descriptors and original draw streams | IMPLEMENTED — VERIFIED DATA: +4096 byte section offset | [ ] |
+| GE-259 | Recover Aztec original source PNG texture images | IMPLEMENTED — VERIFIED DATA: 57/57 images | [ ] |
+| GE-260 | Export source-derived Aztec GLB geometry | IMPLEMENTED — VERIFIED DATA: 77 parsed draws / 26942 triangles | [ ] |
+| GE-261 | Export Aztec source material textured preview with exact UVs | IN PROGRESS — material IDs original, UV normalization experimental | [ ] |
+| GE-262 | Verify Aztec map contains every authored geometry batch | NOT DONE — resource stream appears truncated by 4096 bytes | [ ] |
+| GE-263 | Recover Head Neil source texture images | IMPLEMENTED — VERIFIED DATA: 4 images, geometry still unsupported | [ ] |
+| GE-264 | Recover Uzi magazine source texture image | IMPLEMENTED — VERIFIED DATA: 1 image, geometry still unsupported | [ ] |
+| GE-265 | Recover Frigate skydome source texture images | IMPLEMENTED — VERIFIED DATA: 2 images, geometry still unsupported | [ ] |
+| GE-266 | Extract original Xbox music.xwb and parse its 61 entries | IMPLEMENTED — VERIFIED DATA: 60 XMA and 1 WMA | [ ] |
+| GE-267 | Provide all 61 music bank entries as playable Opus test exports | IMPLEMENTED — STATIC VERIFIED; decoder warnings on every track | [ ] |
+| GE-268 | Verify original music decode fidelity and cue mappings | IN PROGRESS / NOT DONE — XMA warnings, severe WMA warning, cues unverified | [ ] |
+| GE-269 | Decode all remaining CAFF model bundles | NOT DONE — six unresolved source bundles and unsupported vertex formats | [ ] |
+| GE-270 | Decode all original character animations and attach original heads/rigs | NOT DONE — animation data/source rig parser missing | [ ] |
+| GE-271 | Ensure all original 3D level meshes and exact shader UV maps are recovered | NOT DONE — missing batches remain in many maps | [ ] |
+| GE-272 | Deliver one audited incremental recovery archive | IMPLEMENTED — ZIP CRC, GLB reopen, PNG verification, audio probes, checksum manifest | [ ] |
+
+**Source count audit:** Earlier archive has 3037 texture sheets. The new verified delta has 64 original images, so current collection contains 3101 texture images, with 24 source background bundles at least partially parsed. Music has 61 best-effort converted Opus exports but every one has FFmpeg warnings and cue associations remain unverified. The six failed resource bundles, original skeleton animations and complete map geometry remain open. No user acceptance boxes are checked.
