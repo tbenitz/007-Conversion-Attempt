@@ -1,3 +1,16 @@
+## 2026-11-12 — Private playable v3.0 rig movement and clip-import work (NOT user-approved)
+
+- [x] Implemented source-label-based reconstructed character pivot hierarchy: BASE → BACK → NECK/SHOULDER → ELBOW → WRIST and BASE → HIP → KNEE → ANKLE, grounded in 217 CAFF skin-chain strings from 42 original-character metadata reports.
+- [x] Reworked playable reconstructed character and NPC guards' fallback walk/run, firing, hit and staged falling animation states. These are reconstructed motions, **not actual original source keyframe clips**.
+- [x] Added optional local animated glTF/GLB clip import and quaternion-channel mapping to matching source-labeled pivots with AnimationMixer. Imported clips are preview only and may need retarget calibration.
+- [x] Created `V30_SOURCE_RIG_RELATIONSHIPS.json` source audit and `V30_PROGRESS_AND_OPEN_ISSUES.md` inside v3.0 private package; preserved previous v2.8/v2.9 research and tracking.
+- [x] Verified 218 decoded GLB models in the Library asset archive contain zero `skins` and zero `animations`. Thus no native GoldenEye motion was actually decoded from these files; DO NOT mark original animation restoration complete.
+- [x] Static tests and JavaScript syntax passed; no full WebGL/Chromebook gameplay test was performed.
+- [ ] Locate original animation bank bytes from user-owned N64/XBLA source; decode authentic keyframes, timebase, bone matrices and skin weights.
+- [ ] Verify original animation identities/relationships, bone axis conventions, per-character retargeting and browser playback across all movement states.
+- [ ] Test game and optional GLB import on Chromebook; resolve head-parenting, reaction, foot sliding and other bugs reported.
+- [ ] Explicit user approval for any item after practical testing. No prior master checklist approvals changed.
+
 ## 2026-11-12 — Private playable v2.9 Library ZIP (additive; NOT user-approved)
 
 - [x] Created `GoldenEye_World_Explorer_v29_DENSE_EXTERIORS_AND_RIG_RESEARCH.zip` from the actual asset-embedded v2.8 private archive in ChatGPT Library. This is implementation, not acceptance.
