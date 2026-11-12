@@ -275,8 +275,8 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 |---|---|---|---|
 | GE-160 | Correct black world-object textures using their original prop texture sheets | IMPLEMENTED — VERIFY: 17 source prop texture choices, unlit materials | [ ] |
 | GE-161 | Select original recovered source texture images for every weapon/item | IMPLEMENTED — VERIFY: 63 weapon/item images, provisional projected UVs | [ ] |
-| GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | IN PROGRESS — v1.8 source head textures were square/back-facing; v1.9 curved-face repair pending playtest | [ ] |
-| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — wrapped source portraits on curved heads in v1.9; original UVs still incomplete | [ ] |
+| GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | BROKEN / UNDER REVIEW — user reports generic heads; v2.2 loads real source head meshes, not verified in Chrome | [ ] |
+| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — individual original head geometry now available; original character pairing and atlas UVs remain unverified | [ ] |
 | GE-164 | Preserve existing Boris character model during generalized preview changes | IMPLEMENTED — VERIFY | [ ] |
 | GE-165 | Restore standard adult height across character previews; Oddjob shorter, Jaws taller | IMPLEMENTED — VERIFY: ~1.78m adults, 1.52m Oddjob, 2.02m Jaws | [ ] |
 | GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | BROKEN / UNAPPROVED — v1.9 procedural animation rejected by user; original source clips unavailable | [ ] |
@@ -295,8 +295,8 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 
 | ID | Requirement | Development status | User approved |
 |---|---|---|---|
-| GE-175 | Replace square portrait plane with a curved forward-facing source-textured head surface | IMPLEMENTED — VERIFY (generated spherical face patch, user visual test needed) | [ ] |
-| GE-176 | Correct face orientation while running forward; keep avatar local +Z as forward | IMPLEMENTED — VERIFY (third-person yaw consistent with movement) | [ ] |
+| GE-175 | Replace square portrait plane with a curved forward-facing source-textured head surface | BROKEN — user reports same-looking faces and portrait projection on v2.1; replaced with source head mesh in v2.2 | [ ] |
+| GE-176 | Correct face orientation while running forward; keep avatar local +Z as forward | BROKEN — user reported faces looking backward; v2.2 detects native head frontal direction | [ ] |
 | GE-177 | Use different recovered game-source texture sheets for car wheel, body paint, glass and grille | BROKEN / UNAPPROVED — user screenshot still shows vehicles white/bad materials | [ ] |
 | GE-178 | Differentiate military truck and APC body, wheel, panel material groups | IMPLEMENTED — VERIFY (per-batch source sheets) | [ ] |
 | GE-179 | Stop using posters and paintings as generated ground textures | IMPLEMENTED — VERIFY (23 curated source-image palettes) | [ ] |
@@ -369,11 +369,31 @@ The user reported a startup-blocking syntax error in v2.0. The generator closed 
 | GE-224 | WASD driving/reverse/steering, Space braking and Shift acceleration | IMPLEMENTED — VERIFY | [ ] |
 | GE-225 | First-person and third-person driving camera modes using V | IMPLEMENTED — VERIFY | [ ] |
 | GE-226 | Accessible source BMW near generated shell entrance and J spawn action | IMPLEMENTED — VERIFY | [ ] |
-| GE-227 | Three original-source door meshes at front, left and right generated shell entrances | IMPLEMENTED — VERIFY; generated placements | [ ] |
-| GE-228 | Game-textured access ramp geometry through entrance wall gaps | IMPLEMENTED — VERIFY; generated walkways | [ ] |
-| GE-229 | Inside source-door pairs linking exterior via test interaction | IMPLEMENTED — VERIFY; stage connections reconstructed | [ ] |
+| GE-227 | Three original-source door meshes at front, left and right generated shell entrances | BROKEN — user reported freestanding/random black doors; retired boundary gates in v2.2 | [ ] |
+| GE-228 | Game-textured access ramp geometry through entrance wall gaps | IN PROGRESS — old boundary walkway gate placements retired; original entry geometry still missing | [ ] |
+| GE-229 | Inside source-door pairs linking exterior via test interaction | BROKEN — arbitrary linked exterior portals rejected; replaced with short opposite-side wall transitions pending user test | [ ] |
 | GE-230 | Accurate original car collision, suspension and vehicle steering behavior | IN PROGRESS — simple source mesh ground/wall collision only | [ ] |
 | GE-231 | Validate metadata, HTML references, content count, parser and ZIP checksums | IMPLEMENTED — VERIFIED STATIC | [ ] |
 | GE-232 | ChromeOS visual gameplay test of driving, watch, item classification and all three entrances | NEEDS USER TEST; no successful WebGL test | [ ] |
 
 Source file audit confirms CAFF material commands and texture descriptors, not original stage object placement. The gameplay entrance coordinates, paths and car physics are newly coded and require user review. Tape/watch/gadget resources are classified separately from firearms. No approval checkbox is checked.
+
+## T — v2.2 source-head conversion, wall-aligned metal doors and sprint
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-233 | Convert original XBLA head bundles into distinct source geometry | IMPLEMENTED — STATIC VERIFIED: 35 of 37 head bundles | [ ] |
+| GE-234 | Replace single generic portrait sphere with original source head triangles | IMPLEMENTED — VERIFY: original mesh renderer, Chromebook test needed | [ ] |
+| GE-235 | Preserve each original source portrait across one global head UV frame, not repeated per submesh | IMPLEMENTED — VERIFY: projected atlas, original UV still pending | [ ] |
+| GE-236 | Detect per-source head forward face direction so faces are not painted on backs | IMPLEMENTED — VERIFY; user visual test needed | [ ] |
+| GE-237 | Allow manual original head selection and flip/persistence per character | IMPLEMENTED — VERIFY; head-body pairings unverified | [ ] |
+| GE-238 | Recover actual original game head-to-character attachment and authentic UV layout | IN PROGRESS / BLOCKED — stage attachment data not recovered | [ ] |
+| GE-239 | Use original GoldenEye metal-door textures instead of nearly-black masks | IMPLEMENTED — VERIFY; tested source image decoding, not full WebGL | [ ] |
+| GE-240 | Remove random freestanding/boundary gates and find nearby actual map wall faces | IMPLEMENTED — VERIFY; source-wall raycast selection | [ ] |
+| GE-241 | Require walkable floor on both sides before placing a wall-mounted door | IMPLEMENTED — VERIFY; 4 candidates confirmed from Facility source geometry | [ ] |
+| GE-242 | Keep E-triggered door transitions within 1.75 meters across the selected wall | IMPLEMENTED — VERIFY; no distant arbitrary teleport | [ ] |
+| GE-243 | Cut genuine door openings into source wall triangles and verify original authored door coordinates | NOT DONE — door source mapping/openings undecoded | [ ] |
+| GE-244 | Increase sprint duration by at least five times and offer unlimited toggle | IMPLEMENTED — VERIFY: drain 24/s → 4.8/s; unlimited default | [ ] |
+| GE-245 | Runtime WebGL QA of head faces, wall doors and sprint on user's Chromebook | NEEDS USER TEST — Chromium graphics initialization failed | [ ] |
+
+**Regression handling:** The user reported black rectangular doors, arbitrary boundary teleports, and identical fabricated character faces in v2.1. GE-175/176 and GE-227/229 remain marked BROKEN, not approved, until a real playtest. v2.2 replaces generic sphere heads with 35 genuine 3D head asset bundles; original head-to-body assignments are explicitly provisional and editable. The default exterior-boundary shell gates are disabled, source-wall door positions are derived from vertical original map polygons and two supported floor samples. E crosses just 1.75m through a mounted door; original wall polygons are not cut into doorway openings. All user acceptance checkboxes remain unchecked. The standalone JS, independent AST parser, asset JSON and ZIP CRC pass; GUI WebGL smoke test fails in container's EGL initialization, so these are unverified visually.
