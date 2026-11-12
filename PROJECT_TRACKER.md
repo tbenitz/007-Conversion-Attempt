@@ -1,3 +1,18 @@
+## 2026-11-12 — Full authentic XBLA executable decompression and stage pointer discovery (NOT USER APPROVED)
+
+- [x] Fixed STFS first hash-table boundary in native XEX extraction; original full retail game is intact. Correct extracted XEX SHA-256 `00b9197180cb044142dd78f2591ff721b1884f1b87aca5b566a325770054b8fa`.
+- [x] Authenticated **123/123** original XEX compressed-block SHA-1 hashes. Old block-8 failure was an extractor bug and is resolved.
+- [x] Decompressed **542/542** LZX frames to a valid 17,760,256-byte Xbox PowerPC PE image. Original PE SHA-256 `048c9a725e0163de3f1631651f7e250baaa01747d76c3e32cd62501cafefacd9`.
+- [x] Matched **28/28 original STAN clipping block headers** and lengths to named stage allocation slots; this is structural decoding, not functional collision restoration.
+- [x] Inventoried **641 structurally valid candidate original AI-list address/ID references** across 20 stage setup regions. Train requires a different parsing pass. Original opcode semantics not decoded.
+- [ ] **Native objective command execution: 0% verified.** Decode exact script opcode lengths, branches, objective triggers and mission failure conditions; restore only verifiable original gameplay.
+- [ ] **Original door/prop/guard positions integrated: 0% verified.** Parse stage pad/preset and setup object records and verify stage coordinate transforms.
+- [ ] Convert STAN/hits data into actual source walkable triangles and repair Dam's missing walkway surface, rather than inventing a bridge.
+- [ ] Match original scripted events to soundtrack and XACT cue identifiers, test and validate visually on Chromebook.
+- [ ] Explicit user verification/approval and preserve every prior open issue below.
+
+See `research/XBLA_VERIFIED_EXECUTABLE_AND_STAGE_TABLES.md` for exact source evidence. Code-only decoder ZIP has been saved privately to ChatGPT Library; no original copyrighted game binary is committed.
+
 ## 2026-11-12 — Original XBLA mission/placement decoding evidence (NOT user-approved)
 
 - [x] Inspected original user-supplied `original_default.xex`, not a simulated mission catalogue. XEX2 header parsed; AES encryption type 1, Normal LZX compression type 2, 32 KiB window.
