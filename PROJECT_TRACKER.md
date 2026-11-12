@@ -55,17 +55,17 @@ Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete asse
 | GE-033 | Decode all XBLA CAFF source bundles (489/499 passed) | IN PROGRESS | [ ] |
 | GE-034 | Finish Aztec background extraction | BLOCKED | [ ] |
 | GE-035 | All 24 level geometry exports complete | IN PROGRESS — 23 partial maps | [ ] |
-| GE-036 | UV/material references restored on every map | IN PROGRESS | [ ] |
+| GE-036 | UV/material references restored on every map | IN PROGRESS — source draw/texture metadata audited, original UV charts still incomplete | [ ] |
 | GE-037 | Apply all 3039 source-decoded textures | IN PROGRESS | [ ] |
 | GE-038 | Glass/transparency/decals/emissive materials | PLANNED | [ ] |
 | GE-039 | Original props and placement transforms | PLANNED | [ ] |
-| GE-040 | All original Facility/stage doors and animations | IN PROGRESS — source-door showcase, locations unverified | [ ] |
+| GE-040 | All original Facility/stage doors and animations | IN PROGRESS — three generated source-door shell entrances, original placement not recovered | [ ] |
 | GE-041 | Mantling through real window openings | IN PROGRESS | [ ] |
 | GE-042 | Separate real level collision and navigation mesh | PLANNED | [ ] |
 | GE-043 | Reconstructed proper stair/ramps colliders | PLANNED | [ ] |
 | GE-044 | Elevators/ladders/moving platforms | PLANNED | [ ] |
 | GE-045 | Gun/prop textures and UV maps | IN PROGRESS — provisional projected gun images | [ ] |
-| GE-046 | Fix rotated and disconnected weapon meshes | IN PROGRESS | [ ] |
+| GE-046 | Fix rotated and disconnected weapon meshes | IN PROGRESS — wristwatch source geometry/face material improved; original wristwatch UVs unverified | [ ] |
 | GE-047 | Original level fixture lights | PLANNED | [ ] |
 | GE-048 | Level streaming/LOD/Chromebook optimization | PLANNED | [ ] |
 
@@ -285,7 +285,7 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-169 | Restore original Remote Mine source mesh/texture and in-game placing | IMPLEMENTED — VERIFY: 80 source triangles | [ ] |
 | GE-170 | Restore original Timed Mine source mesh/texture and 5.5-second detonation | IMPLEMENTED — VERIFY: 96 source triangles | [ ] |
 | GE-171 | Proximity Mine green original texture and trigger radius | IN PROGRESS — source mine textures improved; Proximity chassis not converted | [ ] |
-| GE-172 | Remote trigger key, mine counters, throwing arc and explosion visuals | BROKEN / UNAPPROVED — prior mines passed through walls; v2.0 swept collision attempt pending user test | [ ] |
+| GE-172 | Remote trigger key, mine counters, throwing arc and explosion visuals | IN PROGRESS — source mine attachment/collision pending user playtest | [ ] |
 | GE-173 | Original GoldenEye mine/slappers sound recordings and motion clips | NOT DONE — only newly synthesized effect clips | [ ] |
 | GE-174 | Full ChromeOS visual interaction regression test of props, character scaling, melee and mines | NEEDS USER TEST — local test browser denied file access | [ ] |
 
@@ -352,3 +352,28 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-215 | Confirm local ChromeOS loading and gameplay after parse hotfix | NEEDS USER TEST; file:// warning may be independent | [ ] |
 
 The user reported a startup-blocking syntax error in v2.0. The generator closed its `for (const m of gameMines)` loop before timed/proximity mine checks, leaving one extra closing brace. v2.0.1 fixes the nesting without altering source assets. All embedded JSON data parsed, the extracted module passed Node plus TypeScript AST parsing, and the new ZIP CRC matches. The separate file:// security warning is not claimed fixed. Previous regression approvals remain unchecked.
+
+
+## S — v2.1 Source decode and drivable vehicle milestone
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-216 | Audit 24 original source background CAFF rendergraphs and texture descriptors | IMPLEMENTED — VERIFIED DATA (23 parse, Aztec exception) | [ ] |
+| GE-217 | Report source draw counts vs extracted geometry including Library/Dam missing batches | IMPLEMENTED — VERIFIED DATA | [ ] |
+| GE-218 | Recover authentic authored doors, room/setup coordinates and full vertex UV descriptors | IN PROGRESS — data not independently recovered | [ ] |
+| GE-219 | Separate firearms/mines from VHS tapes, wristwatches and mission gadgets | IMPLEMENTED — VERIFY | [ ] |
+| GE-220 | 3D inspect nonweapon source models without ammo or firing | IMPLEMENTED — VERIFY | [ ] |
+| GE-221 | Use original watch geometry and apply source watch image to the dial rather than the entire model | IMPLEMENTED — VERIFY (UV approximation) | [ ] |
+| GE-222 | Combine original watch body and laser source attachment for watchlaser | IMPLEMENTED — VERIFY | [ ] |
+| GE-223 | Enter/exit converted original BMW, military truck and APC meshes | IMPLEMENTED — VERIFY (new movement controller) | [ ] |
+| GE-224 | WASD driving/reverse/steering, Space braking and Shift acceleration | IMPLEMENTED — VERIFY | [ ] |
+| GE-225 | First-person and third-person driving camera modes using V | IMPLEMENTED — VERIFY | [ ] |
+| GE-226 | Accessible source BMW near generated shell entrance and J spawn action | IMPLEMENTED — VERIFY | [ ] |
+| GE-227 | Three original-source door meshes at front, left and right generated shell entrances | IMPLEMENTED — VERIFY; generated placements | [ ] |
+| GE-228 | Game-textured access ramp geometry through entrance wall gaps | IMPLEMENTED — VERIFY; generated walkways | [ ] |
+| GE-229 | Inside source-door pairs linking exterior via test interaction | IMPLEMENTED — VERIFY; stage connections reconstructed | [ ] |
+| GE-230 | Accurate original car collision, suspension and vehicle steering behavior | IN PROGRESS — simple source mesh ground/wall collision only | [ ] |
+| GE-231 | Validate metadata, HTML references, content count, parser and ZIP checksums | IMPLEMENTED — VERIFIED STATIC | [ ] |
+| GE-232 | ChromeOS visual gameplay test of driving, watch, item classification and all three entrances | NEEDS USER TEST; no successful WebGL test | [ ] |
+
+Source file audit confirms CAFF material commands and texture descriptors, not original stage object placement. The gameplay entrance coordinates, paths and car physics are newly coded and require user review. Tape/watch/gadget resources are classified separately from firearms. No approval checkbox is checked.
