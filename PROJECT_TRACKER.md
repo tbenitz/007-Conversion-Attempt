@@ -1,3 +1,20 @@
+## 2026-11-12 — v3.4 SOURCE-ONLY Dam collision regression & original mission audit (not user approved)
+
+**User-reported regressions:** Falling through Dam walkway, random floating colored mission cubes, non-authentic pseudo-mission objectives, incomplete map meshes/textures, and invented object placement/audio alignments. All are kept as outstanding until tested and explicitly accepted.
+
+- [x] **Code change / QA pending:** Source-only collision guards stop a grounded walking step if no original decoded floor triangle supports the destination. Axis-slide fallback and restoring the last verified source-supported position replace plunging into a conversion hole. No invisible floor or fabricated map mesh was added. Actual Dam crossing remains unverified.
+- [x] **Code change / QA pending:** Removed v3.3 fabricated mission objective target meshes, instant completion markers, and unverified progress state. The original mission names remain reference-only, not gameplay completion.
+- [x] **Code change / QA pending:** Disabled by default all procedurally generated exteriors, fake outpost structures, random prop/NPC/car/door spawns, waypoint targets, stored unverified placements on map load, and synthetic soundtrack/footsteps. No invented in-game world content in source-only mode.
+- [x] **Code change / QA pending:** Source GLB textures, materials and UVs are preserved; alternate bright material mode OFF by default. Missing authored texture/UV mappings are still unfixed.
+- [x] Inspected the user's `original_default.xex` XEX2 executable (7,266,304 bytes), and 4,565-entry decoded asset ZIP. Found no separately decoded original stage setup/pad tables in available archive. **Does not claim XEX itself lacks embedded mission setup data.** No authentic stage/mission/guard scripting decoded in this pass.
+- [x] Existing verified original XSB name → XWB wave map (209/209) preserved; gameplay model/event-to-cue mappings are still provisional and automatic event playback is disabled in source-only mode. Manual original cue audition remains.
+- [x] Wrote `V34_ORIGINAL_SOURCE_AND_DAM_AUDIT.json` and `V34_PROGRESS_AND_OPEN_ISSUES.md` into new private v3.4 Library ZIP. All old auxiliary files and embedded game assets unchanged; Node syntax and ZIP CRC verified.
+- [ ] **Critical:** Extract/reverse-engineer original XBLA stage setup/pad tables, object transforms and mission AI/script triggers from authenticated original game binary resources and place source objects correctly.
+- [ ] **Critical:** Recover all missing Dam bridge/walkway triangles and authored collision surfaces. v3.4 stops fall-through by blocking invalid steps; this may block progress at map gaps and is not geometry restoration.
+- [ ] Decode per-stage original sound cues / alignment and soundtrack assignment; test each associated event against game behavior.
+- [ ] Correct actual original batch material index / UV mapping, broken mesh geometry and source proper environment textures; audit all maps.
+- [ ] Run real Chromebook WebGL tests for Dam walkway, collision, textures, and interactions. Preserve all user-unapproved defects and existing master checklist items below.
+
 ## 2026-11-12 — Private playable v3.3 mission SIMULATION (code implemented; NOT user-approved)
 
 - [x] Added initial Dam campaign selection instead of Facility and 20 original N64 **00 Agent** briefing/objective catalogues (80 objective entries); source citation included in private documentation. 18 campaign stages plus Aztec and Egyptian; Aztec remains unplayable due missing converted map.
