@@ -1,3 +1,15 @@
+# GoldenEye World Explorer v2.0.1 — Critical JavaScript parsing hotfix
+
+User's ChromeOS console reported `Uncaught SyntaxError: Unexpected token '}'` on line 1069 of the v2.0 standalone HTML. Root cause: `updateMines()` prematurely closed its source-mine loop, moving the timed/proximity checks outside their intended scope and leaving an extra brace.
+
+The **v2.0.1** user download corrects the mine-update braces without changing original game assets or other gameplay systems. All four embedded JSON sections parse; Node syntax checking passes; a separate TypeScript JavaScript AST check reports zero errors and confirms that timed/proximity mine handling and blast animation stay inside `updateMines`. ZIP CRC and exact HTML checksum also passed. This is **not** a graphical playtest or confirmation that all earlier collision/material bugs are resolved.
+
+The browser's `file://` unique-origin warning is a separate Chrome security warning, not the JavaScript parser error. The app has no self-referencing iframe and does not attempt to fetch its own HTML file.
+
+No user-approval boxes have been checked. See [PROJECT_TRACKER.md](PROJECT_TRACKER.md), GE-213–215.
+
+---
+
 # v2.0 source-asset interaction release — November 11, 2026
 
 **Player feedback prompting this release:** v1.9 shows incomplete wall texture charts, floating/oversized vehicles in Facility, missing exterior access, walk-through walls/stairs, mines passing through walls or missing textures, and game-inaccurate fabricated Slappers/explosion effects. These remain **unapproved regressions**, not previously solved features.
