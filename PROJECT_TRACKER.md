@@ -336,7 +336,7 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-206 | Credits, plate, health, ammo loot in interactable crates | IMPLEMENTED — VERIFY (new gameplay economy) | [ ] |
 | GE-207 | Buy stations using recovered source ammo crates for ammo/plates/health/weapons | IMPLEMENTED — VERIFY (reconstructed economy and UI) | [ ] |
 | GE-208 | Reduce oversized vehicles and avoid spawning them immediately inside authored rooms | IMPLEMENTED — VERIFY (appearance requires test) | [ ] |
-| GE-209 | Original vehicle material UV mapping / placement and correct scale across all maps | IN PROGRESS — previous screenshots show failures | [ ] |
+| GE-209 | Original vehicle material UV mapping / placement and correct scale across all maps | IN PROGRESS — source military truck looked wooden; remapped original batch 013/014 to tire image 009 in v2.7, pending visual test | [ ] |
 | GE-210 | Restore full authored exteriors, cave/bunker entrances and object placements | IN PROGRESS — synthetic stage linkage is a test, not authentic source reconstruction | [ ] |
 | GE-211 | Full acceptance test of v2.0 with stairs, collisions, mines, shops, audio on Chromebook | BROKEN in v2.0 — a syntax error prevented any gameplay from starting | [ ] |
 | GE-212 | Optimize wall-ray performance and test on 8GB Chromebook | PLANNED — may be expensive on high-triangle maps | [ ] |
@@ -455,9 +455,9 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-281 | Correct source headjoe extreme depth 1.372 vs most other head depths near 0.08–0.13 | IMPLEMENTED — STATIC VERIFIED bounds; graphical test pending | [ ] |
 | GE-282 | Scan for exterior-facing walls using original geometry rather than source-wall boundary coordinates | IMPLEMENTED — VERIFY: floor on inside / apparent gap outside, no authored entrance data | [ ] |
 | GE-283 | Add additional game-mesh doors mounted flush with validated exit walls | IMPLEMENTED — VERIFY: up to five candidate source-wall entries, may find fewer | [ ] |
-| GE-284 | Connect elevated exit thresholds down to terrain via original game-textured walkable ramps | IMPLEMENTED — VERIFY; generated geometry, original stage ramp locations not recovered | [ ] |
-| GE-285 | Generate original-game-textured foundation supports under some exposed elevated floor edges | IMPLEMENTED — VERIFY: conservative source height tests, generated supports | [ ] |
-| GE-286 | Add generated ramp meshes to ground-following collision instead of leaving them visual only | IMPLEMENTED — VERIFY, Chromebook test needed | [ ] |
+| GE-284 | Connect elevated exit thresholds down to terrain via original game-textured walkable ramps | BROKEN in v2.6 user test — ramps do not always meet doors/ground; v2.7 rebuilt, pending user test | [ ] |
+| GE-285 | Generate original-game-textured foundation supports under some exposed elevated floor edges | BROKEN in v2.6 user test — supports were visual only and floating; v2.7 geometry raycast, pending user test | [ ] |
+| GE-286 | Add generated ramp meshes to ground-following collision instead of leaving them visual only | BROKEN in v2.6 user test — ramps passed through by player; v2.7 analytic ramp support, pending user test | [ ] |
 | GE-287 | Parse XACT cue-to-wave indices and verify original music and every sound effect event | IN PROGRESS — original 209 sfx cue-to-wave references VERIFIED; original music cue-to-track binding not yet parsed | [ ] |
 | GE-288 | Check exterior entrances, ramps, head shapes, source pistol diffuse and sound in Chromebook | NEEDS USER TEST; available container lacks working graphical WebGL | [ ] |
 
@@ -493,7 +493,7 @@ The user provided screenshots of head textures stretched into body-like structur
 | GE-303 | Swept vertical fall-to-ground collision to prevent tunneling through a thin floor at high speed | IMPLEMENTED — VERIFY: static checks only | [ ] |
 | GE-304 | Retain fall damage on real landing after dropping from an elevated platform | IMPLEMENTED — VERIFY | [ ] |
 | GE-305 | Lower generated source-textured exterior terrain below indoor starting floor for visible height separation | IMPLEMENTED — VERIFY: 4.2 scene units lower | [ ] |
-| GE-306 | Construct game-textured retaining-wall supports beneath sampled exposed raised room floors | IMPLEMENTED — VERIFY: generated geometry, not authentic game walls | [ ] |
+| GE-306 | Construct game-textured retaining-wall supports beneath sampled exposed raised room floors | BROKEN in v2.6 user test — pass-through retaining walls; v2.7 collision added, unapproved | [ ] |
 | GE-307 | Correct source door local depth/origin against existing vertical wall face | IMPLEMENTED — VERIFY: <=0.085 source-derived door display depth | [ ] |
 | GE-308 | Cut genuine doorway openings into original wall polygons and reconstruct authored door positions | NOT DONE — model/stage setup decoder incomplete | [ ] |
 | GE-309 | Align converted BMW/truck/APC visual forwards with W-forward movement | IMPLEMENTED — VERIFY: Y-axis model rotation, visual playtest pending | [ ] |
@@ -502,3 +502,26 @@ The user provided screenshots of head textures stretched into body-like structur
 | GE-312 | Restore original per-stage supported outside terrain/ground and collision instead of reconstructed supports | NOT DONE — original stage setup/collision decoding incomplete | [ ] |
 
 v2.6 changes are independently written prototype logic. No original game stage setup/collision or car camera code is recovered. Visual assets and textures remain the original recovered Xbox media. Full GUI gameplay testing unavailable; all approval boxes unchecked.
+
+
+## Z — v2.7 walkable ramps, solid outside boundaries, authentic-source prop cover and original hit format audit
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-313 | Pair each generated outside door with a continuous visibly source-textured ramp footprint | IMPLEMENTED — VERIFY; wall cutout not yet decoded | [ ] |
+| GE-314 | Use ramp-centerline mathematical height support for player climbing/descending | IMPLEMENTED — STATIC TEST PASS; ChromeOS playtest pending | [ ] |
+| GE-315 | Adapt approach ramp length to entrance elevation and meet actual terrain height at endpoint | IMPLEMENTED — STATIC TEST PASS | [ ] |
+| GE-316 | Make visually generated retaining/support walls physical colliders | IMPLEMENTED — VERIFY; raycast generated wall triangles | [ ] |
+| GE-317 | Create source-textured world perimeter barrier that follows outside terrain | IMPLEMENTED — VERIFY | [ ] |
+| GE-318 | Stop both player and driveable vehicles at the actual generated world limits | IMPLEMENTED — STATIC TEST PASS | [ ] |
+| GE-319 | Place original barricade/wood/steel/ammo crate meshes in logical outdoor cover yards | IMPLEMENTED — VERIFY: 9 groups, 54 source-model placements | [ ] |
+| GE-320 | Add approximate collision volumes to outdoor source-prop cover | IMPLEMENTED — VERIFY | [ ] |
+| GE-321 | Repair original truck materials for wheels/canvas/body/glass using original source atlases | IMPLEMENTED — VERIFIED MODEL BATCH DATA; visual test pending | [ ] |
+| GE-322 | Fix undefined `sz.z` outdoor vehicle-population code regression | IMPLEMENTED — STATIC VERIFIED | [ ] |
+| GE-323 | Inventory original stage and character hit/collision source resources | IMPLEMENTED — VERIFIED DATA: 23 level hits + 42 character hits per version | [ ] |
+| GE-324 | Inspect original Facility `hits` binary format before authentic collision decoding | IMPLEMENTED — VERIFIED HEADER; format decoding unfinished | [ ] |
+| GE-325 | Decode original authored walk/run/get-shot/fall animations and use original source rig | NOT DONE — standalone clips not found; requires animation format/executable research | [ ] |
+| GE-326 | Verify v2.7 ramp, terrain support, perimeter, truck and cover gameplay on Chromebook | NEEDS USER TEST — no graphical WebGL playtest | [ ] |
+| GE-327 | Decode original collision/hit CAFF resource into stair, wall and door physics volumes | IN PROGRESS / BLOCKED — actual hit resource found, internal structure not decoded | [ ] |
+
+**Regression discipline:** Previously delivered ramps and supports were reported visually present but non-collidable, so the old GE-284–286 and GE-306 entries remain broken until user re-approval. The v2.7 changes are new unverified implementation attempts. The source-only audit finds real Xbox collision/hit data, but no decoded original character animation clips. No source-model approval or graphical runtime success is asserted.
