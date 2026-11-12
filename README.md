@@ -1,3 +1,13 @@
+# v1.7 — Black material regression rollback and visible Snowguard head
+
+After user testing reported that **even previously working Facility textures became black**, the new downloadable game does not modify Facility's source GLB material instances/UVs at all. For the other 22 available maps, material repair now rebuilds invalid material batches using recovered source map images and **MeshBasicMaterial** so inverted normals and absent indoor lighting cannot produce a black shader result. UVs are reprojected as a temporary visualization method; authentic source UVs remain incomplete.
+
+Snowguard's real head batches still exist, but their shape/UV data made the head effectively invisible in the v1.6 preview. The new build retains those source batches and provides a **provisional hood/head volume** textured with the original Snowguard face atlas. It is not an original rig or animated original head model.
+
+**Verification:** Node syntax checked, original image sets readable for all 23 available maps, single ZIP CRC checked. **ChromeOS GPU visual playtesting remains unverified.** Aztec remains unsupported. Read [PROJECT_TRACKER.md](PROJECT_TRACKER.md) for user-reported regressions and GE-155–159. Never mark feature user-approved without explicit user confirmation. No user-owned copyright-derived assets have been committed to the public repository.
+
+---
+
 # v1.6 — Black-scene visibility and Snowguard character rebuild
 
 **Playable user-owned download:** `GoldenEye_World_Explorer_v16_ONE_ZIP.zip` containing a single HTML game with embedded 23 maps, 42 character meshes, 62 gun/item meshes and the original game texture imagery (no copyrighted files checked into this repository).
