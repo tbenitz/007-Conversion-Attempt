@@ -27,11 +27,12 @@ footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background
 <p>Imports real glTF animation tracks if a rigged local file contains them. Otherwise Boris uses a visibly reconstructed procedural gait. Source CAFF clips have not been decoded. Generated outdoor trees and compounds are not original game assets.</p>
 </aside>
 <button id="panelToggle">☰</button>
-<footer>WASD walk · Shift sprint · Mouse look · V view · F flight · Q/E fly · R respawn · Esc unlock</footer>
+<footer>WASD walk · Shift sprint · J fire / H hit / K death (only if imported clips exist) · V view · F flight · R respawn</footer>
 <script type="module">
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {buildOutdoor,OUTDOOR_Y} from './src/outdoor.js';
+import {clone as cloneSkinned} from 'three/addons/utils/SkeletonUtils.js';
 const canvas=document.querySelector('#screen'),status=document.querySelector('#status');
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x14222b);scene.fog=new THREE.FogExp2(0x14222b,.004);
 const camera=new THREE.PerspectiveCamera(72,innerWidth/innerHeight,.08,500);
@@ -83,13 +84,26 @@ function enableWalk(root){
  }
  root.userData.legs=legs;return root
 }
+function setSourceMotion(obj,motion){
+ const clips=modelClips.boris||[],actions=obj.userData.clipActions;
+ if(!actions?.length)return;
+ const patterns={idle:/idle|stand|rest/i,walk:/walk|stride/i,run:/run|sprint|jog/i,fire:/fire|shoot|attack/i,hit:/hit|react|pain/i,death:/death|die|fall/i};
+ let choice=clips.findIndex(c=>patterns[motion]?.test(c.name||''));
+ if(choice<0&&motion==='run')choice=clips.findIndex(c=>patterns.walk.test(c.name||''));
+ if(choice<0&&motion==='idle')choice=0;
+ if(choice<0)return;
+ if(obj.userData.clipType===choice)return;
+ const prev=obj.userData.clipType;
+ if(Number.isInteger(prev))actions[prev]?.fadeOut(.17);
+ actions[choice].reset().fadeIn(.17).play();obj.userData.clipType=choice;
+}
 function makeActors(){
  for(const k in actors){scene.remove(actors[k]);delete actors[k]}
  for(const k of ['boris']){if(!models[k])continue;
   const authentic=modelClips[k]?.length>0;
-  const obj=authentic?models[k].clone(true):enableWalk(models[k].clone(true));actors[k]=obj;scene.add(obj);
+  const obj=authentic?cloneSkinned(models[k]):enableWalk(models[k].clone(true));actors[k]=obj;scene.add(obj);
   delete mixers[k];
-  if(authentic){mixers[k]=new THREE.AnimationMixer(obj);obj.userData.clipActions=modelClips[k].map(c=>mixers[k].clipAction(c));obj.userData.clipActions[0]?.play();}
+  if(authentic){mixers[k]=new THREE.AnimationMixer(obj);obj.userData.clipActions=modelClips[k].map(c=>mixers[k].clipAction(c));obj.userData.clipType='';setSourceMotion(obj,'idle');}
  }
 }
 async function load(name,data){
@@ -198,6 +212,9 @@ onkeydown=e=>{
   document.querySelector('#character').value=chosen
  }
  if(e.code==='KeyE'){const d=nearestDoor();if(d)d.target=d.target>.5?0:1}
+ if(e.code==='KeyJ')setSourceMotion(actors.boris,'fire');
+ if(e.code==='KeyH')setSourceMotion(actors.boris,'hit');
+ if(e.code==='KeyK')setSourceMotion(actors.boris,'death');
  if(e.code==='KeyN'){const dir=new THREE.Vector3(-Math.sin(player.yaw),0,-Math.cos(player.yaw)).multiplyScalar(2.7);const p=player.pos.clone().add(dir);const h=groundHeight(p.x,p.z,player.pos.y-1.7);if(h!==null)makeDoor(new THREE.Vector3(p.x,h-1.7,p.z),player.yaw)}
  if(e.code==='Space')mantle();
  if(e.code==='KeyC'){solidWalls=!solidWalls;status.textContent=solidWalls?'Experimental collision ON':'Free explore: wall collision OFF'}if(e.code==='PageUp')player.pos.y+=.8;if(e.code==='PageDown')player.pos.y-=.8;if(e.code==='KeyV')third=!third;if(e.code==='KeyF')flight=!flight;if(e.code==='KeyR'){player.pos.set(20,-6.3,20);player.yaw=0;player.pitch=0;flight=false;}
@@ -220,7 +237,8 @@ function animate(now){
  const hasMotion=move.lengthSq()>0;const sprint=keys.has('ShiftLeft')||keys.has('ShiftRight');
  let moving=false;
  if(hasMotion){moving=tryMove(move.normalize().multiplyScalar(dt*(sprint?6:3.5)))}
- if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);for(const a of arms){const power=moving&&!flight?1:0;a.shoulder.rotation.x=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*.48*power;a.elbow.rotation.x=-.18-Math.max(0,Math.sin(walkPhase+(a.sign<0?0:Math.PI)))*.32*power;a.pivot.position.y=Math.abs(Math.sin(walkPhase))*.025*power;}
+ if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);
+ if(!keys.has('KeyJ')&&!keys.has('KeyH')&&!keys.has('KeyK'))setSourceMotion(actors.boris,moving?(sprint?'run':'walk'):'idle');for(const a of arms){const power=moving&&!flight?1:0;a.shoulder.rotation.x=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*.48*power;a.elbow.rotation.x=-.18-Math.max(0,Math.sin(walkPhase+(a.sign<0?0:Math.PI)))*.32*power;a.pivot.position.y=Math.abs(Math.sin(walkPhase))*.025*power;}
  for(const a of (actors.boris?.userData.legs||[])){const power=moving&&!flight?1:0;const v=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*power;a.hip.rotation.x=v*.51;a.knee.rotation.x=-Math.max(0,v)*.72}
  for(const mixer of Object.values(mixers))mixer.update(dt);
  for(const d of doors){if(sprint&&d.g.position.distanceTo(player.pos.clone().add(new THREE.Vector3(0,-1.7,0)))<1.8)d.target=1;d.open=THREE.MathUtils.damp(d.open,d.target,7,dt);d.hinge.rotation.y=-d.open*1.5}
