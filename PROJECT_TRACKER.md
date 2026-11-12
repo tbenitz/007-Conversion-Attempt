@@ -1,3 +1,15 @@
+## 2026-11-12 — Private v3.1 map geometry / texture audit (implementation; not user-approved)
+
+- [x] Audited all 23 map GLBs actually embedded in the v3.0 playable HTML, compared against recovered original CAFF draw records and texture descriptors. Report stored as `V31_MAP_COVERAGE_AUDIT.json` in new private ZIP.
+- [x] Found serious missing geometry draw records, especially Statue Park (82/518 represented), Library (14/66), Complex (14/43), Surface (87/215), and Dam (229/391). These are coverage proxies; **none are certified complete**.
+- [x] Removed hash-based random assignment of a level's textures and forced planar UV override in the existing bright-material function. Now preserves the specific originally embedded GLB texture and UV mapping for each decoded mesh, with optional faithful unlit display.
+- [x] Added per-level on-screen source geometry/texture diagnostic and separate documentation. Existing v3.0 binary-embedded game and historical tracking files are preserved; no geometry is fabricated as original.
+- [x] JavaScript syntax check and ZIP integrity check passed, and all original auxiliary archive files were byte-for-byte preserved.
+- [ ] Recover missing draw batches for heavily incomplete maps from original game CAFF geometry and texture mapping tables.
+- [ ] Confirm every original shader/image binding and UV geometry by evidence and visual Chromebook QA. Authored source textures are not proven correct just because a GLB contains them.
+- [ ] Rebuild Aztec map (not decoded/available in the 23-map list), and examine missing Frigate skydome source.
+- [ ] Test every map for entrances, collision, holes, ramps, spawns and missing rooms; preserve earlier open defects and all prior user approval states.
+
 ## 2026-11-12 — Private playable v3.0 rig movement and clip-import work (NOT user-approved)
 
 - [x] Implemented source-label-based reconstructed character pivot hierarchy: BASE → BACK → NECK/SHOULDER → ELBOW → WRIST and BASE → HIP → KNEE → ANKLE, grounded in 217 CAFF skin-chain strings from 42 original-character metadata reports.
