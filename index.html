@@ -17,19 +17,21 @@ footer{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);background
 </head><body>
 <canvas id="screen"></canvas>
 <aside>
-<h1>007 • Facility Explorer v0.7</h1>
+<h1>007 • Facility Explorer / Rig Research</h1>
 <p>Import your locally converted <code>facility_textured.glb</code> and <code>boris_textured.glb</code>. The converter restores authentic XBLA texture images, UVs and material references. Original game files are not hosted in this repository.</p>
 <input type="file" id="assets" accept=".glb" multiple>
 <p id="status">Choose the two locally converted textured GLBs to load Facility and Boris.</p>
 <button id="play">Explore</button> <button id="reset">Reset position</button> <button id="wire">Wireframe</button>
 <p>Character: <select id="character"><option>boris</option></select></p>
-<p>Loads original source textures and material assignments from locally converted textured GLBs. Boris is controllable in third person. Boris has a procedural walking gait; wall collision and ground traversal are improved. Original skeletal clips, doors, prop placement, and some geometry remain unfinished.</p>
+<p id="outdoorStats">Exterior: 4 generated outposts; 10× scenery density, trees and cover (not restored source assets).</p>
+<p>Imports real glTF animation tracks if a rigged local file contains them. Otherwise Boris uses a visibly reconstructed procedural gait. Source CAFF clips have not been decoded. Generated outdoor trees and compounds are not original game assets.</p>
 </aside>
 <button id="panelToggle">☰</button>
 <footer>WASD walk · Shift sprint · Mouse look · V view · F flight · Q/E fly · R respawn · Esc unlock</footer>
 <script type="module">
 import * as THREE from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
+import {buildOutdoor,OUTDOOR_Y} from './src/outdoor.js';
 const canvas=document.querySelector('#screen'),status=document.querySelector('#status');
 const scene=new THREE.Scene();scene.background=new THREE.Color(0x14222b);scene.fog=new THREE.FogExp2(0x14222b,.004);
 const camera=new THREE.PerspectiveCamera(72,innerWidth/innerHeight,.08,500);
@@ -38,6 +40,9 @@ renderer.setPixelRatio(Math.min(devicePixelRatio,1.5));renderer.outputColorSpace
 scene.add(new THREE.HemisphereLight(0xb7d5ee,0x484738,2.2));
 const sun=new THREE.DirectionalLight(0xfff2e0,3);sun.position.set(40,80,20);scene.add(sun);
 const grid=new THREE.GridHelper(220,44,0x506777,0x2b4152);grid.position.y=-9;scene.add(grid);
+const exterior=buildOutdoor(scene,{density:10,seed:7007});
+document.querySelector('#outdoorStats').textContent='Generated exterior: '+exterior.counts.compoundSites+' outposts, '+exterior.counts.trees+' trees, '+exterior.counts.cover+' cover objects (10× previous 54 placements; not source scenery).';
+const mixers={},modelClips={};
 const gltf=new GLTFLoader(),models={},actors={};let facility=null,wire=false,third=true,flight=false,chosen='boris',walkPhase=0;const walkUniforms=[];let arms=[];let health=100,fallStart=null,vy=0;const doors=[];let solidWalls=false;
 const player={pos:new THREE.Vector3(20,-6.3,20),yaw:0,pitch:0},angles={boris:0,oddjob:2,trevelyan:4};
 function enableWalk(root){
@@ -81,7 +86,10 @@ function enableWalk(root){
 function makeActors(){
  for(const k in actors){scene.remove(actors[k]);delete actors[k]}
  for(const k of ['boris']){if(!models[k])continue;
-  const obj=enableWalk(models[k].clone(true));actors[k]=obj;scene.add(obj)
+  const authentic=modelClips[k]?.length>0;
+  const obj=authentic?models[k].clone(true):enableWalk(models[k].clone(true));actors[k]=obj;scene.add(obj);
+  delete mixers[k];
+  if(authentic){mixers[k]=new THREE.AnimationMixer(obj);obj.userData.clipActions=modelClips[k].map(c=>mixers[k].clipAction(c));obj.userData.clipActions[0]?.play();}
  }
 }
 async function load(name,data){
@@ -94,8 +102,9 @@ async function load(name,data){
    }
  }});
  if(name==='facility'){if(facility)scene.remove(facility);facility=root;scene.add(root);grid.visible=false}
- else{models[name]=root;makeActors()}
- status.textContent='Loaded '+name+' • Actual converted XBLA geometry';
+ else{models[name]=root;modelClips[name]=glb.animations||[];makeActors()}
+ const skinCount=(()=>{let n=0;root.traverse(o=>{if(o.isSkinnedMesh)n++});return n})();
+ status.textContent='Loaded '+name+' • source glTF skins '+skinCount+' • authored clips '+(glb.animations?.length||0)+' (no CAFF decode implied)';
 }
 document.querySelector('#assets').onchange=async e=>{
  for(const file of e.target.files){
@@ -117,6 +126,7 @@ document.querySelector('#panelToggle').onclick=()=>document.body.classList.toggl
 const floorRay=new THREE.Raycaster();const normal=new THREE.Vector3(),down=new THREE.Vector3(0,-1,0),stepHeight=1.35;
 function faceY(h){return h.face?normal.copy(h.face.normal).transformDirection(h.object.matrixWorld).y:0}
 function groundHeight(x,z,feet){
+ if(exterior.isOutside(x,z))return OUTDOOR_Y+1.7;
  if(!facility)return null;
  floorRay.set(new THREE.Vector3(x,feet+1.9,z),down);floorRay.far=5.9;
  let best=null,score=Infinity;
@@ -153,6 +163,7 @@ function nearestDoor(){
 function tryMove(delta){
  if(flight){player.pos.add(delta);return true}
  const old=player.pos.clone(),next=old.clone().add(delta);
+ if(exterior.isOutside(next.x,next.z)&&exterior.blocks(next.x,next.z))return false;
  if(solidWalls){
   const dist=delta.length();
   if(dist>0.0001&&wallBlocks(old,next,0))return false;
@@ -209,8 +220,9 @@ function animate(now){
  const hasMotion=move.lengthSq()>0;const sprint=keys.has('ShiftLeft')||keys.has('ShiftRight');
  let moving=false;
  if(hasMotion){moving=tryMove(move.normalize().multiplyScalar(dt*(sprint?6:3.5)))}
- if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);for(const a of arms){const power=moving&&!flight?1:0;a.shoulder.rotation.x=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*.48*power;a.elbow.rotation.x=-.18-Math.max(0,Math.sin(walkPhase+(a.sign<0?0:Math.PI)))*.32*power;a.body.position.y=Math.abs(Math.sin(walkPhase))*.025*power;}
+ if(moving&&!flight)walkPhase+=dt*(sprint?13.4:9.3);for(const a of arms){const power=moving&&!flight?1:0;a.shoulder.rotation.x=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*.48*power;a.elbow.rotation.x=-.18-Math.max(0,Math.sin(walkPhase+(a.sign<0?0:Math.PI)))*.32*power;a.pivot.position.y=Math.abs(Math.sin(walkPhase))*.025*power;}
  for(const a of (actors.boris?.userData.legs||[])){const power=moving&&!flight?1:0;const v=Math.sin(walkPhase+(a.sign<0?0:Math.PI))*power;a.hip.rotation.x=v*.51;a.knee.rotation.x=-Math.max(0,v)*.72}
+ for(const mixer of Object.values(mixers))mixer.update(dt);
  for(const d of doors){if(sprint&&d.g.position.distanceTo(player.pos.clone().add(new THREE.Vector3(0,-1.7,0)))<1.8)d.target=1;d.open=THREE.MathUtils.damp(d.open,d.target,7,dt);d.hinge.rotation.y=-d.open*1.5}
  if(!flight){const h=groundHeight(player.pos.x,player.pos.z,player.pos.y-1.7);if(h===null){if(fallStart===null)fallStart=player.pos.y-1.7;vy=Math.max(-24,vy-14*dt);player.pos.y+=vy*dt;}else{if(fallStart!==null){health-=Math.max(0,Math.round((fallStart-(h-1.7)-3)*11));health=Math.max(0,health)}fallStart=null;vy=0;player.pos.y=h;}if(player.pos.y< -30||health===0){health=100;player.pos.set(20,-6.3,20);vy=0;fallStart=null}}
  if(Math.floor(now/180)!==Math.floor((now-dt*1000)/180))status.textContent="Health "+health+"/100 · E door · N place demo door · Space mantle";
