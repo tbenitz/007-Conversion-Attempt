@@ -1,3 +1,30 @@
+# v2.5 — Verified Xbox sound cue bindings and corrected source-head fragments
+
+**User-reported regressions:** v2.4 painted the same original portrait repeatedly on badly displaced source head draw groups, producing body-shaped heads and faces on clothing. The sound audition incorrectly assumed a cue's list index equaled its WAV's index; the user heard a gun sound labeled as a door. Both were real implementation errors.
+
+## Confirmed XACT sound fix
+
+The original Xbox `sfx.xsb` is big-endian `SDBK` with 209 simple cues. Each 5-byte simple-cue entry contains a sound-record offset. Each 19-byte sound record contains a **distinct 16-bit wavebank index** (all 209 verified). For example:
+- `195_DOOR_SHUTTER_CLOSE_SFX`: **cue position 87** → **original WAV 155**, NOT WAV 87.
+- `46_GUN_SILPPK_A_SFX`: **cue position 169** → **original WAV 37**, NOT WAV 169.
+- `196_DOOR_METAL_OPEN_SFX`: **cue position 88** → **original WAV 156**.
+
+The single-file v2.5 game audition panel now uses these correct WAVs for 62 embedded source clips, and verified source event names for door, punching, mine attaching, explosion, empty-trigger and applicable weapon firing. The original game's firearm-to-event logic has not been recovered, so cross-weapon **category assignments** remain provisional; cue-to-wave links themselves are verified. No original footsteps were identified.
+
+## Source-character geometry correction
+
+v2.4 attached all of each head's source draw groups, including polygons in the wrong original local coordinate frames. Those fragments resembled bodies or long columns. v2.5 keeps one coherent **original source geometry** group for each of 35 heads, trims displaced outlier faces, and normalizes to a realistic head-sized display. It crops the center of each real source head atlas rather than painting the full side/front atlas repeatedly on disconnected sections. No invented 3D head geometry was added. Original UVs, bone transforms, animation and unverified head-to-character pairings remain unresolved; **visual playtesting is still essential**.
+
+The original body/face atlas audit also found and corrected four reversed atlas assignments: moonguard, moonfemale, commguard and rusguard.
+
+**QA:** 35 cleaned original head GLBs reopen with source-derived faces, all 209 original wave references are valid and distinct, all eight embedded data blocks parse, Node JS syntax + TypeScript parser have zero errors, ZIP archive integrity verified. Full ChromeOS graphical playtest is not claimed. No user approval boxes checked.
+
+The actual game-derived head and sound bytes are distributed only in the user-owned private downloadable build, not this public GitHub repo.
+
+[Master progress tracker through GE-300](PROJECT_TRACKER.md) | [Original XACT cue decoder](tools/decode_original_xact_cues.py) | [Head mesh cleanup utility](tools/clean_head_glb.py)
+
+---
+
 # GoldenEye v2.4 — original sound-bank relationships, correct pistol diffuse and grounded exterior entries
 
 **Private user download:** `GoldenEye_World_Explorer_v24_ONE_GAME.zip` containing one 73 MB standalone asset-embedded HTML with a 42-clip original-bank sound preview interface, cue tables, and audio/asset QA. Separate `GoldenEye_World_Explorer_v24_SOURCE_ONLY.zip` is the 136 KB full browser-game script + HTML source shell, original-cue catalog and corrective code without game assets. Proprietary game-derived media are never committed here.
