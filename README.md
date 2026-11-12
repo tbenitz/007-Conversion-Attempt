@@ -1,3 +1,29 @@
+# GoldenEye World Explorer v2.7 — Physical ramps, solid retaining walls, source-prop outdoor cover
+
+**User report:** v2.6 ramps were visually present but not traversable; raised-room retaining walls were pass-through; some ramps did not meet their source-game door, and the outdoor level had unguarded boundaries. The recovered military truck looked wooden from incorrect source texture assignments. Original walk/run/hit/death animations remain outstanding.
+
+## Changes delivered in the private downloadable game
+
+- **Physical entrance ramps:** The browser controller now supports ramp-height interpolation tied to the **same visible game-textured ramp strip**. The ramp starts 1.2 units inside a validated source-wall position, touches the recovered game door, and extends to sampled outdoor terrain; length scales with elevation drop to keep slopes manageable. Each new ramp requires a successfully loaded original source-door mesh. For original solid wall polygons that have not been cut, press E at the source door to cross, rather than walking through the wall.
+- **Solid supports and world edges:** The actual source-textured retaining-wall mesh is raycast during player collision, no longer just decorative. A visible source-textured perimeter wall follows the terrain around the full outside area, and player/vehicle movement is checked against its matching playable bounds. Interior raised-room ledges can still produce falls.
+- **Outdoor cover using original models only:** Nine generated sheltered cover yards use **54 source-model placements** from converted original GoldenEye barricades, ammunition crates, steel crates and wooden crates; approximate collision is active. Yard arrangements are reconstructed, not authored GoldenEye layout. No invented building assets, trees or fabricated box models.
+- **Truck original materials:** Identified original military truck draw batches 013–014 as wheels and bind them to its recovered 009 wheel atlas. Cab, steel body, canvas and glass groups now use separate source texture images including newly embedded 003, 005, 006, 008 sheets. Authentic per-vertex UVs remain incomplete.
+- **Crash prevention:** Fixed an existing out-of-scope variable `sz.z` in outdoor prop creation that could interrupt asset population when a vehicle model was spawned.
+
+## Source animation and collision audit
+
+The user's original retail STFS listing contains **23 remastered and 23 original level collision/hit resources** and **42 remastered and 42 original character hit resources**. Remastered Facility `default.mb.hit.bin` is a CAFF data payload identifying itself as `hits` version `04.05.05.0032`, with one ~1.39MB data resource. These resources have **not** been reverse engineered into native browser collision meshes. No standalone decoded skeletal walk, run, hit or death animation clips were found in the exported file listing. Those original motions remain blocked pending format decoding; the existing provisional browser movement is NOT original GoldenEye animation.
+
+## QA and approval
+
+Node JavaScript syntax and independent TypeScript AST parse pass; all eight embedded asset JSON sections parse; source-derived truck materials and GLB batch IDs verified; deterministic ramp/width/endpoint/boundary fixture passed; downloadable single HTML embedded source matches code-only source; ZIP CRC passes. **No live ChromeOS WebGL playtest**, and no user approval checkboxes were marked.
+
+The private game delivery is `GoldenEye_World_Explorer_v27_ONE_GAME.zip` with one standalone HTML plus QA, animation/hit inventory and source. `GoldenEye_v27_CODE_ONLY.zip` is 54 KB with the game source and tests, no game media. Copyright-derived models, images and sound are excluded from this public repository.
+
+[Master tracker through GE-325](PROJECT_TRACKER.md)
+
+---
+
 # GoldenEye World Explorer v2.6 — falling, raised-room supports, flush doors, drive direction and windshield POV
 
 ## User-reported problems
