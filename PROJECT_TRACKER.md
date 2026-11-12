@@ -276,7 +276,7 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-160 | Correct black world-object textures using their original prop texture sheets | IMPLEMENTED — VERIFY: 17 source prop texture choices, unlit materials | [ ] |
 | GE-161 | Select original recovered source texture images for every weapon/item | IMPLEMENTED — VERIFY: 63 weapon/item images, provisional projected UVs | [ ] |
 | GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | BROKEN / UNDER REVIEW — user reports generic heads; v2.2 loads real source head meshes, not verified in Chrome | [ ] |
-| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IN PROGRESS — v2.4 source head proportions corrected for shallow geometry and outlier, still visually unverified | [ ] |
+| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | BROKEN IN v2.4 — face/body texture selection reversed for some characters; v2.5 audited 4 swapped pairs, source head UVs still open | [ ] |
 | GE-164 | Preserve existing Boris character model during generalized preview changes | IMPLEMENTED — VERIFY | [ ] |
 | GE-165 | Restore standard adult height across character previews; Oddjob shorter, Jaws taller | IMPLEMENTED — VERIFY: ~1.78m adults, 1.52m Oddjob, 2.02m Jaws | [ ] |
 | GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | BROKEN / UNAPPROVED — v1.9 procedural animation rejected by user; original source clips unavailable | [ ] |
@@ -383,8 +383,8 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | ID | Requirement | Development status | User approved |
 |---|---|---|---|
 | GE-233 | Convert original XBLA head bundles into distinct source geometry | IMPLEMENTED — STATIC VERIFIED: 35 of 37 head bundles | [ ] |
-| GE-234 | Replace single generic portrait sphere with original source head triangles | IMPLEMENTED — VERIFY: original mesh renderer, Chromebook test needed | [ ] |
-| GE-235 | Preserve each original source portrait across one global head UV frame, not repeated per submesh | IMPLEMENTED — VERIFY: projected atlas, original UV still pending | [ ] |
+| GE-234 | Replace single generic portrait sphere with original source head triangles | BROKEN IN v2.4 — multiple original head draw groups attached in wrong locations; v2.5 selects one coherent source mesh, visual test pending | [ ] |
+| GE-235 | Preserve each original source portrait across one global head UV frame, not repeated per submesh | BROKEN IN v2.4 — full head atlas projected repeatedly onto disconnected fragments; v2.5 crops one front-face region, authentic UVs missing | [ ] |
 | GE-236 | Detect per-source head forward face direction so faces are not painted on backs | IMPLEMENTED — VERIFY; user visual test needed | [ ] |
 | GE-237 | Allow manual original head selection and flip/persistence per character | IMPLEMENTED — VERIFY; head-body pairings unverified | [ ] |
 | GE-238 | Recover actual original game head-to-character attachment and authentic UV layout | IN PROGRESS / BLOCKED — stage attachment data not recovered | [ ] |
@@ -446,9 +446,9 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 |---|---|---|---|
 | GE-273 | Extract and categorize all 209 original Xbox sfx XSB candidate names against PCM WAV files | IMPLEMENTED — VERIFIED DATA: source candidate catalog, cue-to-wave numeric binding not parsed | [ ] |
 | GE-274 | Extract stage-named original music cues for each map, including alternate X tracks | IMPLEMENTED — VERIFIED DATA: 56 original XSB named cues; XWB wave link unresolved | [ ] |
-| GE-275 | Audit proper original gunshots, metallic doors, mine SFX, melee and watch candidate cues | IMPLEMENTED — CANDIDATES VERIFIED, actual event assignments need audition | [ ] |
+| GE-275 | Audit proper original gunshots, metallic doors, mine SFX, melee and watch candidate cues | IN PROGRESS — v2.5 VERIFIED actual XACT cue-to-WAV numeric mapping; original model-to-event gameplay choice still partly provisional | [ ] |
 | GE-276 | Find original source footstep WAV recordings and per-material footsteps | NOT DONE — no FOOT/STEP candidate cue names in 209 current sfx entries | [ ] |
-| GE-277 | Provide in-browser sound-cue audition for 42 original PCM files with local event overrides | IMPLEMENTED — VERIFY, no WebGL playtest | [ ] |
+| GE-277 | Provide in-browser sound-cue audition for 42 original PCM files with local event overrides | IN PROGRESS — v2.5 62 original bank clips, real cue-to-WAV mapping replaces false list-order labels, user audition pending | [ ] |
 | GE-278 | Fix PPK rainbow lookup texture 003 used instead of real diffuse slide/grip sheet 005 | IMPLEMENTED — VERIFIED IMAGE SOURCE, visual runtime test pending | [ ] |
 | GE-279 | Apply source image 005 to PPK, PPK Silenced, Gold PPK and Ruger where available | IMPLEMENTED — VERIFY; exact source UV maps remain open | [ ] |
 | GE-280 | Normalize 35 original source head model proportions when Z is flattened or extreme | IMPLEMENTED — VERIFY; original source geometry adjusted, not original rig | [ ] |
@@ -458,7 +458,27 @@ Source file audit confirms CAFF material commands and texture descriptors, not o
 | GE-284 | Connect elevated exit thresholds down to terrain via original game-textured walkable ramps | IMPLEMENTED — VERIFY; generated geometry, original stage ramp locations not recovered | [ ] |
 | GE-285 | Generate original-game-textured foundation supports under some exposed elevated floor edges | IMPLEMENTED — VERIFY: conservative source height tests, generated supports | [ ] |
 | GE-286 | Add generated ramp meshes to ground-following collision instead of leaving them visual only | IMPLEMENTED — VERIFY, Chromebook test needed | [ ] |
-| GE-287 | Parse XACT cue-to-wave indices and verify original music and every sound effect event | NOT DONE — parser/aural QA still required | [ ] |
+| GE-287 | Parse XACT cue-to-wave indices and verify original music and every sound effect event | IN PROGRESS — original 209 sfx cue-to-wave references VERIFIED; original music cue-to-track binding not yet parsed | [ ] |
 | GE-288 | Check exterior entrances, ramps, head shapes, source pistol diffuse and sound in Chromebook | NEEDS USER TEST; available container lacks working graphical WebGL | [ ] |
 
 **User-owned asset evidence:** music.xsb contains 56 named stage cues; original sound bank reports 209 PCM entries and 209 candidate XSB name strings. The relationship of XACT events to wavebank numeric indices is not parsed, so the cue audition is deliberately candidate-level. Original footstep cues not found by name. The source PPK 003 image is an unsuitable rainbow palette lookup; PPK 005 shows the real dark gun/grip diffuse texture. Original head source files are abnormally thin on the Z axis, with headjoe a large outlier. New exterior exits are detected using real original wall polygons, near-side source floors, and a lack of authoring-floor support immediately outside, with generated ramps/foundations using only recovered game textures. The shell and new geometry are reconstructed; original doors and collision data are not decoded. All user-approval boxes remain unchecked. JS + AST + embedded JSON and ZIP CRC checks passed; no visual/runtime game test.
+
+
+## X — v2.5 verified Xbox XACT cue mapping and cleaned original source heads
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-289 | Confirm original Xbox XSB simple-cue offsets and decode actual cue→sound→wave links | IMPLEMENTED — VERIFIED DATA: 209/209 cue bindings; one wavebank; 209 distinct indices | [ ] |
+| GE-290 | Fix mislabeled original sound: door shutter close cue 195 is wave 155, not wave 87 | IMPLEMENTED — VERIFIED DATA | [ ] |
+| GE-291 | Map source original silenced PPK gun cue index 169 to PCM wave 37 | IMPLEMENTED — VERIFIED DATA | [ ] |
+| GE-292 | Show original correct XACT sound cue and verified WAV index in the audio audition UI | IMPLEMENTED — STATIC VERIFIED; runtime audition pending | [ ] |
+| GE-293 | Use verified named source sound effects for pistol, door, punch, mine attach, explosions and empty gun trigger | IMPLEMENTED — VERIFY; gun-class to cue relationships may still be approximate | [ ] |
+| GE-294 | Preserve 209 original sound names and correct wave index in downloadable CSV/JSON | IMPLEMENTED — VERIFIED DATA | [ ] |
+| GE-295 | Remove badly displaced original head model draw batches that resemble body-shaped towers | IMPLEMENTED — VERIFIED GEOMETRY: 35 source head GLBs cleaned, no fabricated polygons | [ ] |
+| GE-296 | Normalize cleaned original head mesh dimensions without adding substitute head triangles | IMPLEMENTED — VERIFIED SOURCE GEOMETRY; appearance still requires user approval | [ ] |
+| GE-297 | Use a single centered original source face crop on the head, not the entire repeated texture atlas | IMPLEMENTED — VERIFY; original UV mapping not recovered | [ ] |
+| GE-298 | Correct reversed original character face/clothing atlas choices | IMPLEMENTED — VERIFIED IMAGE: moonguard, moonfemale, commguard, rusguard | [ ] |
+| GE-299 | Preserve original actor head-to-body pairings, bone placement and face UV charts | NOT DONE — converter still lacks original rig/attachment/UV data | [ ] |
+| GE-300 | Verify repaired heads and correct source audio on user's ChromeOS | NEEDS USER TEST; no successful WebGL playtest | [ ] |
+
+The user provided screenshots of head textures stretched into body-like structures and reported that a door-labeled audio clip was actually a gun sound. v2.5 corrects the XSB sound-to-wave mapping at the binary structural level (209 verified source references) and selects one coherent original mesh for each of the 35 cleaned heads, rejecting disconnected/flattened draw fragments. No invented head triangles or generated source WAVs. Weapon class→named cue assignment, authentic vertex UV mapping and skeletal animations still require original game logic decoding. All user approvals remain unchecked.
