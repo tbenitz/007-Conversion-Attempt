@@ -1,3 +1,17 @@
+## 2026-11-12 — v3.6 authentic original prop + AI opcode stream decoding (NOT user approved)
+
+- [x] Extended original XEX stage property parser with **strict type 0x03 standard object (0x80 bytes)** and **type 0x08 original weapon/item record (0x8C bytes)**, validated against original binary record boundaries; unknown records stop decoding rather than corrupting later offsets.
+- [x] Extracted **444 original prop/item records (390 standard props + 54 weapon/item)** and exact source model IDs, scale words, pad indices, original XYZ/face when linked. **384 have valid source pad associations.** These are not yet verified world placements.
+- [x] Extracted **662 referenced original AI script records** from stage tables. Decoded instruction framing for **15,913 bytecode instructions** using documented GoldenEye AI command-length constants. **521/662** script streams reach the original END opcode; remaining 141 stop safely at boundary or unsupported frame (not arbitrarily parsed).
+- [x] Expanded real asset-embedded explorer's **Original setup data** panel to inspect source model IDs/positions and original stage AI opcode/name previews. No random mission cubes, fake guards, invented trigger completions or unverified physical placements introduced.
+- [x] Preserved all previous v2.8-v3.5 auxiliary tracking files and existing embedded GLB assets. Added `V36_AUTHENTIC_ORIGINAL_STAGE_RECORDS.json`, `decode_original_ai_lists_v36.py`, `decode_authentic_stage_records_v36.py`, `V36_PROGRESS_AND_OPEN_ISSUES.md`.
+- [x] JavaScript syntax, source extraction and ZIP CRC checked. No browser/WebGL runtime claim.
+- [ ] **0% authenticated objective trigger execution implemented:** AI frame decoding does not establish opcode runtime effects/event feeds/branch label state, guards' AI state machines or the native objective flag scheduler. Need explicit implementation and tests against source game.
+- [ ] **0% verified original physical object placement implemented in browser:** Source pad records are recovered, but source-to-current-GLB coordinate transform, source model ID->GLB binding and source map floor/collision completeness remain unverified.
+- [ ] Decode all unsupported native prop record types, especially doors and cameras; validate remaining scripts and stage triggers.
+- [ ] Repair missing original Dam walkway surfaces from STAN source data and calibrate map transforms with source landmarks, then spawn original guards/props/doors (NOT synthesized proxy assets).
+- [ ] Validate full mission behavior, difficulty, success/failure events and audio alignment in ChromeOS; explicit user testing/approval required. Historical full master tracker below remains unchanged.
+
 ## 2026-11-12 — v3.5 original stage setup records (source-authenticated, NOT user approved)
 
 - [x] Decoded **5,200 normal source pad records** across original XBLA stage setup arrays, including native XYZ, up/look orientation, pad-to-room pointers and record offsets; Cuba needs a separate pointer-layout pass. These coordinates are ORIGINAL game units, not calibrated to converted browser map geometry.
