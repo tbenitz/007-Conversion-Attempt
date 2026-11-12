@@ -1,3 +1,16 @@
+## 2026-11-12 — Public viewer animation / exterior work
+
+- [x] Code added: deterministic generated exterior with four outposts and ~10× (540 target) scattered tree/cover instances. **Not user-approved or playtested.**
+- [x] Code added: show real placement counts, boundary walls and simple obstacle collisions; real movement QA pending.
+- [x] Code added: glTF skin/animation relationship inspection CLI.
+- [x] Code added: authored glTF clip playback when present with name-based idle/walk/run/fire/hit/death selection; no proof that local exports include original clips.
+- [x] Code fix: remove invalid `a.body` access in procedural walking.
+- [ ] Decode proprietary Xbox/XBLA CAFF animation banks, times, transforms and original source skeleton relationships.
+- [ ] Identify validated source character-to-skeleton and animation ID mappings.
+- [ ] Test generated scenery, character animation and collision on Chromebook WebGL.
+- [ ] Port these changes into the separately distributed v2.8 private asset-embedded viewer when that actual source is available.
+- [ ] Obtain user's explicit acceptance/approval of new features.
+
 # GoldenEye XBLA — Master Development Tracker
 
 Updated 2026-11-11, v1.9. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
