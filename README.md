@@ -1,3 +1,29 @@
+# v2.0 source-asset interaction release — November 11, 2026
+
+**Player feedback prompting this release:** v1.9 shows incomplete wall texture charts, floating/oversized vehicles in Facility, missing exterior access, walk-through walls/stairs, mines passing through walls or missing textures, and game-inaccurate fabricated Slappers/explosion effects. These remain **unapproved regressions**, not previously solved features.
+
+**User-download artifact:** `GoldenEye_World_Explorer_v20_SOURCE_ASSET_TEST.zip`, one ZIP containing a playable asset-embedded HTML file, conversion/QA notes, and 11 extracted original XBLA PCM WAV samples.
+
+### Implemented code, awaiting actual ChromeOS playtest
+
+- Wall-hit raycasts against converted source level geometry with horizontal sliding, plus limited floor-step lookahead to climb low stair risers. **Neither a real GoldenEye collision mesh nor authored stair navigation has been recovered.** If a wall polygon is missing, raycast collision cannot block it.
+- Mines now use swept ballistic raycasts against converted original map and door faces, and stick to the impact point and surface normal. Original Remote/Timed mine source meshes and game-owned red/blue/green texture imagery remain. Proximity still uses the decoded Remote chassis because the Proximity mesh decoder remains unresolved.
+- **Original firebomb FX frames:** 24 recovered 256×256 Xbox CAFF textures (`files/new/texture/sfx/firebomb0` to `firebomb23`) decoded from Xbox tiled ARGB surfaces into an animated sheet, replacing the fabricated glowing sphere.
+- **Original Xbox audio extraction breakthrough:** The original retail STFS package includes `sfx.xwb` and `sfx.xsb`; all **209 wave-bank entries decode as 44.1kHz mono signed 16-bit big-endian PCM**. 11 WAVs are in the user package and selected WAVs embedded in the game. **Caveat:** Matching names from XSB string-table order to corresponding XWB wave entries remains a provisional cue mapping, NOT an independently parsed/verified cue event binding.
+- Slappers' fabricated animated hand spheres are hidden. Hit logic and candidate original decoded punch audio are available, but the **actual original Slappers fist animation has not been decoded** and must not be claimed restored. The original fist CAFF mesh presently yields no geometry because its pool layout is unsupported.
+- Added generated test entrances to/from the procedurally placed exterior using actual converted source door meshes; original geographic connections remain unknown.
+- Added source-model crates and recovered armor/ammo prop models at generated floor-and-wall-aligned positions; crates contain **newly designed gameplay** credits, armor plates, health, and ammunition. Recovered ammo crate meshes function as buy stations. Buy station menus and credits are **not original GoldenEye game mechanics**.
+- Limited vehicles around map spawn/inside rooms and capped oversized prop bounding-box scales. Original vehicle UVs are still provisional; verified real colors/appearance require user testing.
+- The packaged HTML still contains 23 converted map choices, 42 selectable character previews, 64 gun/item selections, and 24 original converted prop types. It is NOT a complete conversion of all authored maps.
+
+**Verification:** Node `--check` passed; 24 firebomb source images were decoded; all 209 Xbox soundbank entries were extracted to WAV without unsupported formats; 7 newly converted prop models reopen; the compressed ZIP passed CRC. Chromium explicitly returned `ERR_BLOCKED_BY_ADMINISTRATOR` for the local HTML, so runtime gameplay and graphics are **not confirmed**. No approval checkboxes changed.
+
+The public GitHub repo contains **source-only** converter/tracking tools. The user's original copyright-derived asset bytes remain exclusively in their private downloadable build.
+
+[Development tracker](PROJECT_TRACKER.md) · [Original-asset extraction tools](tools)
+
+---
+
 # World Explorer v1.9 — Source-textured world shell, curved character faces and roaming Snowguards
 
 **Downloadable single HTML + ZIP:** The user-owned offline-style release `GoldenEye_World_Explorer_v19_SINGLE_GAME.zip` is delivered through this conversation. It embeds game-derived content from the user's copy; Three.js still loads via CDN. Copyright-derived game meshes and images are *not* committed here.
