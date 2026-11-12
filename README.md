@@ -1,3 +1,23 @@
+# v1.6 — Black-scene visibility and Snowguard character rebuild
+
+**Playable user-owned download:** `GoldenEye_World_Explorer_v16_ONE_ZIP.zip` containing a single HTML game with embedded 23 maps, 42 character meshes, 62 gun/item meshes and the original game texture imagery (no copyrighted files checked into this repository).
+
+## Fixed or changed in code (awaiting Chromebook playtest)
+
+- **Black / silhouette maps:** Bunker, Bunker2, Statue Park, Dam and Cavern now use map-specific oversized-face cleanup to remove likely conversion artifacts. Bunker had 3,388 removed; Bunker2 3,401; Statue Park 17,255; Dam 34; Cavern 8. This cleanup is experimental, may discard legitimate giant source polygons, and does not restore missing game geometry.
+- **Unlit interiors:** stronger hemisphere lighting, a camera-proximate fill light, and source-texture emissive fill keep converted rooms and underground areas from relying solely on sunlight.
+- **Source texture selection:** avoids discarding valid snow, shadow and concrete images just because they contain white/dark pixels. Original texture index mappings are retained where available; UV projection remains provisional.
+- **Snowguard:** source body GLB batches 000–009 are effectively flat, disconnected geometry. The viewer keeps the original head and its eye-mask atlas and rebuilds a provisional articulated winter uniform/boots from Snowguard's actual recovered texture sheets. This is **not** its original geometry rig or animation.
+- **Character ground alignment:** all characters now position their lowest geometry at the floor. The locomotion loop no longer overwrites the vertical rest offset each frame.
+
+**Validation:** Main JS passed Node syntax checks, five filtered GLBs reopen and all their recovered texture images can be loaded, and the single ZIP passes archive CRC. The available Chromium sandbox has failed WebGL/EGL initialization, so no graphical success is claimed. All feature approvals remain unchecked.
+
+[Master issue tracker, GE-001 through GE-154](PROJECT_TRACKER.md) · [Oversized-face conversion audit tool](tools/clean_oversized_meshes.py)
+
+**Open priorities:** original map UV chart recovery, real collision and map spawns, authentic character geometry and skeletal animations, Aztec decoding, actual game doors and placements.
+
+---
+
 # World Explorer v1.5 — white-wall material repair and 23-map audit
 
 **This release targets the reported failure:** 23 of the selectable XBLA background meshes existed but still displayed many mostly-white surfaces. Their source material indices were available; their converted UV charts were incomplete and the previous fallback sometimes chose game decals/masks instead of usable environment textures.
