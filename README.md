@@ -1,3 +1,22 @@
+# v2.3 — Full game browser source separated from all currently decoded assets
+
+**Requested delivery:** Two separate archives from ChatGPT's current v2.3 turn:
+
+1. `GoldenEye_BROWSER_GAME_SOURCE_CODE_ONLY.zip` — 74 KB source code with the full `src/game.mjs` browser gameplay implementation (125,218 bytes, 1,764 lines), HTML source shell (17,451 bytes), CSS (6,355 bytes), STFS/CAFF extraction tools, and `build_single_file.py`. No embedded model, sound, or image bytes.
+2. `GoldenEye_DECODED_ASSETS_COMPACT_ONE_ZIP.zip` — 176 MB decoded-source asset package with 3,037 previously converted WebP texture sheets, every binary asset referenced by the v2.3 game (converted map/character/head/prop/weapon GLBs and extra original texture images), 209 extracted original Xbox sound bank entries, original firebomb artwork, checksums, and six structured JSON data sections required to rebuild the HTML. Also contains **the original compiled XEX2 executable** (`original-native-executable/default.xex`, 7,266,304 bytes).
+
+A third optional `GoldenEye_World_Explorer_v23_HUD_STAIRS_PLAYABLE.zip` contains the rebuilt one-file playable HTML and QA notes. Its embedded game data and game JavaScript were byte/JSON verified to match the source+asset rebuild. All ZIP files passed CRC and the source passed Node syntax and TypeScript AST checks.
+
+**Truthful source-status distinction:** The *original game native engine logic and authored C/C++ source have NOT been recovered*. `default.xex` is compiled Xbox machine code, not a native source listing. The complete `game.mjs` is OUR browser-game logic, not decompiled GoldenEye source. The 3,037 WebP atlases are compressed derivatives of earlier decoded PNG source images; pixel-lossless original PNGs and all raw CAFF assets remain in the user's original supplied/previous extraction archives.
+
+**Map and movement:** The original fullscreen tactical map was still available under M, and health/armor HUD remained present in v2.2. In v2.3 an always-visible clickable HUD minimap was added. To address the still-BROKEN stairs, a stair-tread probe checks for supported real map polygons ahead up to 1.08 scene units, with a second support sample to avoid using a stray sliver. This is an unverified *attempt*, not a repaired original navmesh. True stair/wall navigation remains the highest priority.
+
+All master tracker user-approval boxes remain unchecked. No graphics/browser success is claimed; static syntax, AST, JSON identity and archive CRC were checked.
+
+[Tracker with 257 stable requirements](PROJECT_TRACKER.md)
+
+---
+
 # GoldenEye World Explorer v2.2 — Original 3D heads and map-aligned door repair
 
 **Player-reported regressions:** The v2.1 screenshot showed a solid black rectangle as a door, arbitrary door positions at the generated level boundary, and different characters rendered with nearly identical fabricated heads. The original sprint meter ran out too quickly. These were genuine issues; prior approval was not inferred.
