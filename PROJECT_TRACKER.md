@@ -1,6 +1,6 @@
 # GoldenEye XBLA — Master Development Tracker
 
-Updated 2026-11-11, v1.4. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
+Updated 2026-11-11, v1.8. Goal: polished playable exploration with complete assets, movement, audio, map building and optional missions.
 
 **Progress semantics:** `IMPLEMENTED — VERIFY` means coded but **not approved**. All approval checkboxes remain `[ ]` until the user explicitly approves the corresponding ID. When a feature regresses, set its status to BROKEN and uncheck its approval. Keep IDs stable; new features get new IDs. Syntax tests are not gameplay tests.
 
@@ -250,8 +250,8 @@ All 23 available converted GLB files can be reopened and have source texture ima
 | GE-148 | Statue Park malformed giant triangles | IMPLEMENTED — VERIFY (experimental face filtering) | [ ] |
 | GE-149 | Preserve genuine snow/concrete/shadow texture images instead of blanket rejecting white and dark images | IMPLEMENTED — VERIFY (conservative source image checks) | [ ] |
 | GE-150 | Snowguard source head and original face map retained | BROKEN — head still invisible in v1.6 user playtest (projected UV preview) | [ ] |
-| GE-151 | Replace Snowguard's disconnected flat body with coherent original-atlas uniform and articulated limbs | IMPLEMENTED — VERIFY (provisional reconstruction only) | [ ] |
-| GE-152 | Ground third-person characters correctly and preserve animation vertical offset | IMPLEMENTED — VERIFY | [ ] |
+| GE-151 | Replace Snowguard's disconnected flat body with coherent original-atlas uniform and articulated limbs | BROKEN — user reports Snowguard undersized in v1.7; v1.8 normalized proportions pending test (provisional reconstruction only) | [ ] |
+| GE-152 | Ground third-person characters correctly and preserve animation vertical offset | IN PROGRESS — v1.7 Snowguard was too short; new proportion correction awaits test | [ ] |
 | GE-153 | Restore authentic Snowguard body mesh and original skeletal animation | NOT DONE — original decoder needed | [ ] |
 | GE-154 | Graphical Chromebook test of Dam, Bunker, Cavern and Snowguard | NEEDS USER REVIEW — browser GPU unavailable here | [ ] |
 
@@ -268,3 +268,25 @@ The new v1.6 single-file explorer includes camera fill lighting and emissive tex
 | GE-159 | Confirm Facility, Bunker, Cavern and Snowguard visually on Chromebook | NEEDS USER TEST; previous v1.6 failed | [ ] |
 
 **Regression rule:** The user reported black textures, including Facility, and Snowguard's missing head in v1.6. Previously marked code-ready items GE-116, GE-139 and GE-145–147 and GE-150 are now marked BROKEN pending new verification. v1.7 bypasses global material overrides on Facility and switches the other maps to source-textured MeshBasicMaterial with recomputed UVs. A clearly visible hood/head is provisionally constructed using Snowguard's own original face pixels. This is not genuine original skeletal animation or complete accurate UV mapping. All user approvals remain unchecked. Node syntax test, source-image audit and ZIP CRC passed; WebGL visual testing unavailable.
+
+## O — v1.8 game-prop materials, all-character previews, Slappers and mines
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-160 | Correct black world-object textures using their original prop texture sheets | IMPLEMENTED — VERIFY: 17 source prop texture choices, unlit materials | [ ] |
+| GE-161 | Select original recovered source texture images for every weapon/item | IMPLEMENTED — VERIFY: 63 weapon/item images, provisional projected UVs | [ ] |
+| GE-162 | Rebuild coherent connected third-person bodies for characters with failed mesh conversion | IMPLEMENTED — VERIFY: 41 character variants reconstructed | [ ] |
+| GE-163 | Show each character's real source face and clothing atlas rather than a generic face | IMPLEMENTED — VERIFY: 41 source atlas pairs, approximate crop | [ ] |
+| GE-164 | Preserve existing Boris character model during generalized preview changes | IMPLEMENTED — VERIFY | [ ] |
+| GE-165 | Restore standard adult height across character previews; Oddjob shorter, Jaws taller | IMPLEMENTED — VERIFY: ~1.78m adults, 1.52m Oddjob, 2.02m Jaws | [ ] |
+| GE-166 | Walk/sprint with articulated shoulders, elbows, hips and knees | IMPLEMENTED — VERIFY: procedural motion, not source skeletal animation | [ ] |
+| GE-167 | Add Slappers as a selectable first-person unarmed melee weapon | IMPLEMENTED — VERIFY | [ ] |
+| GE-168 | Animate alternating left/right melee swing, impact checks and sound | IMPLEMENTED — VERIFY: procedural hand movement, synthesized slap impact | [ ] |
+| GE-169 | Restore original Remote Mine source mesh/texture and in-game placing | IMPLEMENTED — VERIFY: 80 source triangles | [ ] |
+| GE-170 | Restore original Timed Mine source mesh/texture and 5.5-second detonation | IMPLEMENTED — VERIFY: 96 source triangles | [ ] |
+| GE-171 | Proximity Mine green original texture and trigger radius | IMPLEMENTED — VERIFY: remote mine body proxy; original proximity vertex decoder blocked | [ ] |
+| GE-172 | Remote trigger key, mine counters, throwing arc and explosion visuals | IMPLEMENTED — VERIFY: synthetic flash/burst/damage | [ ] |
+| GE-173 | Original GoldenEye mine/slappers sound recordings and motion clips | NOT DONE — only newly synthesized effect clips | [ ] |
+| GE-174 | Full ChromeOS visual interaction regression test of props, character scaling, melee and mines | NEEDS USER TEST — local test browser denied file access | [ ] |
+
+**Accuracy:** 41 non-Boris characters have a reconstructed, articulated body using original source face/clothing sheets, not restored original skinning or game-authentic face UV layouts. Boris's previous source geometry is left alone. The original Proximity Mine texture exists, but its standalone geometry still fails decoding; the source Remote Mine chassis is a temporary visual substitute. Slappers hands, all gait motion, effects and sound clips are procedural recreations. World objects now use their own original game-source texture imagery, but UV projection remains approximate. Prior Snowguard height regression was not approved. The v1.8 local asset archive passed JavaScript syntax and embedded mesh/image checks; graphical Chromium access remained blocked. All user approvals remain unchecked.
