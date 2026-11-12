@@ -239,3 +239,20 @@ The ground-safety layer prevents unsupported falls by **retaining confirmed heig
 | GE-144 | Reconstruct exact source UVs, full original geometry and missing Aztec | IN PROGRESS / BLOCKED — source decoder research | [ ] |
 
 All 23 available converted GLB files can be reopened and have source texture images, and all are present in the standalone build. This **does not mean every map is historically complete or that all UVs are accurate**. New default reprojection uses only recovered game images. 3D browser testing is blocked; no visual user approval is recorded. Aztec remains missing and several maps have very incomplete geometry.
+
+## M — v1.6 reported black maps and Snowguard body regression
+
+| ID | Requirement | Development status | User approved |
+|---|---|---|---|
+| GE-145 | Dam converted scene too dark / source-mesh occluders | IMPLEMENTED — VERIFY (lighting and 34 huge-face removals) | [ ] |
+| GE-146 | Bunker and Bunker 2 mostly black views | IMPLEMENTED — VERIFY (lighting and oversized-face filtering) | [ ] |
+| GE-147 | Cavern black / unlit underground surfaces | IMPLEMENTED — VERIFY (near-camera fill and emissive map) | [ ] |
+| GE-148 | Statue Park malformed giant triangles | IMPLEMENTED — VERIFY (experimental face filtering) | [ ] |
+| GE-149 | Preserve genuine snow/concrete/shadow texture images instead of blanket rejecting white and dark images | IMPLEMENTED — VERIFY (conservative source image checks) | [ ] |
+| GE-150 | Snowguard source head and original face map retained | IMPLEMENTED — VERIFY (projected UV preview) | [ ] |
+| GE-151 | Replace Snowguard's disconnected flat body with coherent original-atlas uniform and articulated limbs | IMPLEMENTED — VERIFY (provisional reconstruction only) | [ ] |
+| GE-152 | Ground third-person characters correctly and preserve animation vertical offset | IMPLEMENTED — VERIFY | [ ] |
+| GE-153 | Restore authentic Snowguard body mesh and original skeletal animation | NOT DONE — original decoder needed | [ ] |
+| GE-154 | Graphical Chromebook test of Dam, Bunker, Cavern and Snowguard | NEEDS USER REVIEW — browser GPU unavailable here | [ ] |
+
+The new v1.6 single-file explorer includes camera fill lighting and emissive texture illumination, conservative original map-image filtering, and per-map huge triangle removal: Bunker 3,388, Bunker 2 3,401, Statue Park 17,255, Dam 34, Cavern 8. These are experimentally classified triangles and may include legitimate source faces; original assets remain unchanged in the user's master archive. Snowguard retains the real source head and texture atlases but the body geometry is reconstructed, not recovered. Existing character vertical placement is repaired. These are unverified JS/static checks; browser WebGL test blocked. No user approval is recorded.
