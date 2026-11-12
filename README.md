@@ -1,3 +1,33 @@
+# GoldenEye World Explorer v2.2 — Original 3D heads and map-aligned door repair
+
+**Player-reported regressions:** The v2.1 screenshot showed a solid black rectangle as a door, arbitrary door positions at the generated level boundary, and different characters rendered with nearly identical fabricated heads. The original sprint meter ran out too quickly. These were genuine issues; prior approval was not inferred.
+
+### Original character heads instead of generic fake face spheres
+
+The compact original XBLA asset archive includes **37 separate `files/new/head/*/default.bin` 3D head model bundles**. The source parser converts **35** to genuine, distinctive GLBs; `headbike` and `headneil` are still unsupported. In v2.2, reconstructed character bodies use these original head meshes and their authentic source face image sheets, not the common spherical head or square face billboard. Face textures are projected on the frontal triangles of the source head, not painted on the back of the skull. Global head UV bounds prevent repeated copies of a portrait on individual submeshes.
+
+The source record describing **which original head belongs to which character body is still missing**. Initial associations are previews; a new *Original 3D head model* dropdown lets players select any recovered head and save their preferred character-specific association. A *Flip head forward axis* option handles remaining ambiguous mesh axes. These are original source geometry and images, but **not a fully restored original head assembly or skeletal animation system**.
+
+### Doors on actual wall faces, no black rectangles
+
+The `doormf`, `doorpanel`, `doorstarec2` and `doorroller1` original game meshes use inspected real Xbox source metal textures. A few old source atlas choices were nearly-black masks; these are replaced by readable metal source sheets, using lighting-independent materials. v2.2 disables the synthetic world-boundary portal shell and the floating test-door placements.
+
+At runtime, original map geometry is raycast to find nearby vertical wall surfaces with **walkable floor support on both sides**. A source door is placed flush against that wall; if none can be verified, no imaginary door is placed. The independent Facility source-mesh audit located **four** plausible wall+floor candidate positions. Pressing E at a mounted door transfers the character **only 1.75 meters to the other side of that very wall**, conditional on real floor support. The old distant exterior teleports are removed. **Open wall cutouts and accurate original stage door coordinates are not decoded yet**—an original wall may remain visible behind a door leaf.
+
+### Sprint
+
+Unlimited sprint is on by default, but can be disabled in the menu. In stamina mode, sprint drain is **4.8 per second versus the previous 24**, so stamina lasts five times as long, with 30/s recovery instead of 15/s.
+
+### Verification and limitations
+
+The standalone HTML and its JavaScript module pass Node syntax and TypeScript AST parsing. All embedded JSON sections decode; 35 recovered head GLBs reopen; the single ZIP passes a complete CRC integrity check. A direct independent geometry test found four usable Facility door candidates. Head render orientation, door visuals, transitions, and sprint still require actual ChromeOS gameplay validation; the container Chromium smoke test failed at EGL/ANGLE graphics initialization. No code is marked user-approved by assistant action.
+
+The game file contains derived copyrighted assets from the user's game copy, so they are provided only in the private download and **not committed to this public repo**.
+
+[Track GE-001–GE-245](PROJECT_TRACKER.md) · [Head asset decoder](tools/export_original_heads.py)
+
+---
+
 # GoldenEye World Explorer v2.1 — Source layout audit, original wristwatch and vehicle driving
 
 **User download:** GoldenEye_World_Explorer_v21_ONE_ZIP.zip. Contains one asset-embedded HTML, SOURCE_LAYOUT_AUDIT.json, source code and README.
