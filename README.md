@@ -1,3 +1,22 @@
+# Recovery pass: Aztec geometry/textures + original music bank (Nov 11, 2026)
+
+**New downloadable private artifact:** `GoldenEye_NEWLY_DECODED_AZTEC_MUSIC_ASSETS.zip` (78.7 MB). It is a **delta** to the previously supplied asset archive, not the full collection and not a completed original-game conversion.
+
+### Confirmed advances
+- Recovered Aztec CAFF layout with a +4096-byte resource-section shift. The original 57 texture images decode successfully. The recovered command stream yields 77 readable draw batches and 26,942 original geometry triangles; GLBs include vertex-colored geometry and a source-material textured **preview** with experimental UV scaling. The CAFF stream appears to have a missing 4096-byte tail, so all original geometry may NOT be present.
+- Recovered 7 more original texture images: Head Neil (4), Uzi magazine (1), and Frigate skydome (2). Their meshes remain incomplete.
+- Found a previously unprocessed `music.xwb` bank in the user's original retail STFS package. It contains 61 wave entries: 60 XMA entries and one WMA entry. All have best-effort Opus exports, but **every track generated decoder warnings** and the WMA track produced severe warnings. Neither fidelity nor named cue-to-wave associations have been verified. Existing `sfx.xwb` decoder generated 209 original PCM WAV entries previously; they are not re-shipped in this delta.
+- 3,037 previously verified archived texture sheets plus 64 newly recovered images = 3,101 available source texture images across the two asset deliveries. **This is not proof every original game texture has been decoded.**
+
+### Still unconverted
+Six CAFF sources remain unsupported: `prop/consolesevGEa`, `prop/hatchdoor`, `prop/hind`, `prop/jungle5tree`, `prop/oildrum2`, and `prop/sat1reflect`. There are 37 original head model bundles but only 35 converted 3D head GLBs; character rigs and authored animation clips are not decoded. Original UV charts, exact stage setup/doors/props placement and missing map triangles remain unfinished. The game executable is compiled native code, not recovered source code.
+
+### Verification
+All 57 Aztec and 7 other newly decoded PNGs pass image verification, both Aztec GLBs reopen with 26,942 faces each, and all 61 converted audio outputs have non-zero ffprobe durations. The 144-entry ZIP passes CRC and includes SHA-256 manifests and exact per-asset failure statuses. No in-browser visual/aural playtest is claimed, and no features are marked user-approved.
+
+**Distribution:** Game media stays in the private user download only, not this public GitHub repository.
+
+---
 # v2.3 — Full game browser source separated from all currently decoded assets
 
 **Requested delivery:** Two separate archives from ChatGPT's current v2.3 turn:
