@@ -1,0 +1,397 @@
+{
+  "schema": "goldeneye-permanent-100-point-conversion-ledger-v48",
+  "date": "2026-11-12",
+  "scoring_note": "Engineering milestone estimate, not percentage of playable missions. Do not delete milestones or auto-mark user acceptance.",
+  "current_points": 22,
+  "total_points": 100,
+  "previous_points": 20,
+  "fully_verified_playable_missions": 0,
+  "decoded_setup_stages": 21,
+  "workstreams": [
+    {
+      "name": "Source provenance",
+      "possible": 5,
+      "earned": 3
+    },
+    {
+      "name": "Original map geometry",
+      "possible": 15,
+      "earned": 3
+    },
+    {
+      "name": "Original textures",
+      "possible": 7,
+      "earned": 2
+    },
+    {
+      "name": "STAN collision",
+      "possible": 12,
+      "earned": 5
+    },
+    {
+      "name": "Map registration",
+      "possible": 10,
+      "earned": 1
+    },
+    {
+      "name": "Original object setup",
+      "possible": 12,
+      "earned": 2
+    },
+    {
+      "name": "Characters and animation",
+      "possible": 8,
+      "earned": 1
+    },
+    {
+      "name": "Original AI",
+      "possible": 10,
+      "earned": 4
+    },
+    {
+      "name": "Mission objectives",
+      "possible": 10,
+      "earned": 1
+    },
+    {
+      "name": "Native interactions",
+      "possible": 4,
+      "earned": 0
+    },
+    {
+      "name": "Mission completion",
+      "possible": 4,
+      "earned": 0
+    },
+    {
+      "name": "Runtime QA",
+      "possible": 3,
+      "earned": 0
+    }
+  ],
+  "milestones": [
+    {
+      "id": "SRC-01",
+      "workstream": "Source provenance",
+      "points": 3,
+      "title": "Verified source executable identity and extracted-record SHA",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "SRC-02",
+      "workstream": "Source provenance",
+      "points": 2,
+      "title": "Archive original raw executable and native graphics containers",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "GEO-01",
+      "workstream": "Original map geometry",
+      "points": 3,
+      "title": "Extract initial original geometry for 23 browser map assets",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "GEO-02",
+      "workstream": "Original map geometry",
+      "points": 6,
+      "title": "Recover missing original draw batches on every stage",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "GEO-03",
+      "workstream": "Original map geometry",
+      "points": 6,
+      "title": "Validate full authored floors, walls and rooms on every stage",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "TEX-01",
+      "workstream": "Original textures",
+      "points": 2,
+      "title": "Decode source textures and attach to recovered material batches",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "TEX-02",
+      "workstream": "Original textures",
+      "points": 5,
+      "title": "Verify source UV, transparency and materials across every source mesh",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "COL-01",
+      "workstream": "STAN collision",
+      "points": 5,
+      "title": "Decode all 28 original collision blocks and 36,699 native tiles",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "COL-02",
+      "workstream": "STAN collision",
+      "points": 4,
+      "title": "Use native collision authoritatively on all playable stages",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "COL-03",
+      "workstream": "STAN collision",
+      "points": 3,
+      "title": "Verify original stairs, ramps, gravity, ledges and multi-floor transitions",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "REG-01",
+      "workstream": "Map registration",
+      "points": 1,
+      "title": "Calibrate original Train STAN to converted graphics",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "REG-02",
+      "workstream": "Map registration",
+      "points": 6,
+      "title": "Validate source transforms independently across every other stage",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "REG-03",
+      "workstream": "Map registration",
+      "points": 3,
+      "title": "Explain and recover missing original visual geometry without invented floors",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "OBJ-01",
+      "workstream": "Original object setup",
+      "points": 2,
+      "title": "Recover strict partial original object/guard/tag inventory",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "OBJ-02",
+      "workstream": "Original object setup",
+      "points": 6,
+      "title": "Decode all original setup property types and record lengths",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "OBJ-03",
+      "workstream": "Original object setup",
+      "points": 4,
+      "title": "Connect mission objects to source model, tag, pad and interactive states",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "RIG-01",
+      "workstream": "Characters and animation",
+      "points": 1,
+      "title": "Recover first original source-textured character and guard renderers",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "RIG-02",
+      "workstream": "Characters and animation",
+      "points": 4,
+      "title": "Restore original skeleton, skin weights and authored character bindings",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "RIG-03",
+      "workstream": "Characters and animation",
+      "points": 3,
+      "title": "Run native walk, shoot, hit, death and movement keyframes",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "AI-01",
+      "workstream": "Original AI",
+      "points": 1,
+      "title": "Identify original native AI opcode names",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "AI-02",
+      "workstream": "Original AI",
+      "points": 1,
+      "title": "Implement partial original-pad guards and source command interpreter",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "AI-03",
+      "workstream": "Original AI",
+      "points": 1,
+      "title": "Audit original global-script branch targets, repeated labels and termination",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "AI-04",
+      "workstream": "Original AI",
+      "points": 1,
+      "title": "Stop native goto_next and list transitions when the source target is ambiguous",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "AI-05",
+      "workstream": "Original AI",
+      "points": 2,
+      "title": "Execute complete native background/global AI scripts",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "AI-06",
+      "workstream": "Original AI",
+      "points": 4,
+      "title": "Restore full original guard pathing, pursuit, visibility, combat and reactions",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "MIS-01",
+      "workstream": "Mission objectives",
+      "points": 1,
+      "title": "Decode source objective groups and difficulty conditions",
+      "engineering_complete": true,
+      "user_accepted": false,
+      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+    },
+    {
+      "id": "MIS-02",
+      "workstream": "Mission objectives",
+      "points": 6,
+      "title": "Connect all original objective conditions to source objects and authentic events",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "MIS-03",
+      "workstream": "Mission objectives",
+      "points": 3,
+      "title": "Verify all objective conditions at all three mission difficulties",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "INT-01",
+      "workstream": "Native interactions",
+      "points": 2,
+      "title": "Restore native doors, alarms, access controls and props",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "INT-02",
+      "workstream": "Native interactions",
+      "points": 2,
+      "title": "Restore source vehicle, inventory, pickups and scripted actor interactions",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "END-01",
+      "workstream": "Mission completion",
+      "points": 2,
+      "title": "Recover and implement native exfil, win/fail and transitions",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "END-02",
+      "workstream": "Mission completion",
+      "points": 2,
+      "title": "Finish entire original campaign as linked playable source missions",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "QA-01",
+      "workstream": "Runtime QA",
+      "points": 2,
+      "title": "Test and approve every original stage in real ChromeOS/WebGL",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    },
+    {
+      "id": "QA-02",
+      "workstream": "Runtime QA",
+      "points": 1,
+      "title": "Validate Chromebook memory/AI/performance and restarts under load",
+      "engineering_complete": false,
+      "user_accepted": false,
+      "status": "OPEN"
+    }
+  ],
+  "release_history": [
+    {
+      "release": "v4.7",
+      "points": 20,
+      "description": "retrospective starting score from verified existing deliverables"
+    },
+    {
+      "release": "v4.8 step 1",
+      "points": 21,
+      "milestone": "AI-03"
+    },
+    {
+      "release": "v4.8 step 2",
+      "points": 22,
+      "milestone": "AI-04"
+    }
+  ]
+}
