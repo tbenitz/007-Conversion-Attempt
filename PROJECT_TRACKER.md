@@ -1,3 +1,11 @@
+## 2026-11-13 — v5.3 game transition (user acceptance pending)
+
+- [ ] **REG-02.1 / COL-02.1** — Register Dam against original geometry and use original source collision and insertion.
+- [ ] **AI-06.3** — Restore optional, labeled original-pad movement for blocked guards. No original patrol credit.
+- [ ] **UI-01** — Recreate original single-player mission setup and Q Watch flow. Browser adaptation.
+
+27/100 engineering and 0/21 fully verified missions. [v5.3 notes](research/V53_MISSION_FILES_DAM_AND_GUARD_MOVEMENT.md)
+
 ## 2026-11-13 — v5.2 Train source runtime (user acceptance pending)
 
 - [ ] **AI-05.10** — Fix variable-length debug opcode framing and reject invalid apparent list ends.

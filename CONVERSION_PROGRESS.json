@@ -1,10 +1,10 @@
 {
-  "schema": "goldeneye-permanent-100-point-conversion-ledger-v52",
+  "schema": "goldeneye-permanent-100-point-conversion-ledger-v53",
   "date": "2026-11-13",
-  "scoring_policy": "These fixed, enumerated credits are an ENGINEERING progress estimate, not playable campaign percent. Award a credit only after implementing the named deliverable and retaining its source/static evidence. Distinct user-approval checklist remains unchecked unless the user approves it. No milestone gets deleted, including completed items. New findings append as children under the same milestone IDs without silently changing the denominator. Regression changes credit status with a dated reason and preserves history. v5.1 update: allow strictly evidenced PARTIAL credit inside the existing fixed weight, without closing parent or user approval. Current 22 fully completed milestone points + 1 partial AI-06 point = 23. Untested browser play cannot earn QA credit. v5.2 adds 1 partial AI-05 point for running original Train background bytecode and 1 partial MIS-02 point for connecting escape-room and brake-linked guard events. Both parents remain open.",
+  "scoring_policy": "These fixed, enumerated credits are an ENGINEERING progress estimate, not playable campaign percent. Award a credit only after implementing the named deliverable and retaining its source/static evidence. Distinct user-approval checklist remains unchecked unless the user approves it. No milestone gets deleted, including completed items. New findings append as children under the same milestone IDs without silently changing the denominator. Regression changes credit status with a dated reason and preserves history. v5.1 update: allow strictly evidenced PARTIAL credit inside the existing fixed weight, without closing parent or user approval. Current 22 fully completed milestone points + 1 partial AI-06 point = 23. Untested browser play cannot earn QA credit. v5.2 adds 1 partial AI-05 point for running original Train background bytecode and 1 partial MIS-02 point for connecting escape-room and brake-linked guard events. Both parents remain open. v5.3 awards 1 partial REG-02 point for measured Dam registration and 1 partial COL-02 point for making its source floor authoritative. No native AI or mission-completion points for reconstructed movement or UI.",
   "total_points": 100,
-  "earned_points": 25,
-  "baseline_previous_release_points": 23,
+  "earned_points": 27,
+  "baseline_previous_release_points": 25,
   "delta_this_release_points": 2,
   "fully_playable_missions_verified": 0,
   "source_setup_stages": 21,
@@ -30,12 +30,12 @@
     {
       "name": "STAN collision",
       "points_total": 12,
-      "points_earned": 5
+      "points_earned": 6
     },
     {
       "name": "Map registration",
       "points_total": 10,
-      "points_earned": 1
+      "points_earned": 2
     },
     {
       "name": "Original object setup",
@@ -161,8 +161,10 @@
       "title": "Use source collision authoritatively on every playable stage",
       "engineering_complete": false,
       "user_accepted": false,
-      "state": "OPEN",
-      "evidence_or_blocker": "Only Train source floor verified for runtime placement"
+      "state": "PARTIAL_PROGRESS_1_OF_4_REMAINS_OPEN",
+      "evidence_or_blocker": "Only Train source floor verified for runtime placement",
+      "partial_credit_points": 1,
+      "partial_credit_evidence": "Dam uses 2,755 original STAN tiles for walking and falling; original source insertion and guard grounding share the transform. 73 source-floor visual fragments."
     },
     {
       "id": "COL-03",
@@ -191,8 +193,10 @@
       "title": "Validate source transforms independently for all other stages",
       "engineering_complete": false,
       "user_accepted": false,
-      "state": "OPEN",
-      "evidence_or_blocker": "V46 registration audit finds severe gaps"
+      "state": "PARTIAL_PROGRESS_1_OF_6_REMAINS_OPEN",
+      "evidence_or_blocker": "V46 registration audit finds severe gaps",
+      "partial_credit_points": 1,
+      "partial_credit_evidence": "Dam source scale 0.01 with measured transform. 2,115/2,197 unique native vertices within 0.18 scene units. Train unchanged."
     },
     {
       "id": "REG-03",
@@ -516,9 +520,15 @@
       "total_points": 25,
       "milestone": "MIS-02.2",
       "note": "Train escape-room flag and source brake-to-guard checks now consume real stage events. No mission certified."
+    },
+    {
+      "release": "v5.3",
+      "total_points": 27,
+      "milestone": "REG-02.1/COL-02.1",
+      "note": "Dam original floor and insertion registered. Reconstructed guard movement and recreated single-player shell are unscored."
     }
   ],
-  "release": "v5.2",
+  "release": "v5.3",
   "native_source_objective_conditions": 136,
   "native_source_guard_records": 637,
   "native_source_guard_lists_uniquely_resolvable": 308,
@@ -652,6 +662,38 @@
       "title": "Run original Train exit approach, delay and death-abort conditions without false victory",
       "state": "PARTIAL_RUNTIME_NO_MISSION_COMPLETION_CREDIT",
       "source_evidence": "Source pad 203 and 180 ticks verified. Natalya/finale/exit_level are not executed.",
+      "user_accepted": false
+    },
+    {
+      "id": "REG-02.1",
+      "parent": "REG-02",
+      "title": "Register Dam\u2019s original STAN and source setup to the current rendered map",
+      "state": "PARTIAL_ENGINEERING_1_OF_6",
+      "source_evidence": "V53_MAP_REGISTRATION.json verifies 2,115/2,197 Dam source vertices.",
+      "user_accepted": false
+    },
+    {
+      "id": "COL-02.1",
+      "parent": "COL-02",
+      "title": "Use original Dam floors for player and guards, with controlled ledge falls",
+      "state": "PARTIAL_ENGINEERING_1_OF_4",
+      "source_evidence": "Original pad 33 and 2,755 STAN tiles. 73 neutral-material fragments from original geometry.",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-06.3",
+      "parent": "AI-06",
+      "title": "Restore opt-out movement when a recovered guard script cannot execute",
+      "state": "RECONSTRUCTED_ROUTE_TESTED_NOT_NATIVE_PATROL",
+      "source_evidence": "Grounded original pads, wall checks, working native script priority; no additional AI credit.",
+      "user_accepted": false
+    },
+    {
+      "id": "UI-01",
+      "parent": "UI",
+      "title": "Recreate single-player file, difficulty, briefing, deploy and Q Watch flow",
+      "state": "DOM_TESTED_USER_REVIEW_PENDING",
+      "source_evidence": "Browser adaptation of original menu flow; new art, no progression or multiplayer. Unscored.",
       "user_accepted": false
     }
   ],

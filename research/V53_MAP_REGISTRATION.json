@@ -1,0 +1,494 @@
+{
+  "source_executable_sha256": "048c9a725e0163de3f1631651f7e250baaa01747d76c3e32cd62501cafefacd9",
+  "close_radius": 0.18,
+  "maps": [
+    {
+      "id": "surface",
+      "stage": "Surface 1",
+      "verified_transform": false,
+      "missing_draw_batches": 128,
+      "texture_descriptor_gap": 3
+    },
+    {
+      "id": "archives",
+      "stage": "Archives",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "facility",
+      "stage": "Facility",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "cavern",
+      "stage": "Caverns",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "multitemple",
+      "stage": "Temple",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "depot",
+      "stage": "Depot",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 3
+    },
+    {
+      "id": "jungle",
+      "stage": "Jungle",
+      "verified_transform": false,
+      "missing_draw_batches": 2,
+      "texture_descriptor_gap": 5
+    },
+    {
+      "id": "train",
+      "stage": "Train",
+      "verified_transform": true,
+      "missing_draw_batches": 11,
+      "texture_descriptor_gap": 3
+    },
+    {
+      "id": "frigate",
+      "stage": "Frigate",
+      "verified_transform": false,
+      "missing_draw_batches": 2,
+      "texture_descriptor_gap": 3
+    },
+    {
+      "id": "caves",
+      "stage": "Caves",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "control",
+      "stage": "Control",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 4
+    },
+    {
+      "id": "library",
+      "stage": "Library",
+      "verified_transform": false,
+      "missing_draw_batches": 52,
+      "texture_descriptor_gap": 9
+    },
+    {
+      "id": "cradle",
+      "stage": "Cradle",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "silo",
+      "stage": "Silo",
+      "verified_transform": false,
+      "missing_draw_batches": 6,
+      "texture_descriptor_gap": 13
+    },
+    {
+      "id": "runway",
+      "stage": "Runway",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 2
+    },
+    {
+      "id": "endofgamejungle",
+      "stage": null,
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 1
+    },
+    {
+      "id": "temple",
+      "stage": "Egyptian",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 0
+    },
+    {
+      "id": "bunker2",
+      "stage": "Bunker 2",
+      "verified_transform": false,
+      "missing_draw_batches": 13,
+      "texture_descriptor_gap": 6
+    },
+    {
+      "id": "statuepark",
+      "stage": "Statue",
+      "verified_transform": false,
+      "missing_draw_batches": 204,
+      "texture_descriptor_gap": 58
+    },
+    {
+      "id": "streets",
+      "stage": "Streets",
+      "verified_transform": false,
+      "missing_draw_batches": 0,
+      "texture_descriptor_gap": 44
+    },
+    {
+      "id": "dam",
+      "stage": "Dam",
+      "verified_transform": true,
+      "missing_draw_batches": 162,
+      "texture_descriptor_gap": 27
+    },
+    {
+      "id": "complex",
+      "stage": "Complex",
+      "verified_transform": false,
+      "missing_draw_batches": 29,
+      "texture_descriptor_gap": 16
+    },
+    {
+      "id": "bunker",
+      "stage": "Bunker 1",
+      "verified_transform": false,
+      "missing_draw_batches": 13,
+      "texture_descriptor_gap": 9
+    }
+  ],
+  "verified": {
+    "dam": {
+      "stage": "Dam",
+      "scale": 0.01,
+      "offset": [
+        0.0354,
+        -7.4819,
+        0.017
+      ],
+      "tiles": 2755,
+      "tested_vertices": 2197,
+      "close_vertices": 2115,
+      "close_fraction": 0.96268,
+      "median_residual": 0.00471,
+      "p90_residual": 0.0165,
+      "visual_floor_fragments": [
+        [
+          1087,
+          1
+        ],
+        [
+          1088,
+          1
+        ],
+        [
+          1735,
+          1
+        ],
+        [
+          1736,
+          1
+        ],
+        [
+          1737,
+          1
+        ],
+        [
+          1738,
+          1
+        ],
+        [
+          1739,
+          1
+        ],
+        [
+          1740,
+          1
+        ],
+        [
+          1741,
+          1
+        ],
+        [
+          1742,
+          1
+        ],
+        [
+          1743,
+          1
+        ],
+        [
+          1744,
+          1
+        ],
+        [
+          1745,
+          1
+        ],
+        [
+          1746,
+          1
+        ],
+        [
+          1747,
+          1
+        ],
+        [
+          1748,
+          1
+        ],
+        [
+          1749,
+          1
+        ],
+        [
+          1750,
+          1
+        ],
+        [
+          1751,
+          1
+        ],
+        [
+          1752,
+          1
+        ],
+        [
+          1753,
+          1
+        ],
+        [
+          1754,
+          1
+        ],
+        [
+          1755,
+          1
+        ],
+        [
+          1756,
+          1
+        ],
+        [
+          1757,
+          1
+        ],
+        [
+          1759,
+          1
+        ],
+        [
+          1760,
+          1
+        ],
+        [
+          1761,
+          1
+        ],
+        [
+          1765,
+          1
+        ],
+        [
+          1766,
+          1
+        ],
+        [
+          2516,
+          1
+        ],
+        [
+          2517,
+          1
+        ],
+        [
+          2519,
+          1
+        ],
+        [
+          2521,
+          1
+        ],
+        [
+          2522,
+          1
+        ],
+        [
+          2523,
+          1
+        ],
+        [
+          2524,
+          1
+        ],
+        [
+          2525,
+          1
+        ],
+        [
+          2526,
+          1
+        ],
+        [
+          2527,
+          1
+        ],
+        [
+          2529,
+          1
+        ],
+        [
+          2530,
+          1
+        ],
+        [
+          2531,
+          1
+        ],
+        [
+          2533,
+          1
+        ],
+        [
+          2534,
+          1
+        ],
+        [
+          2542,
+          1
+        ],
+        [
+          2543,
+          1
+        ],
+        [
+          2544,
+          1
+        ],
+        [
+          2545,
+          1
+        ],
+        [
+          2546,
+          1
+        ],
+        [
+          2549,
+          1
+        ],
+        [
+          2551,
+          1
+        ],
+        [
+          2552,
+          1
+        ],
+        [
+          2553,
+          1
+        ],
+        [
+          2554,
+          1
+        ],
+        [
+          2555,
+          1
+        ],
+        [
+          2557,
+          1
+        ],
+        [
+          2558,
+          1
+        ],
+        [
+          2560,
+          1
+        ],
+        [
+          2561,
+          1
+        ],
+        [
+          2566,
+          1
+        ],
+        [
+          2567,
+          1
+        ],
+        [
+          2568,
+          1
+        ],
+        [
+          2570,
+          1
+        ],
+        [
+          2573,
+          2
+        ],
+        [
+          2574,
+          1
+        ],
+        [
+          2575,
+          1
+        ],
+        [
+          2576,
+          1
+        ],
+        [
+          2577,
+          1
+        ],
+        [
+          2579,
+          1
+        ],
+        [
+          2580,
+          1
+        ],
+        [
+          2584,
+          1
+        ],
+        [
+          2585,
+          1
+        ]
+      ]
+    },
+    "train": {
+      "stage": "Train",
+      "scale": 0.0512,
+      "offset": [
+        127.58333984375,
+        -10.94624267578125,
+        0.358448486328125
+      ],
+      "tiles": 694,
+      "tested_vertices": 653,
+      "close_vertices": 627,
+      "close_fraction": 0.96018,
+      "median_residual": 0.02591,
+      "p90_residual": 0.0512,
+      "visual_floor_fragments": []
+    }
+  }
+}

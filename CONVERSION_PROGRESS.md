@@ -1,8 +1,8 @@
 # Permanent game-conversion progress ledger
 
-**Estimated engineering conversion progress: 25 / 100 points (25%) · v5.1: 23 / 100 · +2 evidence-backed partial points this pass.**
+**Estimated engineering conversion progress: 27 / 100 points (27%) · v5.2: 25 / 100 · +2 evidence-backed partial points this pass.**
 
-**Fully verified playable original missions: 0 / 21 (0%).** The engineering score includes 22 points from completed milestones plus one partial point each within AI-06, AI-05 and MIS-02. These parent milestones remain open, and no user acceptance is assumed.
+**Fully verified playable original missions: 0 / 21 (0%).** The engineering score includes 22 points from completed milestones plus one partial point each within AI-06, AI-05, MIS-02, REG-02 and COL-02. These parent milestones remain open, and no user acceptance is assumed.
 
 The master progress items below **never disappear**. Implemented items remain visible and are NOT user-approved merely because code or static tests pass. New discoveries get a new child item beneath a milestone rather than silently changing the fixed 100-point denominator. If an existing feature regresses, retain the item, mark it regressed and reduce its earned points until corrected.
 
@@ -11,8 +11,8 @@ The master progress items below **never disappear**. Implemented items remain vi
 | Source provenance | 3 / 5 | 60.0% |
 | Original map geometry | 3 / 15 | 20.0% |
 | Original textures | 2 / 7 | 28.6% |
-| STAN collision | 5 / 12 | 41.7% |
-| Map registration | 1 / 10 | 10.0% |
+| STAN collision | 6 / 12 (5 complete + 1 partial) | 50.0% |
+| Map registration | 2 / 10 (1 complete + 1 partial) | 20.0% |
 | Original object setup | 2 / 12 | 16.7% |
 | Characters and animation | 1 / 8 | 12.5% |
 | Original AI | 6 / 10 (4 complete + 2 partial) | 60.0% |
@@ -20,6 +20,15 @@ The master progress items below **never disappear**. Implemented items remain vi
 | Native interactions | 0 / 4 | 0.0% |
 | Mission completion | 0 / 4 | 0.0% |
 | Runtime QA | 0 / 3 | 0.0% |
+
+## v5.3 — Mission Files, Dam registration and guard movement
+
+- [ ] **REG-02.1** — Measured Dam’s original collision transform against its actual rendered mesh. +1 partial point.
+- [ ] **COL-02.1** — Use Dam’s original insertion and source collision for walking, gravity and guard grounding. +1 partial point.
+- [ ] **AI-06.3** — Restore labeled, opt-out original-pad movement when a native guard script stalls. Native scripts still have priority. Unscored.
+- [ ] **UI-01** — Recreated file, mission, difficulty, briefing, deploy and Q Watch flow. Unscored.
+
+23 maps audited. Dam and Train use registered original collision. Full map fidelity and 0/21 fully verified missions remain open.
 
 ## v5.2 — Train source runtime and bytecode framing
 
@@ -55,10 +64,10 @@ Evidence: `V52_TRAIN_RUNTIME_NOTES.md`, `V52_AI_FRAMING_AUDIT.json` and `test_v5
 - [ ] **TEX-01 · 2 pts · IMPLEMENTED (user review pending)** — Decode source textures and attach to recovered material batches. *Evidence / blocker:* Source texture and GLB converter audits
 - [ ] **TEX-02 · 5 pts · OPEN** — Verify original UV, textures, transparency and materials on every mesh. *Evidence / blocker:* UV/atlas assignment not fully decoded
 - [ ] **COL-01 · 5 pts · IMPLEMENTED (user review pending)** — Decode 28/28 source STAN collision blocks and all 36,699 tiles. *Evidence / blocker:* V41 collision audit and v47 static test
-- [ ] **COL-02 · 4 pts · OPEN** — Use source collision authoritatively on every playable stage. *Evidence / blocker:* Only Train source floor verified for runtime placement
+- [ ] **COL-02 · 4 pts · OPEN (1/4 partial)** — Use source collision authoritatively on every playable stage. *Evidence / blocker:* Dam and Train source floor registered for runtime; other maps open
 - [ ] **COL-03 · 3 pts · OPEN** — Verify source stairs, edges, ramps, gravity and multi-floor transitions. *Evidence / blocker:* Dam elevations and missing map floors
 - [ ] **REG-01 · 1 pts · IMPLEMENTED (user review pending)** — Calibrate source collision to Train converted graphics. *Evidence / blocker:* V41 source Train transform
-- [ ] **REG-02 · 6 pts · OPEN** — Validate source transforms independently for all other stages. *Evidence / blocker:* V46 registration audit finds severe gaps
+- [ ] **REG-02 · 6 pts · OPEN (1/6 partial)** — Validate source transforms independently for all other stages. *Evidence / blocker:* V46 registration audit finds severe gaps
 - [ ] **REG-03 · 3 pts · OPEN** — Explain/fix missing source visual geometry without synthetic workarounds. *Evidence / blocker:* Missing original draw groups in several stages
 - [ ] **OBJ-01 · 2 pts · IMPLEMENTED (user review pending)** — Recover strict partial object/guard/tag placement inventory. *Evidence / blocker:* V46 audited partial object records
 - [ ] **OBJ-02 · 6 pts · OPEN** — Decode every original setup property record type and length. *Evidence / blocker:* Original parser stops at unsupported property types

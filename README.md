@@ -1,5 +1,13 @@
 # 2026-11-12 — Public viewer: 10× generated outdoors + real glTF rig audit (work in progress)
 
+### v5.3 — Mission Files, Dam source collision and guard movement
+
+The private offline build now opens with the single-player file → mission → difficulty → briefing sequence and a working Q Watch pause menu. Dam uses its original insertion and collision registration, with 73 neutral-material source-floor fragments. Guards with blocked scripts can use collision-checked routes through original pad coordinates. Those routes are reconstructed and do not replace working native scripts.
+
+**27/100 engineering points. 0/21 full missions verified.** The audit covers all 23 packaged map assets. Only Dam and Train have registered authoritative original floors. The public viewer and asset policy are unchanged.
+
+[Progress ledger](CONVERSION_PROGRESS.md) · [Release notes](research/V53_MISSION_FILES_DAM_AND_GUARD_MOVEMENT.md) · [Map audit](research/V53_MAP_REGISTRATION.json)
+
 ### v5.2 Train mission runtime — 25% engineering score
 
 Train now runs its original escape-room check and the source trigger that sends two guards into pursuit after all six brake units are destroyed. The original exit approach and timer run, but Natalya’s rescue and the finale are not implemented. A variable-length debug opcode fix reframed 122 source AI lists and exposed 833 net instruction records.
