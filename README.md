@@ -1,5 +1,14 @@
 # 2026-11-12 — Public viewer: 10× generated outdoors + real glTF rig audit (work in progress)
 
+### v5.1 native guard-to-guard AI scripts — 23% engineering score
+
+**23/100 engineering points** = 22 points of completed milestones + **1 partial AI-06 point** for tested native actor-to-actor script dispatch. AI-06 remains OPEN; **0/21 original campaign missions independently verified fully playable**. The public GitHub Pages viewer is NOT the v5.1 private HTML game.
+
+Original XBLA stage data contains **20 explicit-character AI list handoffs**; **14** have a unique original guard and uniquely terminated stage-local destination program. The new private browser build executes such handoffs when the specific guard is instantiated and alive, preserving the caller's own script. The 32 reserved `0xF8` handoffs remain unsupported rather than guessed. Static Node VM tests pass, ChromeOS/WebGL gameplay is still pending.
+
+[Permanent score / 34 scored milestones / 13 child tasks](CONVERSION_PROGRESS.md) · [Machine-readable score](CONVERSION_PROGRESS.json) · [v5.1 original actor decoder research](research/V51_ORIGINAL_ACTOR_AI_DISPATCH.md) · [historical tracker](PROJECT_TRACKER.md).
+
+
 ### Source-native decoding progress — v4.9 (2026-11-12)
 
 **22% of fixed engineering milestones · 0/21 fully verified source campaign missions.** No additional full milestone was earned this pass; **five documented decoding substeps** and **seven persistent child requirements** were added under the existing 34 milestone IDs.
