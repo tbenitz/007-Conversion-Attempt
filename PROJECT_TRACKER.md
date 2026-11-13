@@ -1,3 +1,20 @@
+## 2026-11-12 — v4.7 original-source objective runtime and playability coverage (IMPLEMENTED FOR TEST / NOT USER APPROVED)
+
+**Do not classify the full campaign as playable.** Original source decoding is incomplete and authenticated objectives beyond the six Train brake units are unimplemented. The supplied private v4.7 ZIP retains the full HTML, source assets, original decoder JSON and previous research. This public repository tracks progress and research without redistributing game asset payloads.
+
+- [ ] **Original difficulty-scoped objective HUD:** Source objective groups filtered for Agent / Secret Agent / 00 Agent. Missing conditions stay unresolved; there is no fabricated mission victory. Browser verification pending.
+- [ ] **Native AI branch repairs:** Original character-ID check for actor dying/dead, actual guard hit-count condition, Bond death condition, and fail-closed unresolved label jumps. Browser AI verification pending.
+- [ ] **Original collision-backed movement:** Source guard steps ray-test against recovered rendered walls; source room conditions require authored STAN and matching converted floor. Verify patrol routes and wall collision in all maps on Chromebook.
+- [ ] **Consistent mission reset on death:** Reloads entire authored stage state (guards, objects, objective flags) rather than healing only the player. Browser verification pending.
+- [ ] **Source payload preservation / static checks:** All 20 original embedded raw data blocks unchanged from v4.6; `node --check` passes and archive CRC passes. Automated static checks do not count as user approval.
+- [ ] **Critical mission blockers:** 21 original setup stages, 55 objective condition groups, 72 destroy-object criteria, just 12 linked original tags, and only six physically recoverable in-game source target models (Train model 120). Cannot call remaining mission objectives operational.
+- [ ] **Critical map blockers:** 28 original STAN blocks and 36,699 authentic tiles decoded; Dam, Facility, Streets, Statue, Runway have nontrivial disagreement with rendered geometry; do not fabricate missing floors or guessed universal coordinate transforms.
+- [ ] **Playability blocker:** Full original global AI, NPC/object and door interaction, source-model lookup, exfil/victory and missing render batches still unported. Real WebGL/ChromeOS acceptance required; testing environment blocked Chromium navigation.
+
+Details: [v4.7 original mission and layout audit](research/V47_NATIVE_MISSION_AND_MAP_AUDIT.md). Private user-held archive: `GoldenEye_World_Explorer_v47_NATIVE_AI_OBJECTIVES_SOURCE_AUDIT.zip`. Preserve all historical checklist items and prior explicit user approvals below.
+
+---
+
 ## 2026-11-12 — v4.4 original mission insertion and Train object-trigger gameplay (IMPLEMENTED FOR TEST; USER APPROVAL PENDING)
 
 **This is a partial native mission implementation, not a complete restored campaign. All new acceptance boxes remain unchecked; do not change any existing acceptance state.**
