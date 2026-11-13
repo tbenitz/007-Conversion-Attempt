@@ -1,5 +1,19 @@
 # GoldenEye 007 — Permanent conversion progress
 
+## v5.1 — verified original-character AI transfers (+1 evidence-backed partial point)
+
+**Engineering milestone score 23/100, up from 22/100.** The 100-point weights and all 34 original milestone IDs remain intact. **22 full milestone points + 1 partial point within AI-06 (4-point milestone)**. AI-06 remains OPEN; not one original mission is accepted as fully playable (0/21).
+
+- [ ] **AI-05.9 · CODE IMPLEMENTED, NODE TESTS PASS, BROWSER ACCEPTANCE OPEN:** The original `jump_to_ai_list` actor selector now changes the *identified* source guard's program when that guard is unique/alive and the target source program is unique/fully terminated. Original caller continues its own instruction stream. Failed resolution halts instead of corrupting the wrong guard.
+- [ ] **AI-06.2 · PARTIAL 1/4 POINT, PARENT OPEN:** Of 480 original handoffs, 428 are self-selector 0xFD, 32 use reserved selector 0xF8, and 20 name explicit characters. **14** explicit-character handoffs have one original source guard and one unique terminated target program; **6** do not. Runtime also requires the target guard to actually be spawned. Pseudo-character 0xF8 and full native AI remain unresolved.
+- [ ] **Source-backed QA pending:** Node VM tests cover success, caller continuation, absent/duplicate/dead recipients, and 0xF8. Live ChromeOS/WebGL guard behavior is untested; 0/21 complete missions verified.
+- [ ] **Permanent rule unchanged:** no prior requirement, recorded blocker or existing approval removed. Score changed by applying documented partial credit within an existing milestone—not claiming complete native guard AI.
+
+Private release: `GoldenEye_World_Explorer_v51_NATIVE_CHARACTER_AI_HANDOFFS_PROGRESS.zip`. [Research and evidence](research/V51_ORIGINAL_ACTOR_AI_DISPATCH.md).
+
+---
+
+
 ## v5.0 — original AI return-list execution and actor-selective targeting
 
 **Engineering milestones: 22/100 (unchanged). Full original missions browser-verified playable: 0/21.** This pass advances parent AI-05 but does not complete the native AI engine. The original 34 scored milestones and 7 prior child tasks remain in the checklist.
