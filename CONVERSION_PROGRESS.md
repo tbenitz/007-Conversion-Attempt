@@ -1,5 +1,21 @@
 # GoldenEye 007 — Permanent conversion progress
 
+## v5.0 — original AI return-list execution and actor-selective targeting
+
+**Engineering milestones: 22/100 (unchanged). Full original missions browser-verified playable: 0/21.** This pass advances parent AI-05 but does not complete the native AI engine. The original 34 scored milestones and 7 prior child tasks remain in the checklist.
+
+- [ ] **AI-05.5 · IMPLEMENTED FOR TEST:** Original `set_return_ai_list` (u16 source ID) is stored per actor, and `jump_to_return_ai_list` switches only to uniquely found terminated source-stage script. Node VM test passing; user acceptance pending.
+- [ ] **AI-05.6 · IMPLEMENTED FOR TEST:** `jump_to_ai_list` interprets native source actor selector instead of ignoring it. The 52 non-`0xFD` selectors stop rather than changing the wrong guard's list. Node VM test passing; user acceptance pending.
+- [ ] **AI-05.7 · DECODED AUDIT COMPLETE / GAMEPLAY STILL OPEN:** Original 21-stage scripts contain 480 list transfers (428 `0xFD`, 52 other), 87 return-list setters and 37 return jumps. 38 setter IDs resolve uniquely to stage-local terminated original programs. All original source byte offsets are in the private JSON.
+- [ ] **AI-05.8 · OPEN:** Reconstruct full original character registry, cross-character message semantics, initial return program values and shared/global AI program lookup.
+
+Four dated steps appended; no previous requirements removed, no earned points or user acceptance changed. v5.0 standalone HTML and full assets/research archive distributed separately: `GoldenEye_World_Explorer_v50_NATIVE_AI_RETURN_AND_ACTOR_DECODING.zip`.
+
+[Native source research](research/V50_ORIGINAL_AI_RETURN_AND_ACTOR_SCOPE.md).
+
+---
+
+
 ## v4.9 — actual original AI VM and object-dependency substeps
 
 **22/100 engineering milestone credits (22%) · change from v4.8: +0 completed full milestones. Original missions fully verified playable: 0/21.** The following seven children advance incomplete parents but do not earn full milestone credit. All acceptance boxes remain unchecked, and the 34 original requirement IDs below remain intact.
