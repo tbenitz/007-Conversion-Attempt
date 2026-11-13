@@ -1,3 +1,17 @@
+## 2026-11-12 — v5.1 native cross-character AI behavior, tested partial score (NOT USER APPROVED)
+
+**Source-engineering conversion 23/100**, up from 22/100: 22 points from previously completed full milestones + 1 evidence-backed partial point of the still-OPEN, 4-point AI-06 milestone. **Original source missions fully ChromeOS verified: 0/21.** Neither original global AI nor final campaign is done.
+
+- [ ] **AI-05.9 · implemented; static tests pass; awaiting user browser acceptance.** The source `jump_to_ai_list` actor selector is no longer always blocked or incorrectly treated as self. A source-authenticated explicit character ID selects one uniquely instantiated living original guard and one fully decoded terminated original stage-local AI program; program state is updated on THAT original character. The source caller **continues its own original script** after transferring.
+- [ ] **AI-06.2 · 1/4 AI-06 partial credit; overall AI-06 remains open.** Of 480 source handoffs, 428 select 0xFD/self, 32 select reserved 0xF8 (still blocked), and 20 select an explicit source guard ID. 14/20 original explicit actor links resolve uniquely by source guard record and stage script; actual runtime transfer still requires that character to spawn.
+- [ ] **Regression behavior maintained.** Named actor absent, duplicate, dead, missing destination, or reserved 0xF8: interpreter does not substitute another guard or invent cross-character actor state. Node VM tests pass.
+- [ ] **Still blocked:** native `0xF8` registry, uninstantiated guard IDs, complete source AI and original mission scripts, 72 objective destroy conditions with only six original-model connected targets, missing original draw batches and stage exfil.
+- [ ] **Full source archive and QA:** Private v5.1 ZIP retains original asset/data payloads and earlier decoder and research files; original embedded script sections byte-identical to v5.0. Node module syntax and ZIP integrity pass; ChromeOS/WebGL playthrough and native mission victory not demonstrated.
+
+Evidence: [v5.1 decoded actor dispatcher](research/V51_ORIGINAL_ACTOR_AI_DISPATCH.md), [permanent 100-point roadmap](CONVERSION_PROGRESS.md). User-held private archive `GoldenEye_World_Explorer_v51_NATIVE_CHARACTER_AI_HANDOFFS_PROGRESS.zip`. **All preexisting items and explicit user approvals preserved below.**
+
+---
+
 ## 2026-11-12 — v4.9 source-native AI VM and mission dependency decoding (IMPLEMENTED FOR STATIC TEST, NOT USER-APPROVED)
 
 **Score 22/100 engineering milestones, unchanged from v4.8. Fully verified original campaign missions: 0/21.** There are **7 permanent new child requirements** under the existing 34 fixed milestones, with no deletion or change to previously recorded approvals. Full versioned private ZIP keeps original embedded game assets and all previous decoding notes.
