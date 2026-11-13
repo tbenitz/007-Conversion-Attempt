@@ -1,8 +1,8 @@
 {
-  "schema": "goldeneye-permanent-100-point-conversion-ledger-v50",
+  "schema": "goldeneye-permanent-100-point-conversion-ledger-v51",
   "date": "2026-11-12",
-  "scoring_note": "Engineering milestone estimate, not percentage of playable missions. Do not delete milestones or auto-mark user acceptance.",
-  "current_points": 22,
+  "scoring_note": "Engineering milestone estimate, not percentage of playable missions. Do not delete milestones or auto-mark user acceptance. From v5.1 onward: award evidence-backed partial credit strictly within existing milestone weights without closing a parent or auto-approving. Current score 22 completed points + 1 partial AI-06 point; 100-point denominator unchanged.",
+  "current_points": 23,
   "total_points": 100,
   "previous_points": 22,
   "fully_verified_playable_missions": 0,
@@ -46,7 +46,7 @@
     {
       "name": "Original AI",
       "possible": 10,
-      "earned": 4
+      "earned": 5
     },
     {
       "name": "Mission objectives",
@@ -293,7 +293,9 @@
       "title": "Restore full original guard pathing, pursuit, visibility, combat and reactions",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "status": "PARTIALLY_IMPLEMENTED_1_OF_4_POINTS_REMAINING_OPEN",
+      "partial_credit_points": 1,
+      "partial_credit_evidence": "v5.1 source-authenticated actor-to-actor native script dispatch: 20 explicit actor handoffs, 14 unique source guard and program bindings; Node VM cross-character tests; no ChromeOS QA"
     },
     {
       "id": "MIS-01",
@@ -446,10 +448,22 @@
       "points": 22,
       "milestone": "AI-05.8",
       "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+    },
+    {
+      "release": "v5.1 step 1",
+      "points": 22,
+      "milestone": "AI-05.9",
+      "description": "Decoded 20 explicit native actor handoffs; 14 source unique guard/script pairs; 32 reserved pseudo-character transfers unresolved."
+    },
+    {
+      "release": "v5.1 step 2",
+      "points": 23,
+      "milestone": "AI-06.2",
+      "description": "Working source-actor AI dispatch and caller continuation, duplicate/missing/dead actor guards, Node VM regression tests; 1/4 partial AI-06 point while milestone still open."
     }
   ],
   "verified_original_missions": 0,
-  "latest_release": "v5.0",
+  "latest_release": "v5.1",
   "latest_evidence": {
     "setup_stages": 21,
     "objective_groups": 55,
@@ -467,7 +481,11 @@
     "source_other_actor_handoffs": 52,
     "source_return_list_setters": 87,
     "stage_local_resolvable_return_setters": 38,
-    "source_return_jumps": 37
+    "source_return_jumps": 37,
+    "explicit_character_ai_handoffs": 20,
+    "unique_source_guard_script_links": 14,
+    "unresolved_explicit_guard_handoffs": 6,
+    "reserved_pseudo_actor_handoffs_f8": 32
   },
   "child_requirements": [
     {
@@ -545,6 +563,20 @@
       "parent": "AI-05",
       "title": "Recover original source character registry, shared/global AI programs and cross-character script handoffs",
       "state": "OPEN_UNPORTER_NATIVE_ENGINE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.9",
+      "parent": "AI-05",
+      "title": "Dispatch original explicit-character AI list transitions to uniquely resolved living source guards without hijacking caller program",
+      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_CHROMEBOOK_ACCEPTANCE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-06.2",
+      "parent": "AI-06",
+      "title": "Maintain source guard-specific program state and reject unknown/duplicate/dead actor selectors (1/4 AI-06 points partial)",
+      "state": "PARTIAL_CREDIT_EVIDENCE_TESTED_1_OF_4_PARENT_STILL_OPEN",
       "user_accepted": false
     }
   ]
