@@ -1,5 +1,21 @@
 # GoldenEye 007 — Permanent conversion progress
 
+## v4.9 — actual original AI VM and object-dependency substeps
+
+**22/100 engineering milestone credits (22%) · change from v4.8: +0 completed full milestones. Original missions fully verified playable: 0/21.** The following seven children advance incomplete parents but do not earn full milestone credit. All acceptance boxes remain unchecked, and the 34 original requirement IDs below remain intact.
+
+- [ ] **AI-05.1 · IMPLEMENTED FOR TEST:** Correct native `jump_to_ai_list` execution to load target-list instructions, not stale prior instructions; Node VM regression passes.
+- [ ] **AI-05.2 · IMPLEMENTED FOR TEST:** Stop a source conditional immediately when its label is missing; prevent unintended subsequent objective flag writes; regression passes.
+- [ ] **AI-05.3 · IMPLEMENTED FOR TEST:** Require exactly one fully decoded original guard AI list for initial assignment (308/637 guard records resolve, 329 remain unresolved).
+- [ ] **AI-05.4 · BLOCKED:** Recover original shared and missing AI lists (234/480 original handoffs resolve to unique terminated stage-local programs; 246 do not).
+- [ ] **AI-06.1 · OPEN:** Decode actual hearing, partial line-of-sight and witnessed-shot events. Guessed outcomes removed, authentic event system unimplemented.
+- [ ] **OBJ-02.1 · BLOCKED:** Validate unparsed native setup property types, especially original type 0x20 enter-room objective. The old raw Xbox PE is missing from the current archive. Public N64 record lengths are hypotheses, not a verified Xbox byte grammar.
+- [ ] **OBJ-03.1 · SOURCE INVENTORY COMPLETE / GAMEPLAY OPEN:** New per-stage graph records 55 objective groups / 136 original conditions, 72 destroy conditions / 12 tag links / six connected Train source target models, original code offsets and candidate AI flag writers.
+
+**New private ZIP:** `GoldenEye_World_Explorer_v49_NATIVE_AI_VM_AND_OBJECT_DEPENDENCY_DECODING.zip` contains the game, decoded assets, every earlier research file, new graph, strict decoder, tests and previous roadmap snapshots. Tests passed but the original campaign is still not fully playable. [v4.9 source audit](research/V49_SOURCE_OBJECT_AI_DEPENDENCY_AND_RUNTIME.md).
+
+---
+
 **v4.8 (November 12, 2026): 22/100 engineering milestone points (22%), up from 20/100 on the retrospective v4.7 baseline.**
 
 **Fully verified playable original missions: 0 of 21.** The engineering percentage is **NOT** the proportion of missions playable, and a static implementation does not imply user approval.
