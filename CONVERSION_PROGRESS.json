@@ -1,10 +1,10 @@
 {
-  "schema": "goldeneye-permanent-100-point-conversion-ledger-v48",
+  "schema": "goldeneye-permanent-100-point-conversion-ledger-v49",
   "date": "2026-11-12",
   "scoring_note": "Engineering milestone estimate, not percentage of playable missions. Do not delete milestones or auto-mark user acceptance.",
   "current_points": 22,
   "total_points": 100,
-  "previous_points": 20,
+  "previous_points": 22,
   "fully_verified_playable_missions": 0,
   "decoded_setup_stages": 21,
   "workstreams": [
@@ -392,6 +392,102 @@
       "release": "v4.8 step 2",
       "points": 22,
       "milestone": "AI-04"
+    },
+    {
+      "release": "v4.9 step 1",
+      "points": 22,
+      "milestone": "AI-05.1",
+      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+    },
+    {
+      "release": "v4.9 step 2",
+      "points": 22,
+      "milestone": "AI-05.2",
+      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+    },
+    {
+      "release": "v4.9 step 3",
+      "points": 22,
+      "milestone": "AI-05.3",
+      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+    },
+    {
+      "release": "v4.9 step 4",
+      "points": 22,
+      "milestone": "OBJ-03.1",
+      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+    },
+    {
+      "release": "v4.9 step 5",
+      "points": 22,
+      "milestone": "OBJ-02.1",
+      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+    }
+  ],
+  "verified_original_missions": 0,
+  "latest_release": "v4.9",
+  "latest_evidence": {
+    "setup_stages": 21,
+    "objective_groups": 55,
+    "objective_conditions": 136,
+    "destroy_conditions": 72,
+    "linked_destroy_tags": 12,
+    "renderable_destroy_targets": 6,
+    "guard_records": 637,
+    "guard_programs_resolved": 308,
+    "guard_programs_unresolved": 329,
+    "native_program_handoffs": 480,
+    "valid_stage_local_handoffs": 234
+  },
+  "child_requirements": [
+    {
+      "id": "AI-05.1",
+      "parent": "AI-05",
+      "title": "Native destination list instructions execute after jump_to_ai_list",
+      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_USER_ACCEPTANCE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.2",
+      "parent": "AI-05",
+      "title": "Failed source conditional branches halt before objective side effects",
+      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_USER_ACCEPTANCE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.3",
+      "parent": "AI-05",
+      "title": "Original guard initial AI program must be uniquely resolved and terminated",
+      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_USER_ACCEPTANCE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.4",
+      "parent": "AI-05",
+      "title": "Recover missing original shared/global AI programs",
+      "state": "BLOCKED_ORIGINAL_BINARY_MISSING",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-06.1",
+      "parent": "AI-06",
+      "title": "Decode native hearing and partial LOS and witnessed-fire event mechanics",
+      "state": "IN_PROGRESS_NO_SIMULATED_OUTCOME",
+      "user_accepted": false
+    },
+    {
+      "id": "OBJ-02.1",
+      "parent": "OBJ-02",
+      "title": "Verify original Xbox property record grammar beyond unsupported objective records",
+      "state": "BLOCKED_ORIGINAL_BINARY_MISSING",
+      "user_accepted": false
+    },
+    {
+      "id": "OBJ-03.1",
+      "parent": "OBJ-03",
+      "title": "Inventory original objective/tag/model/pad/AI-writer dependencies per stage",
+      "state": "DECODED_AUDIT_DONE_GAMEPLAY_BINDING_OPEN",
+      "user_accepted": false
     }
   ]
 }
