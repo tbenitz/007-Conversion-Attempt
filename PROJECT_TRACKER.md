@@ -1,3 +1,21 @@
+## 2026-11-12 — v4.9 source-native AI VM and mission dependency decoding (IMPLEMENTED FOR STATIC TEST, NOT USER-APPROVED)
+
+**Score 22/100 engineering milestones, unchanged from v4.8. Fully verified original campaign missions: 0/21.** There are **7 permanent new child requirements** under the existing 34 fixed milestones, with no deletion or change to previously recorded approvals. Full versioned private ZIP keeps original embedded game assets and all previous decoding notes.
+
+- [ ] **AI-05.1:** Fixed real script-interpreter bug: after original `jump_to_ai_list`, subsequent commands execute the destination AI list, not the previous list with a reset PC. Native VM test verifies objective flag source.
+- [ ] **AI-05.2:** Fixed native conditional-label halt propagation. When source goto label is unresolved, no later objective flag write is run.
+- [ ] **AI-05.3:** Original initial guard AI program is selected only when unique and fully terminated. Original records show 637 guard placements; 308 references resolve to unique terminated source lists, 329 do not.
+- [ ] **AI-05.4 (BLOCKED):** Of 480 original AI list transitions, 234 resolve to a unique terminated stage-local source list, 246 are still missing/ambiguous/truncated (some may refer to system/shared scripts). Recover full original binary/native shared lists rather than invent behavior.
+- [ ] **AI-06.1 (BLOCKED):** Previous fake hearing/partial LOS/witnessed-shot branches now stop as unsupported native event logic. Genuine source sensory events not yet reconstructed.
+- [ ] **OBJ-02.1 (BLOCKED):** Original raw 17,760,256-byte Xbox PE absent from supplied v4.8 archive. New strict parser preserves known original record offsets; N64 `0x20` enter-room length is a documented *candidate*, not used to skip unknown native Xbox bytes.
+- [ ] **OBJ-03.1 (DECODED AUDIT, GAMEPLAY OPEN):** Source dependency graph covers 21 setup stages, 55 objective groups / 136 conditions; 72 destroy requirements, 12 linked tags and six physically connected renderable Train targets. Candidate bitfield setters are source references only, not verified executable game events.
+- [ ] **Browser acceptance still required:** No source-correct all-map mission/AI playthrough completed. Static tests: Node syntax, VM list-jump/conditional-halt, source property mock structural fixture, original 20 embedded source payloads byte-identical from v4.8, 34 original IDs preserved, full ZIP integrity.
+- [ ] **Cannot mark whole campaign playable:** Native extraction, original asset draw batches, objective interactions, shared AI lists and numerous map/STAN registration issues remain.
+
+Details: [v4.9 source evidence](research/V49_SOURCE_OBJECT_AI_DEPENDENCY_AND_RUNTIME.md), [immutable progress scoreboard](CONVERSION_PROGRESS.md). Private downloadable archive: `GoldenEye_World_Explorer_v49_NATIVE_AI_VM_AND_OBJECT_DEPENDENCY_DECODING.zip`. **Preserve every earlier tracker item below.**
+
+---
+
 ## 2026-11-12 — v4.8 permanent 100-point conversion ledger and source global AI control-flow audit (NOT USER APPROVED)
 
 **Engineering milestone estimate: 22/100 points; v4.7 scored 20/100 under the same rubric (+2). Fully verified original campaign missions: 0/21.** The engineering score is not the percent of missions playable.
