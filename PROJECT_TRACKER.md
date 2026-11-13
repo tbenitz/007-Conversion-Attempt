@@ -1,3 +1,18 @@
+## 2026-11-12 — v4.4 original mission insertion and Train object-trigger gameplay (IMPLEMENTED FOR TEST; USER APPROVAL PENDING)
+
+**This is a partial native mission implementation, not a complete restored campaign. All new acceptance boxes remain unchecked; do not change any existing acceptance state.**
+
+- [ ] **Train source mission insertion:** Load the original normal mission start pad 186, native coordinates (117,45,-9), source-to-GLB and original STAN floor checked. Verify in running Chromebook game that it is the correct START rather than the end/exfil position.
+- [ ] **Other maps source insertion:** Audit 18 original stage entry pads, enable source entry only when the original floor and existing recovered rendered mesh support the position. Dam's actual source pad 33 lies outside the currently rendered graphics, so the game explicitly uses an **EXPLORER START** rather than a made-up authentic entry.
+- [ ] **First actual gameplay objective, Train A:** Decode original type 0x16 tag links 8–13 to six *source model ID 120* original Train brake-controller instances. Recover the real 62-triangle brakeunit CAFF source model and six original bound pad positions (10000, 10052, 10055, 10075, 10103, 10119); place on verified Train source STAN. Shooting them updates native destroyed-object tags; objective A completes only after all six source tags are destroyed. One-hit target damage is simplified; original UV/scale exactness pending.
+- [ ] **Original Train background event subset:** The original 0x1009 background list checks the source room of pad 98 then sets original objective bitmask 0x00100000. Browser stage trigger performs a source-STAN room comparison and sets only that exact original bit. Full AI interpreter unavailable.
+- [ ] **Real Restart Mission action:** Re-load actual stage, original spawn where supported, six Train objects, guards and objective state; verify in browser.
+- [ ] **Critical remaining original campaign:** Natalya rescue and all other Train objectives, exact native exfil/victory, doors and prop interactions, full source AI global script semantics, and every other level's original gameplay.
+- [ ] **Visual and controller QA:** Test six source brake meshes visible, hits do not penetrate carriage walls, mission status is correct and no unexpected 3D offset; verify insertion on each eligible map, collision, guard respawns and restart.
+- [ ] **Static tests completed but not user-approved:** Source model, six tag/model/pad associations, six STAN floor matches, JavaScript syntax, JSON scripts and ZIP CRC. **No Chromebook WebGL runtime test claimed.**
+
+Research: `research/V44_SOURCE_MISSION_START_AND_TRAIN_BRAKEUNIT.md`. Private source-derived asset package: `GoldenEye_World_Explorer_v44_ORIGINAL_MISSION_START_AND_TRAIN_TARGETS.zip`, saved to ChatGPT Library. Preserve all historical checklist items below.
+
 ## 2026-11-12 — v4.3 AI movement efficiency and original command-name decoding (NOT USER APPROVED)
 
 - [ ] **Implemented; needs Chromebook acceptance:** Correct double-stepping NPC movement, index source Train STAN floor collision, share original guard atlas/mesh resources, stagger sight queries and guard AI ticks, and render-cull distant guard models. Measured AI CPU status is visible while source guards are running.
