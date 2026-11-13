@@ -1,5 +1,18 @@
 # 2026-11-12 — Public viewer: 10× generated outdoors + real glTF rig audit (work in progress)
 
+### Source-native decoding progress — v4.9 (2026-11-12)
+
+**22% of fixed engineering milestones · 0/21 fully verified source campaign missions.** No additional full milestone was earned this pass; **five documented decoding substeps** and **seven persistent child requirements** were added under the existing 34 milestone IDs.
+
+This release fixes two real browser source-AI runtime errors: a `jump_to_ai_list` no longer executes the previous instruction list with the destination PC, and an unresolved conditional label now stops before a subsequent objective flag write. Initial guard source scripts must also be unique and complete; unverified hearing/partial-LOS and witnessed-combat outcomes no longer fabricate branch results. All changes pass static VM tests, **not a Chromebook WebGL gameplay test**.
+
+New native source dependency audit: 21 setup stages, 55 objective groups, 136 source conditions, 72 destroy criteria, 12 linked source tags and 6 connected original Train target models. The full original property stream requires the original decrypted Xbox executable; no missing model/room/exfil was invented.
+
+[Permanent milestone scoreboard](CONVERSION_PROGRESS.md) · [Machine-readable status](CONVERSION_PROGRESS.json) · [v4.9 full research and blockers](research/V49_SOURCE_OBJECT_AI_DEPENDENCY_AND_RUNTIME.md) · [Historical work tracker](PROJECT_TRACKER.md)
+
+The complete **private** v4.9 ZIP delivered in chat contains playable-prototype HTML, original supplied embedded game assets, source decoders, earlier ZIP research history and tests. The public GitHub Pages viewer is **not** replaced with these private game assets.
+
+
 ### Source-authentic conversion score — v4.8
 
 **22% engineering milestones** (up from 20% under the fixed 100-point rubric). **0/21 original campaign missions are independently verified fully playable.** The percentage measures documented extraction/runtime milestones, not finished playable stages; user approval is still required.
