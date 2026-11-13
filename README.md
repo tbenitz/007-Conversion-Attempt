@@ -1,5 +1,14 @@
 # 2026-11-12 — Public viewer: 10× generated outdoors + real glTF rig audit (work in progress)
 
+### Source-authentic conversion score — v4.8
+
+**22% engineering milestones** (up from 20% under the fixed 100-point rubric). **0/21 original campaign missions are independently verified fully playable.** The percentage measures documented extraction/runtime milestones, not finished playable stages; user approval is still required.
+
+[Permanent 34-item progress ledger](CONVERSION_PROGRESS.md) · [Machine-readable progress JSON](CONVERSION_PROGRESS.json) · [v4.8 native global AI decoding audit](research/V48_NATIVE_GLOBAL_AI_CONTROL_FLOW_SUMMARY.md) · [historical feature tracker](PROJECT_TRACKER.md)
+
+Native global-script analysis now covers 184 original lists and 5,887 instructions; the runtime stops at unresolved next-label jumps or ambiguous duplicate/incomplete source AI programs instead of guessing a target. The user-owned v4.8 ZIP contains the private game HTML, embedded original assets, complete decoding notes and test artifacts. **The public GitHub Pages build does not incorporate that private v4.8 game bundle.**
+
+
 > **Latest source-authentic research release (2026-11-12): v4.7.** The user-owned private ZIP `GoldenEye_World_Explorer_v47_NATIVE_AI_OBJECTIVES_SOURCE_AUDIT.zip` contains the playable-browser prototype, original embedded assets, decoded collision/setup/AI records, decoders, and the complete per-stage objective/map audit. Its static checks pass but the full original campaign is **not yet playable**: only the six original Train brake-controller targets have a connected runtime model, and native exits/global AI/most objective interactions remain incomplete. No original-game asset payload is published in this repository. See [v4.7 research audit](research/V47_NATIVE_MISSION_AND_MAP_AUDIT.md) and [master tracker](PROJECT_TRACKER.md). All new gameplay acceptance remains unchecked until user testing.\n\n
 **Scope:** The repository contains the older public `index.html` viewer, not the private v2.8 asset-embedded build described below. This update edits the committed public viewer only. It does not alter the unavailable private v2.8 ZIP, and does not claim any newly recovered Xbox animation bytes.
 
