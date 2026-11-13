@@ -1,5 +1,5 @@
 {
-  "schema": "goldeneye-permanent-100-point-conversion-ledger-v49",
+  "schema": "goldeneye-permanent-100-point-conversion-ledger-v50",
   "date": "2026-11-12",
   "scoring_note": "Engineering milestone estimate, not percentage of playable missions. Do not delete milestones or auto-mark user acceptance.",
   "current_points": 22,
@@ -422,10 +422,34 @@
       "points": 22,
       "milestone": "OBJ-02.1",
       "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+    },
+    {
+      "release": "v5.0 step 1",
+      "points": 22,
+      "milestone": "AI-05.5",
+      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+    },
+    {
+      "release": "v5.0 step 2",
+      "points": 22,
+      "milestone": "AI-05.6",
+      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+    },
+    {
+      "release": "v5.0 step 3",
+      "points": 22,
+      "milestone": "AI-05.7",
+      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+    },
+    {
+      "release": "v5.0 step 4",
+      "points": 22,
+      "milestone": "AI-05.8",
+      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
     }
   ],
   "verified_original_missions": 0,
-  "latest_release": "v4.9",
+  "latest_release": "v5.0",
   "latest_evidence": {
     "setup_stages": 21,
     "objective_groups": 55,
@@ -437,7 +461,13 @@
     "guard_programs_resolved": 308,
     "guard_programs_unresolved": 329,
     "native_program_handoffs": 480,
-    "valid_stage_local_handoffs": 234
+    "valid_stage_local_handoffs": 234,
+    "original_ai_handoffs": 480,
+    "source_self_actor_handoffs": 428,
+    "source_other_actor_handoffs": 52,
+    "source_return_list_setters": 87,
+    "stage_local_resolvable_return_setters": 38,
+    "source_return_jumps": 37
   },
   "child_requirements": [
     {
@@ -487,6 +517,34 @@
       "parent": "OBJ-03",
       "title": "Inventory original objective/tag/model/pad/AI-writer dependencies per stage",
       "state": "DECODED_AUDIT_DONE_GAMEPLAY_BINDING_OPEN",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.5",
+      "parent": "AI-05",
+      "title": "Implement source set_return_ai_list / jump_to_return_ai_list using actor return register and unique terminated stage-local program",
+      "state": "IMPLEMENTED_STATIC_TESTED_AWAITING_USER_ACCEPTANCE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.6",
+      "parent": "AI-05",
+      "title": "Preserve original jump_to_ai_list actor selector; prevent nonself actor transfers from changing active guard",
+      "state": "IMPLEMENTED_STATIC_TESTED_AWAITING_USER_ACCEPTANCE",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.7",
+      "parent": "AI-05",
+      "title": "Decode 21-stage return/actor control-flow graph, original offsets and opcode operands",
+      "state": "DECODED_AUDIT_COMPLETE_GAMEPLAY_STILL_OPEN",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.8",
+      "parent": "AI-05",
+      "title": "Recover original source character registry, shared/global AI programs and cross-character script handoffs",
+      "state": "OPEN_UNPORTER_NATIVE_ENGINE",
       "user_accepted": false
     }
   ]
