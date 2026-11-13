@@ -1,5 +1,13 @@
 # 2026-11-12 — Public viewer: 10× generated outdoors + real glTF rig audit (work in progress)
 
+### v5.2 Train mission runtime — 25% engineering score
+
+Train now runs its original escape-room check and the source trigger that sends two guards into pursuit after all six brake units are destroyed. The original exit approach and timer run, but Natalya’s rescue and the finale are not implemented. A variable-length debug opcode fix reframed 122 source AI lists and exposed 833 net instruction records.
+
+**25/100 engineering points, up from 23.** 0/21 full original missions verified. Automated source-runtime tests pass. Chromebook gameplay is unverified. The new HTML and original game assets remain in the user’s private ZIP. This public viewer is unchanged.
+
+[Permanent ledger](CONVERSION_PROGRESS.md) · [Train decoding and verification notes](research/V52_TRAIN_RUNTIME_NOTES.md)
+
 ### v5.1 native guard-to-guard AI scripts — 23% engineering score
 
 **23/100 engineering points** = 22 points of completed milestones + **1 partial AI-06 point** for tested native actor-to-actor script dispatch. AI-06 remains OPEN; **0/21 original campaign missions independently verified fully playable**. The public GitHub Pages viewer is NOT the v5.1 private HTML game.

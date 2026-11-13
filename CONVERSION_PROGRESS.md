@@ -1,127 +1,131 @@
-# GoldenEye 007 — Permanent conversion progress
+# Permanent game-conversion progress ledger
 
-## v5.1 — verified original-character AI transfers (+1 evidence-backed partial point)
+**Estimated engineering conversion progress: 25 / 100 points (25%) · v5.1: 23 / 100 · +2 evidence-backed partial points this pass.**
 
-**Engineering milestone score 23/100, up from 22/100.** The 100-point weights and all 34 original milestone IDs remain intact. **22 full milestone points + 1 partial point within AI-06 (4-point milestone)**. AI-06 remains OPEN; not one original mission is accepted as fully playable (0/21).
+**Fully verified playable original missions: 0 / 21 (0%).** The engineering score includes 22 points from completed milestones plus one partial point each within AI-06, AI-05 and MIS-02. These parent milestones remain open, and no user acceptance is assumed.
 
-- [ ] **AI-05.9 · CODE IMPLEMENTED, NODE TESTS PASS, BROWSER ACCEPTANCE OPEN:** The original `jump_to_ai_list` actor selector now changes the *identified* source guard's program when that guard is unique/alive and the target source program is unique/fully terminated. Original caller continues its own instruction stream. Failed resolution halts instead of corrupting the wrong guard.
-- [ ] **AI-06.2 · PARTIAL 1/4 POINT, PARENT OPEN:** Of 480 original handoffs, 428 are self-selector 0xFD, 32 use reserved selector 0xF8, and 20 name explicit characters. **14** explicit-character handoffs have one original source guard and one unique terminated target program; **6** do not. Runtime also requires the target guard to actually be spawned. Pseudo-character 0xF8 and full native AI remain unresolved.
-- [ ] **Source-backed QA pending:** Node VM tests cover success, caller continuation, absent/duplicate/dead recipients, and 0xF8. Live ChromeOS/WebGL guard behavior is untested; 0/21 complete missions verified.
-- [ ] **Permanent rule unchanged:** no prior requirement, recorded blocker or existing approval removed. Score changed by applying documented partial credit within an existing milestone—not claiming complete native guard AI.
+The master progress items below **never disappear**. Implemented items remain visible and are NOT user-approved merely because code or static tests pass. New discoveries get a new child item beneath a milestone rather than silently changing the fixed 100-point denominator. If an existing feature regresses, retain the item, mark it regressed and reduce its earned points until corrected.
 
-Private release: `GoldenEye_World_Explorer_v51_NATIVE_CHARACTER_AI_HANDOFFS_PROGRESS.zip`. [Research and evidence](research/V51_ORIGINAL_ACTOR_AI_DISPATCH.md).
-
----
-
-
-## v5.0 — original AI return-list execution and actor-selective targeting
-
-**Engineering milestones: 22/100 (unchanged). Full original missions browser-verified playable: 0/21.** This pass advances parent AI-05 but does not complete the native AI engine. The original 34 scored milestones and 7 prior child tasks remain in the checklist.
-
-- [ ] **AI-05.5 · IMPLEMENTED FOR TEST:** Original `set_return_ai_list` (u16 source ID) is stored per actor, and `jump_to_return_ai_list` switches only to uniquely found terminated source-stage script. Node VM test passing; user acceptance pending.
-- [ ] **AI-05.6 · IMPLEMENTED FOR TEST:** `jump_to_ai_list` interprets native source actor selector instead of ignoring it. The 52 non-`0xFD` selectors stop rather than changing the wrong guard's list. Node VM test passing; user acceptance pending.
-- [ ] **AI-05.7 · DECODED AUDIT COMPLETE / GAMEPLAY STILL OPEN:** Original 21-stage scripts contain 480 list transfers (428 `0xFD`, 52 other), 87 return-list setters and 37 return jumps. 38 setter IDs resolve uniquely to stage-local terminated original programs. All original source byte offsets are in the private JSON.
-- [ ] **AI-05.8 · OPEN:** Reconstruct full original character registry, cross-character message semantics, initial return program values and shared/global AI program lookup.
-
-Four dated steps appended; no previous requirements removed, no earned points or user acceptance changed. v5.0 standalone HTML and full assets/research archive distributed separately: `GoldenEye_World_Explorer_v50_NATIVE_AI_RETURN_AND_ACTOR_DECODING.zip`.
-
-[Native source research](research/V50_ORIGINAL_AI_RETURN_AND_ACTOR_SCOPE.md).
-
----
-
-
-## v4.9 — actual original AI VM and object-dependency substeps
-
-**22/100 engineering milestone credits (22%) · change from v4.8: +0 completed full milestones. Original missions fully verified playable: 0/21.** The following seven children advance incomplete parents but do not earn full milestone credit. All acceptance boxes remain unchecked, and the 34 original requirement IDs below remain intact.
-
-- [ ] **AI-05.1 · IMPLEMENTED FOR TEST:** Correct native `jump_to_ai_list` execution to load target-list instructions, not stale prior instructions; Node VM regression passes.
-- [ ] **AI-05.2 · IMPLEMENTED FOR TEST:** Stop a source conditional immediately when its label is missing; prevent unintended subsequent objective flag writes; regression passes.
-- [ ] **AI-05.3 · IMPLEMENTED FOR TEST:** Require exactly one fully decoded original guard AI list for initial assignment (308/637 guard records resolve, 329 remain unresolved).
-- [ ] **AI-05.4 · BLOCKED:** Recover original shared and missing AI lists (234/480 original handoffs resolve to unique terminated stage-local programs; 246 do not).
-- [ ] **AI-06.1 · OPEN:** Decode actual hearing, partial line-of-sight and witnessed-shot events. Guessed outcomes removed, authentic event system unimplemented.
-- [ ] **OBJ-02.1 · BLOCKED:** Validate unparsed native setup property types, especially original type 0x20 enter-room objective. The old raw Xbox PE is missing from the current archive. Public N64 record lengths are hypotheses, not a verified Xbox byte grammar.
-- [ ] **OBJ-03.1 · SOURCE INVENTORY COMPLETE / GAMEPLAY OPEN:** New per-stage graph records 55 objective groups / 136 original conditions, 72 destroy conditions / 12 tag links / six connected Train source target models, original code offsets and candidate AI flag writers.
-
-**New private ZIP:** `GoldenEye_World_Explorer_v49_NATIVE_AI_VM_AND_OBJECT_DEPENDENCY_DECODING.zip` contains the game, decoded assets, every earlier research file, new graph, strict decoder, tests and previous roadmap snapshots. Tests passed but the original campaign is still not fully playable. [v4.9 source audit](research/V49_SOURCE_OBJECT_AI_DEPENDENCY_AND_RUNTIME.md).
-
----
-
-**v4.8 (November 12, 2026): 22/100 engineering milestone points (22%), up from 20/100 on the retrospective v4.7 baseline.**
-
-**Fully verified playable original missions: 0 of 21.** The engineering percentage is **NOT** the proportion of missions playable, and a static implementation does not imply user approval.
-
-## Permanent tracking rules
-
-1. Never delete an existing requirement, even when implemented. Retain its stable ID and completion evidence.
-2. Append newly discovered requirements beneath an existing workstream / parent ID. Do not silently move goalposts or change the fixed 100-point rubric.
-3. Distinguish source decoded, code implemented, gameplay tested, and **user accepted**. Every new acceptance checkbox remains unchecked until the user expressly approves it.
-4. When a feature regresses, preserve its history, flag it as regressed, and remove milestone credit until corrected; never conceal it.
-5. Every later “keep decoding” pass appends a dated progress step, updates this scoreboard and the master tracker, and supplies a separate user-owned ZIP with the executable HTML, assets, decoding data, tests, and historical notes.
-
-## Scored workstreams
-
-| Workstream | Earned | Possible |
+| Workstream | Earned / possible | Progress |
 |---|---:|---:|
-| Source provenance | 3 | 5 |
-| Original map geometry | 3 | 15 |
-| Original textures | 2 | 7 |
-| STAN collision | 5 | 12 |
-| Map registration | 1 | 10 |
-| Original object setup | 2 | 12 |
-| Characters and animation | 1 | 8 |
-| Original AI | 4 | 10 |
-| Mission objectives | 1 | 10 |
-| Native interactions | 0 | 4 |
-| Mission completion | 0 | 4 |
-| Runtime QA | 0 | 3 |
+| Source provenance | 3 / 5 | 60.0% |
+| Original map geometry | 3 / 15 | 20.0% |
+| Original textures | 2 / 7 | 28.6% |
+| STAN collision | 5 / 12 | 41.7% |
+| Map registration | 1 / 10 | 10.0% |
+| Original object setup | 2 / 12 | 16.7% |
+| Characters and animation | 1 / 8 | 12.5% |
+| Original AI | 6 / 10 (4 complete + 2 partial) | 60.0% |
+| Mission objectives | 2 / 10 (1 complete + 1 partial) | 20.0% |
+| Native interactions | 0 / 4 | 0.0% |
+| Mission completion | 0 / 4 | 0.0% |
+| Runtime QA | 0 / 3 | 0.0% |
 
-## Permanent milestone checklist (34 stable IDs; 100 points)
+## v5.2 — Train source runtime and bytecode framing
 
-All acceptance boxes are unchecked. “Implemented” means code/source evidence exists; it does not certify ChromeOS game behavior.
+- [ ] **AI-05.10** — Corrected null-terminated debug instruction framing across 122 affected lists. The decoder recovered 833 net instruction records and invalidated 11 false terminators.
+- [ ] **AI-05.11** — Runs the original Train room and exit-approach scripts through supported commands. +1 partial AI-05 point.
+- [ ] **MIS-02.2** — Reaching Train's original escape room completes its source condition. Six brake events now also drive the original guard pursuit handoff. +1 partial MIS-02 point.
+- [ ] **END-01.1** — Original pad 203, timer and death branch execute, but hostage, cutscene and victory remain open. No mission-completion credit awarded.
 
-- [ ] **SRC-01 · 3 pts · IMPLEMENTED, awaiting user acceptance** — Verified source executable identity and extracted-record SHA
-- [ ] **SRC-02 · 2 pts · OPEN** — Archive original raw executable and native graphics containers
-- [ ] **GEO-01 · 3 pts · IMPLEMENTED, awaiting user acceptance** — Extract initial original geometry for 23 browser map assets
-- [ ] **GEO-02 · 6 pts · OPEN** — Recover missing original draw batches on every stage
-- [ ] **GEO-03 · 6 pts · OPEN** — Validate full authored floors, walls and rooms on every stage
-- [ ] **TEX-01 · 2 pts · IMPLEMENTED, awaiting user acceptance** — Decode source textures and attach to recovered material batches
-- [ ] **TEX-02 · 5 pts · OPEN** — Verify source UV, transparency and materials across every source mesh
-- [ ] **COL-01 · 5 pts · IMPLEMENTED, awaiting user acceptance** — Decode all 28 original collision blocks and 36,699 native tiles
-- [ ] **COL-02 · 4 pts · OPEN** — Use native collision authoritatively on all playable stages
-- [ ] **COL-03 · 3 pts · OPEN** — Verify original stairs, ramps, gravity, ledges and multi-floor transitions
-- [ ] **REG-01 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Calibrate original Train STAN to converted graphics
-- [ ] **REG-02 · 6 pts · OPEN** — Validate source transforms independently across every other stage
-- [ ] **REG-03 · 3 pts · OPEN** — Explain and recover missing original visual geometry without invented floors
-- [ ] **OBJ-01 · 2 pts · IMPLEMENTED, awaiting user acceptance** — Recover strict partial original object/guard/tag inventory
-- [ ] **OBJ-02 · 6 pts · OPEN** — Decode all original setup property types and record lengths
-- [ ] **OBJ-03 · 4 pts · OPEN** — Connect mission objects to source model, tag, pad and interactive states
-- [ ] **RIG-01 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Recover first original source-textured character and guard renderers
-- [ ] **RIG-02 · 4 pts · OPEN** — Restore original skeleton, skin weights and authored character bindings
-- [ ] **RIG-03 · 3 pts · OPEN** — Run native walk, shoot, hit, death and movement keyframes
-- [ ] **AI-01 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Identify original native AI opcode names
-- [ ] **AI-02 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Implement partial original-pad guards and source command interpreter
-- [ ] **AI-03 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Audit original global-script branch targets, repeated labels and termination
-- [ ] **AI-04 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Stop native goto_next and list transitions when the source target is ambiguous
-- [ ] **AI-05 · 2 pts · OPEN** — Execute complete native background/global AI scripts
-- [ ] **AI-06 · 4 pts · OPEN** — Restore full original guard pathing, pursuit, visibility, combat and reactions
-- [ ] **MIS-01 · 1 pt · IMPLEMENTED, awaiting user acceptance** — Decode source objective groups and difficulty conditions
-- [ ] **MIS-02 · 6 pts · OPEN** — Connect all original objective conditions to source objects and authentic events
-- [ ] **MIS-03 · 3 pts · OPEN** — Verify all objective conditions at all three mission difficulties
-- [ ] **INT-01 · 2 pts · OPEN** — Restore native doors, alarms, access controls and props
-- [ ] **INT-02 · 2 pts · OPEN** — Restore source vehicle, inventory, pickups and scripted actor interactions
-- [ ] **END-01 · 2 pts · OPEN** — Recover and implement native exfil, win/fail and transitions
-- [ ] **END-02 · 2 pts · OPEN** — Finish entire original campaign as linked playable source missions
-- [ ] **QA-01 · 2 pts · OPEN** — Test and approve every original stage in real ChromeOS/WebGL
-- [ ] **QA-02 · 1 pt · OPEN** — Validate Chromebook memory/AI/performance and restarts under load
+Evidence: `V52_TRAIN_RUNTIME_NOTES.md`, `V52_AI_FRAMING_AUDIT.json` and `test_v52_source_runtime.cjs`. Browser/Chromebook verification pending.
 
-## Progress history
+---
 
-- **v4.7 baseline: 20/100.** Retrospectively scored with this fixed rubric; no claim of earlier user approval.
-- **v4.8 step 1: 21/100.** AI-03 — Audited 184 native global AI scripts / 5,887 instructions; flagged duplicate labels and unsupported lists from the original source records.
-- **v4.8 step 2: 22/100.** AI-04 — Fixed original AI label/list target handling to block invented wraparounds, truncated program jumps and duplicate script IDs. Static Node tests pass.
+## v5.1 — original explicit-character AI dispatch · +1 verified partial point
 
-## Outstanding blockers
+**23/100 engineering conversion points**, up from 22. This **does not** close AI-06 or certify any completed mission. This fixes the previous zero-progress accounting by allowing evidence-backed partial points **within existing weights**, while preserving all requirements, the fixed total of 100, and every prior user-acceptance state.
 
-Missing raw original binary prevents further unknown-property-byte decoding from already-extracted records alone. Several maps still have missing source draw groups, collision ↔ render gaps, incomplete native object/gameplay bindings, and no recovered original mission extraction/victory transitions. Source objective groups: 55. Connected source-native shootable objective targets: 6 (Train brake controllers). Fully gameplay-verified original missions: 0.
+- [ ] **AI-05.9 · IMPLEMENTED AND STATIC-TESTED:** Source `jump_to_ai_list` carries an original actor selector. A valid explicit character ID dispatches to that actor's **own** source AI runtime, preserving the caller's current instructions; if the original guard is absent/duplicate/dead or destination list missing/ambiguous/truncated, the transfer is blocked. Actual Chromebook gameplay still needs verification.
+- [ ] **AI-06.2 · PARTIAL AI-06 CREDIT 1/4:** Source graph contains **20** explicit character-ID handoffs; **14** have one original guard record and one unique terminated original destination script. Those 14 are eligible for execution **when the named original guard is actually spawned**. There are 32 reserved 0xF8 selectors, still unimplemented rather than guessed.
+- [ ] **AI-05.8 remains OPEN:** Full original actor registry, uninstantiated guards, pseudo-characters, original global AI and native hearing/combat/exit not restored.
+- [ ] **No browser gameplay approval:** 0/21 fully verified original missions. Original embedded assets/records remain byte-identical to v5.0. Source and VM tests pass.
 
-See [v4.8 native global AI research](research/V48_NATIVE_GLOBAL_AI_CONTROL_FLOW_SUMMARY.md), [master history](PROJECT_TRACKER.md), and the private v4.8 archive supplied in ChatGPT for the complete source files and tools.
+**Evidence:** `V51_NATIVE_ACTOR_AI_DISPATCH_SOURCE_AUDIT.json`, `test_v51_native_ai.cjs`, full private v5.1 archive and the immutable historical master tracker.
+
+---
+
+## Permanent milestones (stable IDs)
+
+- [ ] **SRC-01 · 3 pts · IMPLEMENTED (user review pending)** — Verified source executable identity and source record SHA. *Evidence / blocker:* V36/V41 source extraction and V48 AI input hash
+- [ ] **SRC-02 · 2 pts · OPEN** — Archive original raw executable and native graphics containers with provenance. *Evidence / blocker:* Original raw binary absent from the existing user-held ZIP
+- [ ] **GEO-01 · 3 pts · IMPLEMENTED (user review pending)** — Extract initial original geometry for the 23 browser map assets. *Evidence / blocker:* V40 mesh-batch audit
+- [ ] **GEO-02 · 6 pts · OPEN** — Recover all missing source draw batches on every stage. *Evidence / blocker:* Dam, Statue, Surface and others incomplete
+- [ ] **GEO-03 · 6 pts · OPEN** — Validate faithful complete original floor, walls and room assembly on every map. *Evidence / blocker:* No complete 23-map traversal
+- [ ] **TEX-01 · 2 pts · IMPLEMENTED (user review pending)** — Decode source textures and attach to recovered material batches. *Evidence / blocker:* Source texture and GLB converter audits
+- [ ] **TEX-02 · 5 pts · OPEN** — Verify original UV, textures, transparency and materials on every mesh. *Evidence / blocker:* UV/atlas assignment not fully decoded
+- [ ] **COL-01 · 5 pts · IMPLEMENTED (user review pending)** — Decode 28/28 source STAN collision blocks and all 36,699 tiles. *Evidence / blocker:* V41 collision audit and v47 static test
+- [ ] **COL-02 · 4 pts · OPEN** — Use source collision authoritatively on every playable stage. *Evidence / blocker:* Only Train source floor verified for runtime placement
+- [ ] **COL-03 · 3 pts · OPEN** — Verify source stairs, edges, ramps, gravity and multi-floor transitions. *Evidence / blocker:* Dam elevations and missing map floors
+- [ ] **REG-01 · 1 pts · IMPLEMENTED (user review pending)** — Calibrate source collision to Train converted graphics. *Evidence / blocker:* V41 source Train transform
+- [ ] **REG-02 · 6 pts · OPEN** — Validate source transforms independently for all other stages. *Evidence / blocker:* V46 registration audit finds severe gaps
+- [ ] **REG-03 · 3 pts · OPEN** — Explain/fix missing source visual geometry without synthetic workarounds. *Evidence / blocker:* Missing original draw groups in several stages
+- [ ] **OBJ-01 · 2 pts · IMPLEMENTED (user review pending)** — Recover strict partial object/guard/tag placement inventory. *Evidence / blocker:* V46 audited partial object records
+- [ ] **OBJ-02 · 6 pts · OPEN** — Decode every original setup property record type and length. *Evidence / blocker:* Original parser stops at unsupported property types
+- [ ] **OBJ-03 · 4 pts · OPEN** — Bind every mission object to source model, tag, pad and usable state. *Evidence / blocker:* Only six Train shootable model instances linked
+- [ ] **RIG-01 · 1 pts · IMPLEMENTED (user review pending)** — Recover first source textured character/guard renderers. *Evidence / blocker:* V42 source body/atlas prototype
+- [ ] **RIG-02 · 4 pts · OPEN** — Restore exact original skeleton hierarchy, skin weights and model bindings. *Evidence / blocker:* Exact authored skin weights still unknown
+- [ ] **RIG-03 · 3 pts · OPEN** — Run original walk, shoot, hit, death and movement keyframes. *Evidence / blocker:* Reconstructed animation remains
+- [ ] **AI-01 · 1 pts · IMPLEMENTED (user review pending)** — Identify native opcode names across decoded instruction records. *Evidence / blocker:* V43 native opcode dictionary
+- [ ] **AI-02 · 1 pts · IMPLEMENTED (user review pending)** — Implement limited guards under original pads and subset AI commands. *Evidence / blocker:* V47 partial instruction interpreter
+- [ ] **AI-03 · 1 pts · IMPLEMENTED (user review pending)** — Audit original global-script control flow, room branch targets and repeated labels. *Evidence / blocker:* V48 global AI audit: 184 lists
+- [ ] **AI-04 · 1 pts · IMPLEMENTED (user review pending)** — Fail closed on unresolved goto_next instead of inventing wrap target. *Evidence / blocker:* V48 nativeAIJump patch + Node branch tests
+- [ ] **AI-05 · 2 pts · OPEN (1/2 partial)** — Execute complete original native background/global AI scripts. *Evidence / blocker:* Global scripts and NPC actions not implemented end-to-end
+- [ ] **AI-06 · 4 pts · OPEN (1/4 partial earned; 3/4 pending)** — Restore original enemy AI pathing, pursuit, visibility, combat and reaction across all maps. *Evidence / blocker:* Only partial original interpreter exists
+- [ ] **MIS-01 · 1 pts · IMPLEMENTED (user review pending)** — Decode original objective groups and difficulty conditions. *Evidence / blocker:* V47 55 source objective groups
+- [ ] **MIS-02 · 6 pts · OPEN (1/6 partial)** — Connect all original mission conditions to source objects and authentic world actions. *Evidence / blocker:* Only six Train brake targets have physical source models
+- [ ] **MIS-03 · 3 pts · OPEN** — Verify all objective conditions at Agent, Secret Agent and 00 Agent. *Evidence / blocker:* No campaign mission fully verified
+- [ ] **INT-01 · 2 pts · OPEN** — Restore original doors, alarms, locked access, triggers and prop handling. *Evidence / blocker:* Stateful native interactions incomplete
+- [ ] **INT-02 · 2 pts · OPEN** — Restore original vehicle, inventory, pickups, scripted actor interactions. *Evidence / blocker:* Source AI and object handlers incomplete
+- [ ] **END-01 · 2 pts · OPEN** — Decode and implement native exfil and success/failure mission transitions. *Evidence / blocker:* Train exit approach and timer run. Hostage, finale and mission result are unported
+- [ ] **END-02 · 2 pts · OPEN** — Finish entire original campaign as playable linked missions. *Evidence / blocker:* 0 source-authentic missions fully playable
+- [ ] **QA-01 · 2 pts · OPEN** — Test and approve every stage in browser/Chromebook. *Evidence / blocker:* No complete source-authentic stage acceptance
+- [ ] **QA-02 · 1 pts · OPEN** — Validate Chromebook performance/AI, memory and restarts under load. *Evidence / blocker:* Requires actual Chromebook/WebGL performance QA
+
+## v5.0 — source-native return-list commands and actor-target resolution
+
+**Engineering completion: 22/100 = 22%, no full milestone added. Native original campaign missions browser-verified playable: 0/21.** Previous 34 scored milestones, 7 v4.9 child requirements, and all earlier progress updates remain in place.
+
+- [ ] **AI-05.5 · IMPLEMENTED FOR TEST:** Native original `set_return_ai_list` reads its 2-byte script ID into each guard's own return-list register. `jump_to_return_ai_list` resolves the stored native ID uniquely and switches the executing AI program. Absent or duplicate target: halt, never guess. Node VM test passes.
+- [ ] **AI-05.6 · IMPLEMENTED FOR TEST:** `jump_to_ai_list` must check its first actor-selector byte. Recovered original command records contain 428 `0xFD` target selectors and 52 others; only self-target handoffs can be faithfully executed by the current per-guard interpreter. Preserving and blocking other actor selectors prevents corrupting the wrong guard's script. Node VM tests pass.
+- [ ] **AI-05.7 · SOURCE DATA DECODED / GAMEPLAY OPEN:** Complete 21-stage audit of 480 handoffs, 87 return-list setters (38 refer to a uniquely resolved terminated stage-local list) and 37 return jumps, each retaining its original source byte offset and instruction parameters.
+- [ ] **AI-05.8 · NOT IMPLEMENTED:** Full source character registry, native return state initialized outside the current interpreter, and shared AI list lookup. Stage-local absence is not evidence that an original target is invalid.
+
+No original-game world geometry, mission objects, or other decoded binary payload was changed. This pass is **not** a claim of a complete AI engine or a playable original mission. Full private v5.0 ZIP retains prior asset/code/research snapshots and adds `V50_NATIVE_AI_RETURN_AND_ACTOR_SCOPE_AUDIT.json` and tests.
+
+## v4.9 — source-native interpreter and object dependency advancement (all acceptance pending)
+
+**Score remains 22/100.** The completed sub-steps below are inside unfinished parent AI-05, AI-06, OBJ-02 and OBJ-03. Awarding full parent credit now would falsely claim complete global AI or full objective model binding.
+
+- [ ] **AI-05.1 · IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING** — Original AI list changes must fetch new instruction array. Evidence: v49 test source original program A to B demonstrates target flag selection.
+- [ ] **AI-05.2 · IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING** — Stop native AI immediately after failed conditional label jump. Evidence: v49 VM test proves no post-failure objective flag write.
+- [ ] **AI-05.3 · IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING** — Require unique fully decoded original guard initial AI list. Evidence: 308 of 637 source guard records resolve to unique terminated original list; 329 not yet resolved.
+- [ ] **AI-05.4 · BLOCKED_UNRECOVERED_RAW_EXE** — Recover original shared/global AI programs beyond stage setup streams. Evidence: 246 of 480 native list handoffs lack unique terminated stage-local destination; some may refer to shared lists.
+- [ ] **AI-06.1 · IN_PROGRESS_BLOCKED_NATIVE_EVENT_SYSTEM** — Replace guessed hearing/partial LOS/witnessed-shot source condition outcomes with original event logic. Evidence: v49 now fails closed at these unknown conditions; original event model remains unimplemented.
+- [ ] **OBJ-02.1 · BLOCKED_UNRECOVERED_RAW_EXE** — Recover XBLA property 0x20 objective_enter_room record length and associated fields from raw original bytes. Evidence: v49 strict parser retains original offset and N64 documentation as unverified candidate; no guessed strides.
+- [ ] **OBJ-03.1 · SOURCE_AUDIT_COMPLETE_IMPLEMENTATION_NOT_DONE** — Trace objective-to-native-tag-to-prop-model-to-floor-to-AI-writer dependencies on all setup stages. Evidence: v49 source graph 55 groups/136 criteria, 72 destroy checks/12 linked/6 with runtime model.
+
+Original objective records: **55 groups / 136 conditions** (72 object-destruction, 34 completion-flag, 30 failure-flag). **12/72** destroy criteria have a decoded source tag link, only **6/72** have a connected renderable source objective model. Original source guard records: **637**, with **308** unique and terminated initial AI-list references, **329** unresolved/ambiguous/truncated. Native program handoffs: **480**, of which **234** target a uniquely resolved terminated stage-local program. These are static source evidence counts and do not imply gameplay verification.
+
+## Step-by-step progress log
+
+- **v4.7 — 20/100**: Retrospectively scored pre-v48 verified extraction and partial game milestones under the new fixed scoring rubric.
+- **v4.8-step-1 — 21/100**: Decoded and audited native global AI structure/room branch topology across 21 setup stages.
+- **v4.8-step-2 — 22/100**: Guard nativeAIJump no longer guesses initial label when goto_next has no matching successor; fail-closed until exact semantics verified.
+
+- **v4.9-step-1 — 22/100**: Source VM executes the *new* original AI list following a native list handoff, not stale source commands.
+- **v4.9-step-2 — 22/100**: Failed source conditional jumps stop before any later flag/object event. Regression tested.
+- **v4.9-step-3 — 22/100**: Initial source guard AI list must resolve uniquely and be complete; unverified hearing/partial LOS/witnessed-shot predicates no longer fabricate events.
+- **v4.9-step-4 — 22/100**: Produced 21-stage, per-objective source dependency graph with authentic original offsets, tagged objects, scene transform/stage support, native AI-flag writers, and missing dependencies.
+- **v4.9-step-5 — 22/100**: Added strict original-property byte parser. First new candidate type (0x20, objective enter room) remains marked as *unverified for XBLA* until the raw PE is supplied; no speculative byte skipping.
+
+## Confirmed unconverted parts / no fake fixes
+
+- 184 original global AI lists recovered from source records; 118 contain repeated labels and 24 are truncated/nonterminated, so global script runtime is NOT complete.
+- Only six Train original brake units are verified as connected source objective shootable objects; other objective actions remain unimplemented.
+- Original render/STAN alignment is not resolved for most maps. Never replace original layout with invented supports or derived fake victory triggers.
+- No real-world ChromeOS/WebGL acceptance test has certified any original campaign mission.
+
+## Scoring changes policy
+
+Keep milestone IDs and original historical tracker intact. Append new discoveries under their parent as `ID.subnumber`, never remove or silently tick an acceptance box. Recompute weights only if the user explicitly authorizes a new scoring rubric, and always keep prior release snapshots for comparison.

@@ -1,72 +1,76 @@
 {
-  "schema": "goldeneye-permanent-100-point-conversion-ledger-v51",
-  "date": "2026-11-12",
-  "scoring_note": "Engineering milestone estimate, not percentage of playable missions. Do not delete milestones or auto-mark user acceptance. From v5.1 onward: award evidence-backed partial credit strictly within existing milestone weights without closing a parent or auto-approving. Current score 22 completed points + 1 partial AI-06 point; 100-point denominator unchanged.",
-  "current_points": 23,
+  "schema": "goldeneye-permanent-100-point-conversion-ledger-v52",
+  "date": "2026-11-13",
+  "scoring_policy": "These fixed, enumerated credits are an ENGINEERING progress estimate, not playable campaign percent. Award a credit only after implementing the named deliverable and retaining its source/static evidence. Distinct user-approval checklist remains unchecked unless the user approves it. No milestone gets deleted, including completed items. New findings append as children under the same milestone IDs without silently changing the denominator. Regression changes credit status with a dated reason and preserves history. v5.1 update: allow strictly evidenced PARTIAL credit inside the existing fixed weight, without closing parent or user approval. Current 22 fully completed milestone points + 1 partial AI-06 point = 23. Untested browser play cannot earn QA credit. v5.2 adds 1 partial AI-05 point for running original Train background bytecode and 1 partial MIS-02 point for connecting escape-room and brake-linked guard events. Both parents remain open.",
   "total_points": 100,
-  "previous_points": 22,
-  "fully_verified_playable_missions": 0,
-  "decoded_setup_stages": 21,
+  "earned_points": 25,
+  "baseline_previous_release_points": 23,
+  "delta_this_release_points": 2,
+  "fully_playable_missions_verified": 0,
+  "source_setup_stages": 21,
+  "original_collision_blocks_decoded": 28,
+  "original_collision_polygons_decoded": 36699,
+  "source_objective_groups_decoded": 55,
   "workstreams": [
     {
       "name": "Source provenance",
-      "possible": 5,
-      "earned": 3
+      "points_total": 5,
+      "points_earned": 3
     },
     {
       "name": "Original map geometry",
-      "possible": 15,
-      "earned": 3
+      "points_total": 15,
+      "points_earned": 3
     },
     {
       "name": "Original textures",
-      "possible": 7,
-      "earned": 2
+      "points_total": 7,
+      "points_earned": 2
     },
     {
       "name": "STAN collision",
-      "possible": 12,
-      "earned": 5
+      "points_total": 12,
+      "points_earned": 5
     },
     {
       "name": "Map registration",
-      "possible": 10,
-      "earned": 1
+      "points_total": 10,
+      "points_earned": 1
     },
     {
       "name": "Original object setup",
-      "possible": 12,
-      "earned": 2
+      "points_total": 12,
+      "points_earned": 2
     },
     {
       "name": "Characters and animation",
-      "possible": 8,
-      "earned": 1
+      "points_total": 8,
+      "points_earned": 1
     },
     {
       "name": "Original AI",
-      "possible": 10,
-      "earned": 5
+      "points_total": 10,
+      "points_earned": 6
     },
     {
       "name": "Mission objectives",
-      "possible": 10,
-      "earned": 1
+      "points_total": 10,
+      "points_earned": 2
     },
     {
       "name": "Native interactions",
-      "possible": 4,
-      "earned": 0
+      "points_total": 4,
+      "points_earned": 0
     },
     {
       "name": "Mission completion",
-      "possible": 4,
-      "earned": 0
+      "points_total": 4,
+      "points_earned": 0
     },
     {
       "name": "Runtime QA",
-      "possible": 3,
-      "earned": 0
+      "points_total": 3,
+      "points_earned": 0
     }
   ],
   "milestones": [
@@ -74,46 +78,51 @@
       "id": "SRC-01",
       "workstream": "Source provenance",
       "points": 3,
-      "title": "Verified source executable identity and extracted-record SHA",
+      "title": "Verified source executable identity and source record SHA",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V36/V41 source extraction and V48 AI input hash"
     },
     {
       "id": "SRC-02",
       "workstream": "Source provenance",
       "points": 2,
-      "title": "Archive original raw executable and native graphics containers",
+      "title": "Archive original raw executable and native graphics containers with provenance",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Original raw binary absent from the existing user-held ZIP"
     },
     {
       "id": "GEO-01",
       "workstream": "Original map geometry",
       "points": 3,
-      "title": "Extract initial original geometry for 23 browser map assets",
+      "title": "Extract initial original geometry for the 23 browser map assets",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V40 mesh-batch audit"
     },
     {
       "id": "GEO-02",
       "workstream": "Original map geometry",
       "points": 6,
-      "title": "Recover missing original draw batches on every stage",
+      "title": "Recover all missing source draw batches on every stage",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Dam, Statue, Surface and others incomplete"
     },
     {
       "id": "GEO-03",
       "workstream": "Original map geometry",
       "points": 6,
-      "title": "Validate full authored floors, walls and rooms on every stage",
+      "title": "Validate faithful complete original floor, walls and room assembly on every map",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "No complete 23-map traversal"
     },
     {
       "id": "TEX-01",
@@ -122,462 +131,533 @@
       "title": "Decode source textures and attach to recovered material batches",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "Source texture and GLB converter audits"
     },
     {
       "id": "TEX-02",
       "workstream": "Original textures",
       "points": 5,
-      "title": "Verify source UV, transparency and materials across every source mesh",
+      "title": "Verify original UV, textures, transparency and materials on every mesh",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "UV/atlas assignment not fully decoded"
     },
     {
       "id": "COL-01",
       "workstream": "STAN collision",
       "points": 5,
-      "title": "Decode all 28 original collision blocks and 36,699 native tiles",
+      "title": "Decode 28/28 source STAN collision blocks and all 36,699 tiles",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V41 collision audit and v47 static test"
     },
     {
       "id": "COL-02",
       "workstream": "STAN collision",
       "points": 4,
-      "title": "Use native collision authoritatively on all playable stages",
+      "title": "Use source collision authoritatively on every playable stage",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Only Train source floor verified for runtime placement"
     },
     {
       "id": "COL-03",
       "workstream": "STAN collision",
       "points": 3,
-      "title": "Verify original stairs, ramps, gravity, ledges and multi-floor transitions",
+      "title": "Verify source stairs, edges, ramps, gravity and multi-floor transitions",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Dam elevations and missing map floors"
     },
     {
       "id": "REG-01",
       "workstream": "Map registration",
       "points": 1,
-      "title": "Calibrate original Train STAN to converted graphics",
+      "title": "Calibrate source collision to Train converted graphics",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V41 source Train transform"
     },
     {
       "id": "REG-02",
       "workstream": "Map registration",
       "points": 6,
-      "title": "Validate source transforms independently across every other stage",
+      "title": "Validate source transforms independently for all other stages",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "V46 registration audit finds severe gaps"
     },
     {
       "id": "REG-03",
       "workstream": "Map registration",
       "points": 3,
-      "title": "Explain and recover missing original visual geometry without invented floors",
+      "title": "Explain/fix missing source visual geometry without synthetic workarounds",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Missing original draw groups in several stages"
     },
     {
       "id": "OBJ-01",
       "workstream": "Original object setup",
       "points": 2,
-      "title": "Recover strict partial original object/guard/tag inventory",
+      "title": "Recover strict partial object/guard/tag placement inventory",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V46 audited partial object records"
     },
     {
       "id": "OBJ-02",
       "workstream": "Original object setup",
       "points": 6,
-      "title": "Decode all original setup property types and record lengths",
+      "title": "Decode every original setup property record type and length",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "IN_PROGRESS_SOURCE_DATA_INCOMPLETE",
+      "evidence_or_blocker": "Original parser stops at unsupported property types | v4.9 partial source audit and interpreter safety tests; task remains incomplete"
     },
     {
       "id": "OBJ-03",
       "workstream": "Original object setup",
       "points": 4,
-      "title": "Connect mission objects to source model, tag, pad and interactive states",
+      "title": "Bind every mission object to source model, tag, pad and usable state",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "IN_PROGRESS_SOURCE_DATA_INCOMPLETE",
+      "evidence_or_blocker": "Only six Train shootable model instances linked | v4.9 partial source audit and interpreter safety tests; task remains incomplete"
     },
     {
       "id": "RIG-01",
       "workstream": "Characters and animation",
       "points": 1,
-      "title": "Recover first original source-textured character and guard renderers",
+      "title": "Recover first source textured character/guard renderers",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V42 source body/atlas prototype"
     },
     {
       "id": "RIG-02",
       "workstream": "Characters and animation",
       "points": 4,
-      "title": "Restore original skeleton, skin weights and authored character bindings",
+      "title": "Restore exact original skeleton hierarchy, skin weights and model bindings",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Exact authored skin weights still unknown"
     },
     {
       "id": "RIG-03",
       "workstream": "Characters and animation",
       "points": 3,
-      "title": "Run native walk, shoot, hit, death and movement keyframes",
+      "title": "Run original walk, shoot, hit, death and movement keyframes",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Reconstructed animation remains"
     },
     {
       "id": "AI-01",
       "workstream": "Original AI",
       "points": 1,
-      "title": "Identify original native AI opcode names",
+      "title": "Identify native opcode names across decoded instruction records",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V43 native opcode dictionary"
     },
     {
       "id": "AI-02",
       "workstream": "Original AI",
       "points": 1,
-      "title": "Implement partial original-pad guards and source command interpreter",
+      "title": "Implement limited guards under original pads and subset AI commands",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V47 partial instruction interpreter"
     },
     {
       "id": "AI-03",
       "workstream": "Original AI",
       "points": 1,
-      "title": "Audit original global-script branch targets, repeated labels and termination",
+      "title": "Audit original global-script control flow, room branch targets and repeated labels",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V48 global AI audit: 184 lists"
     },
     {
       "id": "AI-04",
       "workstream": "Original AI",
       "points": 1,
-      "title": "Stop native goto_next and list transitions when the source target is ambiguous",
+      "title": "Fail closed on unresolved goto_next instead of inventing wrap target",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V48 nativeAIJump patch + Node branch tests"
     },
     {
       "id": "AI-05",
       "workstream": "Original AI",
       "points": 2,
-      "title": "Execute complete native background/global AI scripts",
+      "title": "Execute complete original native background/global AI scripts",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "PARTIAL_PROGRESS_1_OF_2_REMAINS_OPEN",
+      "evidence_or_blocker": "Global scripts and NPC actions not implemented end-to-end | v4.9 partial source audit and interpreter safety tests; task remains incomplete",
+      "partial_credit_points": 1,
+      "partial_credit_evidence": "Two original Train background scripts execute through supported branches. Full shared scripts and source finale not ported."
     },
     {
       "id": "AI-06",
       "workstream": "Original AI",
       "points": 4,
-      "title": "Restore full original guard pathing, pursuit, visibility, combat and reactions",
+      "title": "Restore original enemy AI pathing, pursuit, visibility, combat and reaction across all maps",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "PARTIALLY_IMPLEMENTED_1_OF_4_POINTS_REMAINING_OPEN",
+      "state": "PARTIAL_PROGRESS_1_OF_4_REMAINS_OPEN",
+      "evidence_or_blocker": "Only partial original interpreter exists",
       "partial_credit_points": 1,
-      "partial_credit_evidence": "v5.1 source-authenticated actor-to-actor native script dispatch: 20 explicit actor handoffs, 14 unique source guard and program bindings; Node VM cross-character tests; no ChromeOS QA"
+      "partial_credit_evidence": "v5.1 distinct original-character handoff execution, 14/20 source links supported, Node VM tests; source AI remains incomplete and unapproved"
     },
     {
       "id": "MIS-01",
       "workstream": "Mission objectives",
       "points": 1,
-      "title": "Decode source objective groups and difficulty conditions",
+      "title": "Decode original objective groups and difficulty conditions",
       "engineering_complete": true,
       "user_accepted": false,
-      "status": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING"
+      "state": "IMPLEMENTED_STATIC_USER_REVIEW_PENDING",
+      "evidence_or_blocker": "V47 55 source objective groups"
     },
     {
       "id": "MIS-02",
       "workstream": "Mission objectives",
       "points": 6,
-      "title": "Connect all original objective conditions to source objects and authentic events",
+      "title": "Connect all original mission conditions to source objects and authentic world actions",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "PARTIAL_PROGRESS_1_OF_6_REMAINS_OPEN",
+      "evidence_or_blocker": "Only six Train brake targets have physical source models",
+      "partial_credit_points": 1,
+      "partial_credit_evidence": "Original Train STAN room sets Escape objective; all six original brake tags feed source guard AI."
     },
     {
       "id": "MIS-03",
       "workstream": "Mission objectives",
       "points": 3,
-      "title": "Verify all objective conditions at all three mission difficulties",
+      "title": "Verify all objective conditions at Agent, Secret Agent and 00 Agent",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "No campaign mission fully verified"
     },
     {
       "id": "INT-01",
       "workstream": "Native interactions",
       "points": 2,
-      "title": "Restore native doors, alarms, access controls and props",
+      "title": "Restore original doors, alarms, locked access, triggers and prop handling",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Stateful native interactions incomplete"
     },
     {
       "id": "INT-02",
       "workstream": "Native interactions",
       "points": 2,
-      "title": "Restore source vehicle, inventory, pickups and scripted actor interactions",
+      "title": "Restore original vehicle, inventory, pickups, scripted actor interactions",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Source AI and object handlers incomplete"
     },
     {
       "id": "END-01",
       "workstream": "Mission completion",
       "points": 2,
-      "title": "Recover and implement native exfil, win/fail and transitions",
+      "title": "Decode and implement native exfil and success/failure mission transitions",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Train source pad-203 approach and 180-tick delay execute. Original hostage, finale and win/fail transition not implemented."
     },
     {
       "id": "END-02",
       "workstream": "Mission completion",
       "points": 2,
-      "title": "Finish entire original campaign as linked playable source missions",
+      "title": "Finish entire original campaign as playable linked missions",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "0 source-authentic missions fully playable"
     },
     {
       "id": "QA-01",
       "workstream": "Runtime QA",
       "points": 2,
-      "title": "Test and approve every original stage in real ChromeOS/WebGL",
+      "title": "Test and approve every stage in browser/Chromebook",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "No complete source-authentic stage acceptance"
     },
     {
       "id": "QA-02",
       "workstream": "Runtime QA",
       "points": 1,
-      "title": "Validate Chromebook memory/AI/performance and restarts under load",
+      "title": "Validate Chromebook performance/AI, memory and restarts under load",
       "engineering_complete": false,
       "user_accepted": false,
-      "status": "OPEN"
+      "state": "OPEN",
+      "evidence_or_blocker": "Requires actual Chromebook/WebGL performance QA"
     }
   ],
-  "release_history": [
+  "updates": [
     {
       "release": "v4.7",
-      "points": 20,
-      "description": "retrospective starting score from verified existing deliverables"
+      "total_points": 20,
+      "note": "Retrospectively scored pre-v48 verified extraction and partial game milestones under the new fixed scoring rubric."
     },
     {
-      "release": "v4.8 step 1",
-      "points": 21,
-      "milestone": "AI-03"
+      "release": "v4.8-step-1",
+      "total_points": 21,
+      "milestone": "AI-03",
+      "note": "Decoded and audited native global AI structure/room branch topology across 21 setup stages."
     },
     {
-      "release": "v4.8 step 2",
-      "points": 22,
-      "milestone": "AI-04"
+      "release": "v4.8-step-2",
+      "total_points": 22,
+      "milestone": "AI-04",
+      "note": "Guard nativeAIJump no longer guesses initial label when goto_next has no matching successor; fail-closed until exact semantics verified."
     },
     {
-      "release": "v4.9 step 1",
-      "points": 22,
+      "release": "v4.9-step-1",
+      "total_points": 22,
       "milestone": "AI-05.1",
-      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+      "note": "Fixed original AI list handoff execution to fetch target-program commands, tested with source-style list ID and original byte offsets."
     },
     {
-      "release": "v4.9 step 2",
-      "points": 22,
+      "release": "v4.9-step-2",
+      "total_points": 22,
       "milestone": "AI-05.2",
-      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+      "note": "Conditional source jump failure now stops the interpreter before any later objective flag write; static VM regression test."
     },
     {
-      "release": "v4.9 step 3",
-      "points": 22,
+      "release": "v4.9-step-3",
+      "total_points": 22,
       "milestone": "AI-05.3",
-      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+      "note": "Guard initial source AI list must be unique and terminated; no arbitrary first matching program."
     },
     {
-      "release": "v4.9 step 4",
-      "points": 22,
+      "release": "v4.9-step-4",
+      "total_points": 22,
       "milestone": "OBJ-03.1",
-      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+      "note": "Rechecked every source objective, tag and original AI writer across 21 stages; documented 72 destroy conditions, 12 tag links and six playable-model bindings."
     },
     {
-      "release": "v4.9 step 5",
-      "points": 22,
+      "release": "v4.9-step-5",
+      "total_points": 22,
       "milestone": "OBJ-02.1",
-      "description": "Implemented or audited within incomplete parent milestone; earned parent credit remains 0."
+      "note": "Added strict byte scanner to make next raw-source import predictable; 0x20 candidate not interpreted without verified original binary."
     },
     {
-      "release": "v5.0 step 1",
-      "points": 22,
+      "release": "v5.0-step-1",
+      "total_points": 22,
       "milestone": "AI-05.5",
-      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+      "note": "Original source AI return and actor-selector control-flow advanced and tested; parent AI-05 remains unfinished; no milestone credit awarded."
     },
     {
-      "release": "v5.0 step 2",
-      "points": 22,
+      "release": "v5.0-step-2",
+      "total_points": 22,
       "milestone": "AI-05.6",
-      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+      "note": "Original source AI return and actor-selector control-flow advanced and tested; parent AI-05 remains unfinished; no milestone credit awarded."
     },
     {
-      "release": "v5.0 step 3",
-      "points": 22,
+      "release": "v5.0-step-3",
+      "total_points": 22,
       "milestone": "AI-05.7",
-      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+      "note": "Original source AI return and actor-selector control-flow advanced and tested; parent AI-05 remains unfinished; no milestone credit awarded."
     },
     {
-      "release": "v5.0 step 4",
-      "points": 22,
+      "release": "v5.0-step-4",
+      "total_points": 22,
       "milestone": "AI-05.8",
-      "description": "Native source return AI and actor-selector decoding; partial AI-05 progress, no new earned parent milestone"
+      "note": "Original source AI return and actor-selector control-flow advanced and tested; parent AI-05 remains unfinished; no milestone credit awarded."
     },
     {
-      "release": "v5.1 step 1",
-      "points": 22,
+      "release": "v5.1-step-1",
+      "total_points": 22,
       "milestone": "AI-05.9",
-      "description": "Decoded 20 explicit native actor handoffs; 14 source unique guard/script pairs; 32 reserved pseudo-character transfers unresolved."
+      "note": "Original source actor graph: 20 explicit links; 14 unique guard+terminated-program bindings; 32 special 0xF8 reserved selectors kept unknown."
     },
     {
-      "release": "v5.1 step 2",
-      "points": 23,
+      "release": "v5.1-step-2",
+      "total_points": 23,
       "milestone": "AI-06.2",
-      "description": "Working source-actor AI dispatch and caller continuation, duplicate/missing/dead actor guards, Node VM regression tests; 1/4 partial AI-06 point while milestone still open."
+      "note": "Original actor handoffs are actually dispatched to unique, live original guard; source caller keeps own program; VM tests pass. 1/4 partial AI-06 credit; parent remains OPEN."
+    },
+    {
+      "release": "v5.2-step-1",
+      "total_points": 24,
+      "milestone": "AI-05.11",
+      "note": "Executed selected original Train background commands and reframed retained XBLA debug-print bytes."
+    },
+    {
+      "release": "v5.2-step-2",
+      "total_points": 25,
+      "milestone": "MIS-02.2",
+      "note": "Train escape-room flag and source brake-to-guard checks now consume real stage events. No mission certified."
     }
   ],
-  "verified_original_missions": 0,
-  "latest_release": "v5.1",
-  "latest_evidence": {
-    "setup_stages": 21,
-    "objective_groups": 55,
-    "objective_conditions": 136,
-    "destroy_conditions": 72,
-    "linked_destroy_tags": 12,
-    "renderable_destroy_targets": 6,
-    "guard_records": 637,
-    "guard_programs_resolved": 308,
-    "guard_programs_unresolved": 329,
-    "native_program_handoffs": 480,
-    "valid_stage_local_handoffs": 234,
-    "original_ai_handoffs": 480,
-    "source_self_actor_handoffs": 428,
-    "source_other_actor_handoffs": 52,
-    "source_return_list_setters": 87,
-    "stage_local_resolvable_return_setters": 38,
-    "source_return_jumps": 37,
-    "explicit_character_ai_handoffs": 20,
-    "unique_source_guard_script_links": 14,
-    "unresolved_explicit_guard_handoffs": 6,
-    "reserved_pseudo_actor_handoffs_f8": 32
-  },
-  "child_requirements": [
+  "release": "v5.2",
+  "native_source_objective_conditions": 136,
+  "native_source_guard_records": 637,
+  "native_source_guard_lists_uniquely_resolvable": 308,
+  "native_source_ai_list_handoffs": 480,
+  "native_source_ai_list_handoffs_resolvable": 234,
+  "tracked_child_requirements": [
     {
       "id": "AI-05.1",
       "parent": "AI-05",
-      "title": "Native destination list instructions execute after jump_to_ai_list",
-      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_USER_ACCEPTANCE",
-      "user_accepted": false
+      "title": "Original AI list changes must fetch new instruction array",
+      "state": "IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING",
+      "source_evidence": "v49 test source original program A to B demonstrates target flag selection"
     },
     {
       "id": "AI-05.2",
       "parent": "AI-05",
-      "title": "Failed source conditional branches halt before objective side effects",
-      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_USER_ACCEPTANCE",
-      "user_accepted": false
+      "title": "Stop native AI immediately after failed conditional label jump",
+      "state": "IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING",
+      "source_evidence": "v49 VM test proves no post-failure objective flag write"
     },
     {
       "id": "AI-05.3",
       "parent": "AI-05",
-      "title": "Original guard initial AI program must be uniquely resolved and terminated",
-      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_USER_ACCEPTANCE",
-      "user_accepted": false
+      "title": "Require unique fully decoded original guard initial AI list",
+      "state": "IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING",
+      "source_evidence": "308 of 637 source guard records resolve to unique terminated original list; 329 not yet resolved"
     },
     {
       "id": "AI-05.4",
       "parent": "AI-05",
-      "title": "Recover missing original shared/global AI programs",
-      "state": "BLOCKED_ORIGINAL_BINARY_MISSING",
-      "user_accepted": false
+      "title": "Recover original shared/global AI programs beyond stage setup streams",
+      "state": "BLOCKED_UNRECOVERED_RAW_EXE",
+      "source_evidence": "246 of 480 native list handoffs lack unique terminated stage-local destination; some may refer to shared lists"
     },
     {
       "id": "AI-06.1",
       "parent": "AI-06",
-      "title": "Decode native hearing and partial LOS and witnessed-fire event mechanics",
-      "state": "IN_PROGRESS_NO_SIMULATED_OUTCOME",
-      "user_accepted": false
+      "title": "Replace guessed hearing/partial LOS/witnessed-shot source condition outcomes with original event logic",
+      "state": "IN_PROGRESS_BLOCKED_NATIVE_EVENT_SYSTEM",
+      "source_evidence": "v49 now fails closed at these unknown conditions; original event model remains unimplemented"
     },
     {
       "id": "OBJ-02.1",
       "parent": "OBJ-02",
-      "title": "Verify original Xbox property record grammar beyond unsupported objective records",
-      "state": "BLOCKED_ORIGINAL_BINARY_MISSING",
-      "user_accepted": false
+      "title": "Recover XBLA property 0x20 objective_enter_room record length and associated fields from raw original bytes",
+      "state": "BLOCKED_UNRECOVERED_RAW_EXE",
+      "source_evidence": "v49 strict parser retains original offset and N64 documentation as unverified candidate; no guessed strides"
     },
     {
       "id": "OBJ-03.1",
       "parent": "OBJ-03",
-      "title": "Inventory original objective/tag/model/pad/AI-writer dependencies per stage",
-      "state": "DECODED_AUDIT_DONE_GAMEPLAY_BINDING_OPEN",
-      "user_accepted": false
+      "title": "Trace objective-to-native-tag-to-prop-model-to-floor-to-AI-writer dependencies on all setup stages",
+      "state": "SOURCE_AUDIT_COMPLETE_IMPLEMENTATION_NOT_DONE",
+      "source_evidence": "v49 source graph 55 groups/136 criteria, 72 destroy checks/12 linked/6 with runtime model"
     },
     {
       "id": "AI-05.5",
       "parent": "AI-05",
-      "title": "Implement source set_return_ai_list / jump_to_return_ai_list using actor return register and unique terminated stage-local program",
-      "state": "IMPLEMENTED_STATIC_TESTED_AWAITING_USER_ACCEPTANCE",
+      "title": "Execute native set_return_ai_list / jump_to_return_ai_list with source u16 target and runtime return register",
+      "state": "IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING",
+      "source_evidence": "Original source commands 87 setters and 37 return jumps; Node VM return-chain test passed; stage-local target resolution required",
       "user_accepted": false
     },
     {
       "id": "AI-05.6",
       "parent": "AI-05",
-      "title": "Preserve original jump_to_ai_list actor selector; prevent nonself actor transfers from changing active guard",
-      "state": "IMPLEMENTED_STATIC_TESTED_AWAITING_USER_ACCEPTANCE",
+      "title": "Honor source jump_to_ai_list actor selector; never change current guard for non-0xFD selectors",
+      "state": "IMPLEMENTED_STATIC_TEST_PASS_USER_REVIEW_PENDING",
+      "source_evidence": "Original source has 480 handoffs: 428 opcode operands with 0xFD and 52 with other actor selectors; Node VM asserts no wrong guard mutation",
       "user_accepted": false
     },
     {
       "id": "AI-05.7",
       "parent": "AI-05",
-      "title": "Decode 21-stage return/actor control-flow graph, original offsets and opcode operands",
-      "state": "DECODED_AUDIT_COMPLETE_GAMEPLAY_STILL_OPEN",
+      "title": "Cross-stage AI return/actor selector inventory with source byte offsets and valid-target checks",
+      "state": "DECODED_STATIC_AUDIT_COMPLETE_GAMEPLAY_OPEN",
+      "source_evidence": "Original 21-stage opcode graph and 38/87 return setter IDs resolving to unique stage-local terminated lists",
       "user_accepted": false
     },
     {
       "id": "AI-05.8",
       "parent": "AI-05",
-      "title": "Recover original source character registry, shared/global AI programs and cross-character script handoffs",
-      "state": "OPEN_UNPORTER_NATIVE_ENGINE",
+      "title": "Recover native cross-character AI registry and shared/global return program lookup",
+      "state": "OPEN_SOURCE_GAME_ENGINE_NOT_PORTED",
+      "source_evidence": "52 actor-selective handoffs and missing return targets cannot be correctly executed without source character registry and shared AI programs",
       "user_accepted": false
     },
     {
       "id": "AI-05.9",
       "parent": "AI-05",
-      "title": "Dispatch original explicit-character AI list transitions to uniquely resolved living source guards without hijacking caller program",
-      "state": "IMPLEMENTED_STATIC_TESTED_PENDING_CHROMEBOOK_ACCEPTANCE",
+      "title": "Execute explicit native character-ID AI list transfers on the uniquely matching source guard, preserving the executing guard program",
+      "state": "IMPLEMENTED_STATIC_TESTED_NEEDS_CHROMEBOOK_VERIFICATION",
+      "source_evidence": "v5.1 original source 20 explicit transfers; 14 link to unique source character/list; Node VM actor handoff tests",
       "user_accepted": false
     },
     {
       "id": "AI-06.2",
       "parent": "AI-06",
-      "title": "Maintain source guard-specific program state and reject unknown/duplicate/dead actor selectors (1/4 AI-06 points partial)",
-      "state": "PARTIAL_CREDIT_EVIDENCE_TESTED_1_OF_4_PARENT_STILL_OPEN",
+      "title": "Track actor-to-actor AI control-flow by original character IDs; reject missing, duplicate, dead or reserved actor targets",
+      "state": "PARTIAL_FUNCTIONAL_SOURCE_VM_1_OF_4_PARENT_CREDIT",
+      "source_evidence": "Only explicitly identified original source guard ID + unique terminated list receives target script; 0xF8 remains blocked",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.10",
+      "parent": "AI-05",
+      "title": "Reframe null-terminated source debug print and reject false program terminators",
+      "state": "SOURCE_OVERLAY_IMPLEMENTED_TESTED",
+      "source_evidence": "122 affected lists, 833 net recovered instruction records, 7 new proven ENDs and 11 invalidated old ENDs.",
+      "user_accepted": false
+    },
+    {
+      "id": "AI-05.11",
+      "parent": "AI-05",
+      "title": "Run selected original Train background AI with source labels and timers",
+      "state": "PARTIAL_FUNCTIONAL_SOURCE_VM_1_OF_2_PARENT_CREDIT",
+      "source_evidence": "Real lists 0x1009 and 0x1006 execute through supported commands; missing shared list and finale remain open.",
+      "user_accepted": false
+    },
+    {
+      "id": "MIS-02.2",
+      "parent": "MIS-02",
+      "title": "Connect Train escape room and brake-unit destruction to original mission and guard checks",
+      "state": "PARTIAL_FUNCTIONAL_SOURCE_VM_1_OF_6_PARENT_CREDIT",
+      "source_evidence": "Original STAN room 53 sets 0x00100000; tags 8\u201313 complete source objective 0 and enable 0x0411\u21920x0409; grounded movement tested.",
+      "user_accepted": false
+    },
+    {
+      "id": "END-01.1",
+      "parent": "END-01",
+      "title": "Run original Train exit approach, delay and death-abort conditions without false victory",
+      "state": "PARTIAL_RUNTIME_NO_MISSION_COMPLETION_CREDIT",
+      "source_evidence": "Source pad 203 and 180 ticks verified. Natalya/finale/exit_level are not executed.",
       "user_accepted": false
     }
-  ]
+  ],
+  "native_ai_return_set_commands": 87,
+  "native_ai_return_jump_commands": 37,
+  "native_ai_return_set_stage_local_resolvable": 38,
+  "native_ai_handoffs_self_selector": 428,
+  "native_ai_handoffs_other_actor_selector": 52
 }

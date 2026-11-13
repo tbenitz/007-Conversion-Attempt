@@ -1,3 +1,12 @@
+## 2026-11-13 — v5.2 Train source runtime (user acceptance pending)
+
+- [ ] **AI-05.10** — Fix variable-length debug opcode framing and reject invalid apparent list ends.
+- [ ] **AI-05.11** — Execute original Train background room and exit-approach checks. Partial AI-05 credit only.
+- [ ] **MIS-02.2** — Connect the original escape objective and six brake-unit checks to real runtime state. Partial MIS-02 credit only.
+- [ ] **END-01.1** — Test the native exit approach, timing and death branch. Natalya and finale remain open.
+
+25/100 engineering, 0/21 fully verified missions. See [v5.2 research](research/V52_TRAIN_RUNTIME_NOTES.md).
+
 ## 2026-11-12 — v5.1 native cross-character AI behavior, tested partial score (NOT USER APPROVED)
 
 **Source-engineering conversion 23/100**, up from 22/100: 22 points from previously completed full milestones + 1 evidence-backed partial point of the still-OPEN, 4-point AI-06 milestone. **Original source missions fully ChromeOS verified: 0/21.** Neither original global AI nor final campaign is done.
