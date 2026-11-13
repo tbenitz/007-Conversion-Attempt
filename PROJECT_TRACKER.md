@@ -1,3 +1,20 @@
+## 2026-11-12 — v4.8 permanent 100-point conversion ledger and source global AI control-flow audit (NOT USER APPROVED)
+
+**Engineering milestone estimate: 22/100 points; v4.7 scored 20/100 under the same rubric (+2). Fully verified original campaign missions: 0/21.** The engineering score is not the percent of missions playable.
+
+**Permanent rule:** never delete a feature/issue from this tracker, whether complete or blocked; retain stable IDs, append new discoveries, add dated evidence, and keep completed requirements visible. Only the user's explicit approval can mark an acceptance checkbox. A regression stays recorded and can remove earned engineering credit until repaired. See [root permanent roadmap](CONVERSION_PROGRESS.md) (34 stable milestones / 12 scored workstreams).
+
+- [ ] **AI-03 source decoder implemented / awaiting user acceptance:** Audited 184 source global AI lists / 5,887 instructions, including 118 lists with duplicated original labels, 24 truncated/nonterminated lists, and 189 original room-test branches of which 81 have unresolved or ambiguous jump targets.
+- [ ] **AI-04 control-flow safety implemented / awaiting user acceptance:** Removed invented `goto_next` wrap to first source label; ambiguous duplicate or truncated `jump_to_ai_list` target is blocked instead of arbitrarily selected. Node VM branch tests and JavaScript syntax pass.
+- [ ] **Progress dashboard implemented / awaiting user acceptance:** Single-file game now shows the fixed 22% engineering estimate, +2 points this release, all 12 workstreams and the separate 0/21 actually verified mission statistic.
+- [ ] **Preserved source-data audit / awaiting acceptance:** All 20 embedded v4.7 source-asset datasets are byte-identical in v4.8. Private ZIP includes 91 retained/new files, the full original embedded assets, decoder scripts, control-flow JSON, release manifest and older decoding notes; ZIP CRC passed.
+- [ ] **Critical incomplete campaign:** Original global AI and native mission completion remain unported; 55 original objective groups exist but only six source Train brake controller objective models are physically connected. Unknown setup property types cannot be fully recovered without original executable bytes, which are absent as raw binaries in the supplied v4.7 ZIP. Source map geometry gaps and collision registration remain.
+- [ ] **Visual and runtime QA:** No certified ChromeOS browser / WebGL playtest; no fully playable source mission; do not mark the above accepted until user testing.
+
+Research: [v4.8 original AI audit](research/V48_NATIVE_GLOBAL_AI_CONTROL_FLOW_SUMMARY.md). User-held archive: `GoldenEye_World_Explorer_v48_NATIVE_GLOBAL_AI_AND_PERMANENT_PROGRESS.zip`. Historical tracking below remains unmodified.
+
+---
+
 ## 2026-11-12 — v4.7 original-source objective runtime and playability coverage (IMPLEMENTED FOR TEST / NOT USER APPROVED)
 
 **Do not classify the full campaign as playable.** Original source decoding is incomplete and authenticated objectives beyond the six Train brake units are unimplemented. The supplied private v4.7 ZIP retains the full HTML, source assets, original decoder JSON and previous research. This public repository tracks progress and research without redistributing game asset payloads.
