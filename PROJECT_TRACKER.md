@@ -1,3 +1,13 @@
+## 2026-11-12 — v4.3 AI movement efficiency and original command-name decoding (NOT USER APPROVED)
+
+- [ ] **Implemented; needs Chromebook acceptance:** Correct double-stepping NPC movement, index source Train STAN floor collision, share original guard atlas/mesh resources, stagger sight queries and guard AI ticks, and render-cull distant guard models. Measured AI CPU status is visible while source guards are running.
+- [ ] **Implemented; needs behavioral acceptance:** Reconcile native original 253 opcode names and label 2,914 previously unidentified instructions in 662 authentic stage lists without altering their bytecode or silently simulating unsupported instructions.
+- [ ] **Implemented; needs acceptance:** Add conservative source AI state register/guard flags/pad preset commands and Train-only source distance condition checks. Original global AI lists and command effects still incomplete.
+- [ ] **Perf test needed on Chromebook:** Validate FPS, guard model textures, walking/pursuit smoothness, source-position accuracy, floor transitions and whether AI CPU readout decreases during Train gameplay. No live WebGL QA was possible in restricted test browser.
+- [ ] **Full campaign still open:** Decode complete native global AI, patrol path command behavior, mission triggers, bone weights, and all-map original coordinate transforms. Do not claim full original AI from mere opcode-name recovery.
+
+See `research/V43_AI_CPU_AND_NATIVE_COMMAND_PROGRESS.md` for documented static checks. All prior requirements and approvals below are retained without modification.
+
 ## 2026-11-12 — Private v4.2: source-textured guard models, test patrol motion, native objective HUD, restored settings, top-left minimap (NOT USER APPROVED)
 
 - [x] **Code patched / browser visual QA pending:** Original source-guard loader no longer directly displays white/untextured or malformed skinned CAFF character GLBs. It now builds the project's source texture atlas-based articulated guard avatar using original uniform/face texture assets and reconstructed geometry/head binding (the full original skinned body model UV/bind-pose remains unsolved). No plain-white GLB fallback.
