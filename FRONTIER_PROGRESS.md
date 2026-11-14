@@ -1,5 +1,13 @@
 # GoldenEye Frontier
 
+## v0.4.0 — Connected Grounds
+
+- Reproduced the Birch Court missing-floor bug against v0.3.0. Removed the oversized Streets cutout from the outdoor grid and kept native Streets behind its existing marked entrance. The walk-in Runway now has continuous, source-textured apron backfill around its native strip.
+- Added Grove Lane, Fern Court, a greenway loop, 12 roofed Surface buildings and new back lots in eligible procedural neighborhoods. Reused original Jungle tree and undergrowth models without blocking the public walks.
+- Streamed ground follows exact sector boundaries and keeps the four-sector detail cap. A distant terrain-only mesh avoids looking out into a sky gap.
+- The packed offline build passed 32 crossing traces at walk and sprint speeds, the new Grove/Fern loop and door regression, and earlier map transfers. Not all original districts have physical seams. No hardware frame-rate claims or full manual playthrough are recorded.
+- The local release includes the playable single HTML, editable project, source provenance and route-test logs. The public tracker does not host game assets.
+
 ## v0.3.0 — Neighborhoods
 
 - Removed the façade-only building modules shown in the v0.2.0 user playtest. Reused roofed Surface and Depot geometry plus original vegetation, vehicles, fences, furniture, doors and street materials.
