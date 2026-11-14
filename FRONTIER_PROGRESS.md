@@ -1,5 +1,12 @@
 # GoldenEye Frontier
 
+## v0.7.0 — Closing Circle
+
+- Added a separate offline survival round with 25 seeded rivals. The gas closes continuously over seven minutes toward a randomized point. Bots predict the gas, use the street grid, and engage each other and the player. Free roam remains available and its inventory is restored after a match.
+- Added 58 partitioned two-room cabins in the default South Lane sector. The original shell and source wood texture are reused. Red supply crates give cash score, armor and ammunition. The tested start loaded 199 crates across its four local sectors.
+- Five vehicle types spawn in randomized roadside positions each match. The additional drivable utility van uses original prop 304. The original free-roam placements and save remain unchanged.
+- Packed-game tests exercise movement, gas damage, crate rewards, player-versus-bot combat, second-room collision and loot, and free-roam restoration. Runtime-authored rival rigs use source-derived uniform crops. No Chromebook performance or full manual match claim.
+
 ## v0.6.0 — Greenbelts
 
 - Added range-batched Jungle verge, yard and brush detail. The default South Lane sector rose from 140 to 1,396 trees and from 260 to 2,591 plants. Additional vegetation is mostly non-solid and does not cover the protected routes.
