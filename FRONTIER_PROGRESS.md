@@ -1,4 +1,13 @@
-# GoldenEye Frontier v0.2.0
+# GoldenEye Frontier
+
+## v0.3.0 — Neighborhoods
+
+- Removed the façade-only building modules shown in the v0.2.0 user playtest. Reused roofed Surface and Depot geometry plus original vegetation, vehicles, fences, furniture, doors and street materials.
+- Added Birch Court and Mill Lane as two connected cul-de-sacs with working through-houses, a pedestrian green, and South Lane. Added a guided walk to the Station Quarter loading hall. Road widths and lot placement are distinct from the 250 m streaming grid.
+- Reused the original door and floorboard assets for a new rear opening in the copied cabin. Original source missions are unchanged. The assembled scene received an independent offline render review using its actual meshes and textures.
+- Tests cover both through routes, closed-door blocking, source-floor traversal, sampled procedural rotations and seeds, and older map seams. Chromebook WebGL performance and a complete playtest of the mission interiors remain unverified.
+
+## v0.2.0 — Initial procedural build
 
 Separate exploration build. City Survey and campaign builds are unchanged. Source-derived game assets are not published to the tracker.
 
