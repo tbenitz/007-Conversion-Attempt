@@ -1,5 +1,12 @@
 # GoldenEye Frontier
 
+## v0.5.0 — Motor Pool
+
+- Densified developed neighborhoods with roofed Surface cabins, shared footpaths and separately operable instanced doors. In the default South Lane sector, the count rose from 34 to 331 buildings, from 40 to 140 Jungle trees and from 62 to 260 understory props. Woodland, mission entries and the protected starter paths retain more space.
+- Spawned original crates and player-drivable parked cars and trucks. The yellow taxi reuses an original hatchback mesh. Sandbox vehicle mechanics include steering, reverse, braking, collision and safe dismount. No AI traffic.
+- Added first-person PP7 and KF7 Soviet sandbox loadouts with unlimited ammo and destructible crates. The models are recovered original geometry. The campaign and its shooting rules were not changed.
+- The packaged runtime passed driving and braking for all three vehicle classes, the Motor Pool atlas route, both compact door orientations and crate unload/reload. Hardware performance remains unmeasured. The local package includes the standalone HTML, editable source, provenance and route logs. No game assets were added to this tracker.
+
 ## v0.4.0 — Connected Grounds
 
 - Reproduced the Birch Court missing-floor bug against v0.3.0. Removed the oversized Streets cutout from the outdoor grid and kept native Streets behind its existing marked entrance. The walk-in Runway now has continuous, source-textured apron backfill around its native strip.
