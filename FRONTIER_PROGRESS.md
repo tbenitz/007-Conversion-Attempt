@@ -1,5 +1,12 @@
 # GoldenEye Frontier
 
+## v0.6.0 — Greenbelts
+
+- Added range-batched Jungle verge, yard and brush detail. The default South Lane sector rose from 140 to 1,396 trees and from 260 to 2,591 plants. Additional vegetation is mostly non-solid and does not cover the protected routes.
+- Compact neighborhoods now use all three source Surface cabin forms with staggered rows, garden pockets and crosspaths. The new compact cabin variants were exercised on their original Surface floors. The existing Depot and through-house designs remain.
+- Recovered original supply box, armor and magazine models and scattered them indoors and outdoors. Pickups persist. Unlimited ammo remains the default, with a setting to spend looted ammo instead. Armor is an inventory reserve in this non-combat sandbox.
+- Space jumps on foot and still brakes in vehicles. Tests cover jumping and landing, overhead limits, no double jumps, accessible loot and closed-door pickup blocking. The playable offline HTML, editable ZIP and same-view vegetation comparison are delivered separately. No hardware performance results are claimed.
+
 ## v0.5.0 — Motor Pool
 
 - Densified developed neighborhoods with roofed Surface cabins, shared footpaths and separately operable instanced doors. In the default South Lane sector, the count rose from 34 to 331 buildings, from 40 to 140 Jungle trees and from 62 to 260 understory props. Woodland, mission entries and the protected starter paths retain more space.
